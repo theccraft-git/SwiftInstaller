@@ -1,0 +1,722 @@
+import SwiftUI
+import SideInstallerFFI
+
+// MARK: - Catalogue
+
+/// A developer-portal capability. Names are Apple's feature names and aren't
+/// translated.
+struct Entitlement: Identifiable, Hashable {
+    /// Apple's capability id, e.g. `INCREASED_MEMORY_LIMIT`.
+    let id: String
+    let name: String
+    /// Which section of the list it sits in.
+    let group: Group
+    /// Selected by default: capabilities sideloaded apps usually want and free
+    /// Apple IDs are known to get.
+    let recommended: Bool
+
+    enum Group: String, CaseIterable, Identifiable {
+        case memory, other
+        var id: String { rawValue }
+
+        var title: String {
+            switch self {
+            case .memory: return L("Memory and performance")
+            case .other:  return L("Other free capabilities")
+            }
+        }
+    }
+
+    /// Capabilities a **free** Apple ID can be granted. Paid-only ones (Push,
+    /// iCloud, Associated Domains, etc.) are left out.
+    ///
+    /// Increased Memory Limit and App Groups are confirmed to work on free
+    /// accounts. The rest have historically been allowed; each is requested
+    /// separately, so any that need a paid account fail on their own.
+    static let all: [Entitlement] = [
+        // Memory capabilities, selected by default.
+        .init(id: "INCREASED_MEMORY_LIMIT", name: "Increased Memory Limit", group: .memory, recommended: true),
+        .init(id: "EXTENDED_VIRTUAL_ADDRESSING", name: "Extended Virtual Addressing", group: .memory, recommended: true),
+        .init(id: "INCREASED_DEBUGGING_MEMORY_LIMIT", name: "Increased Debugging Memory Limit", group: .memory, recommended: true),
+
+        // Other capabilities available to free accounts.
+        .init(id: "APP_GROUPS", name: "App Groups", group: .other, recommended: false),
+        .init(id: "GAME_CENTER", name: "Game Center", group: .other, recommended: false),
+        .init(id: "IN_APP_PURCHASE", name: "In-App Purchase", group: .other, recommended: false),
+        .init(id: "INTER_APP_AUDIO", name: "Inter-App Audio", group: .other, recommended: false),
+        .init(id: "HEALTHKIT", name: "HealthKit", group: .other, recommended: false),
+        .init(id: "HOMEKIT", name: "HomeKit", group: .other, recommended: false),
+        .init(id: "PERSONAL_VPN", name: "Personal VPN", group: .other, recommended: false),
+        .init(id: "WIRELESS_ACCESSORY_CONFIGURATION", name: "Wireless Accessory Configuration", group: .other, recommended: false),
+        .init(id: "DATA_PROTECTION", name: "Data Protection", group: .other, recommended: false),
+    ]
+
+    static var recommendedIDs: Set<String> {
+        Set(all.filter(\.recommended).map(\.id))
+    }
+
+    static func named(_ id: String) -> String {
+        all.first { $0.id == id }?.name ?? id
+    }
+
+    static func inGroup(_ group: Group) -> [Entitlement] {
+        all.filter { $0.group == group }
+    }
+}
+
+// MARK: - Models
+
+/// One App ID on the team, decoded from `si_appid_list`.
+struct AppIdentifier: Identifiable, Decodable, Equatable {
+    /// Apple's opaque id — what the capability call addresses.
+    let appIdId: String
+    /// The reverse-DNS bundle identifier.
+    let identifier: String
+    let name: String
+
+    enum CodingKeys: String, CodingKey {
+        case appIdId = "app_id_id"
+        case identifier, name
+    }
+
+    var id: String { appIdId }
+    var displayName: String { name.isEmpty ? identifier : name }
+}
+
+/// What Apple said about one capability, decoded from `si_appid_enable`.
+struct EntitlementOutcome: Identifiable, Decodable, Hashable {
+    let capability: String
+    let ok: Bool
+    let error: String
+
+    var id: String { capability }
+    var name: String { Entitlement.named(capability) }
+}
+
+// MARK: - Manager
+
+/// Lists the team's App IDs and enables capabilities on one. Uses the same
+/// developer-portal session type as `CertManager`; no device connection needed.
+final class EntitlementsManager: ObservableObject {
+
+    @Published private(set) var apps: [AppIdentifier] = []
+    @Published private(set) var teamSummary: String?
+    @Published private(set) var isWorking = false
+    /// `id` of the App ID currently being written to, if any.
+    @Published private(set) var applyingID: String?
+    /// Last run's per-capability outcomes, keyed by App ID.
+    @Published private(set) var outcomes: [String: [EntitlementOutcome]] = [:]
+    @Published var lastError: String?
+    /// The App ID whose results popup is up, from the last run until closed.
+    @Published private var reportedID: String?
+    @Published private(set) var hasLoaded = false
+
+    private var session: OpaquePointer?            // CertSession*
+    private let queue = DispatchQueue(label: "sideinstaller.entitlements")
+
+    private var engine: Engine { Engine.shared }
+
+    /// Limits `autoLoad` to one attempt, so a failed sign-in or dismissed 2FA
+    /// prompt doesn't come back every time the page opens.
+    private var didAutoLoad = false
+
+    deinit {
+        if let session { si_cert_session_free(session) }
+    }
+
+    var isBusy: Bool { isWorking || applyingID != nil }
+
+    // MARK: Popups
+
+    /// One of this page's popups; they stack in this order. Each carries what
+    /// it shows, so it keeps its content while it closes.
+    enum Popup: Hashable {
+        /// What Apple accepted on an App ID, and why it refused the rest.
+        case results(appName: String, [EntitlementOutcome])
+        case error(String)
+    }
+
+    /// The popups up now, top to bottom.
+    var popups: [Popup] {
+        var shown: [Popup] = []
+        if let reportedID, let results = outcomes[reportedID] {
+            let name = apps.first { $0.id == reportedID }?.displayName ?? reportedID
+            shown.append(.results(appName: name, results))
+        }
+        if let lastError { shown.append(.error(lastError)) }
+        return shown
+    }
+
+    func closePopup(_ popup: Popup) {
+        switch popup {
+        case .results: reportedID = nil
+        case .error:   lastError = nil
+        }
+    }
+
+    // MARK: Actions
+
+    /// Loads App IDs when the page opens. Does nothing if no Apple ID is saved.
+    @MainActor
+    func autoLoad() {
+        guard !didAutoLoad, !hasLoaded, !isBusy else { return }
+        guard !engine.normalizedAppleID.isEmpty, !engine.applePassword.isEmpty else { return }
+        didAutoLoad = true
+        loadApps()
+    }
+
+    /// Sign in if needed, then load the team's App IDs.
+    @MainActor
+    func loadApps() {
+        guard !isBusy else { return }
+        let id = engine.normalizedAppleID, pw = engine.applePassword
+        guard !id.isEmpty, !pw.isEmpty else {
+            lastError = L("No Apple ID saved. Add one in Settings › Account.")
+            return
+        }
+        isWorking = true
+        lastError = nil
+        engine.log("=== Entitlements: loading App IDs ===")
+        Task { @MainActor in
+            do {
+                if session == nil { try await signIn(id: id, pw: pw) }
+                let list = try await onQueue { try self.performList() }
+                apps = list.sorted { $0.displayName.localizedCaseInsensitiveCompare($1.displayName) == .orderedAscending }
+                hasLoaded = true
+                engine.log("Entitlements: \(list.count) App ID(s).")
+            } catch {
+                lastError = short(error)
+                engine.log("⛔️ Entitlements: \(lastError ?? "failed")")
+            }
+            isWorking = false
+        }
+    }
+
+    /// Ask Apple to enable `ids` on `app`. Each is a separate request, so the
+    /// result is per-capability rather than one pass/fail.
+    @MainActor
+    func enable(_ ids: [String], on app: AppIdentifier) {
+        guard session != nil, !isBusy, !ids.isEmpty else { return }
+        applyingID = app.id
+        lastError = nil
+        reportedID = nil
+        outcomes[app.id] = nil
+        engine.log("Entitlements: enabling \(ids.count) capability(ies) on \(app.identifier) …")
+        Task { @MainActor in
+            do {
+                let results = try await onQueue { try self.performEnable(appIdId: app.appIdId, ids: ids) }
+                outcomes[app.id] = results
+                reportedID = app.id
+                let granted = results.filter(\.ok).count
+                engine.log("Entitlements: Apple accepted \(granted)/\(results.count) on \(app.identifier).")
+            } catch {
+                lastError = short(error)
+                engine.log("⛔️ Entitlements: \(lastError ?? "failed")")
+            }
+            applyingID = nil
+        }
+    }
+
+    /// Frees the session and clears the page (e.g. when the Apple ID changes).
+    /// No-op if not signed in.
+    @MainActor
+    func signOut() {
+        guard let session else { return }
+        si_cert_session_free(session)
+        self.session = nil
+        teamSummary = nil
+        apps = []
+        outcomes = [:]
+        hasLoaded = false
+        didAutoLoad = false
+        lastError = nil
+        engine.log("Entitlements: signed out.")
+    }
+
+    // MARK: Sign-in
+
+    @MainActor
+    private func signIn(id: String, pw: String) async throws {
+        let servers = anisetteCandidates()
+        let dir = storageDir
+        engine.twoFactorWasCancelled = false
+        var lastError = "no anisette servers configured"
+        var appleRefusals = AnisetteServer.AppleRefusals(servers: engine.anisetteServers)
+        var appleUnreachable = 0
+
+        for (idx, ani) in servers.enumerated() {
+            if appleRefusals.rulesOut(ani) {
+                engine.log("Entitlements: skipping anisette \(idx + 1)/\(servers.count): Apple has refused the device sign-in reports through it.")
+                continue
+            }
+            do {
+                let summary = try await onQueue {
+                    try self.performSignIn(id: id, pw: pw, ani: ani, dir: dir)
+                }
+                engine.anisetteURL = ani
+                teamSummary = summary
+                engine.log("Entitlements: signed in (\(summary)).")
+                return
+            } catch let error as EngineError {
+                lastError = error.errorDescription ?? "sign-in failed"
+                if engine.twoFactorWasCancelled {
+                    throw EngineError.message(L("Two-factor verification was cancelled."))
+                }
+                if Engine.isAccountLocked(lastError) {
+                    throw EngineError.accountLocked
+                }
+                if Engine.isEmailUnverifiedError(lastError) {
+                    throw EngineError.emailUnverified
+                }
+                if Engine.isCredentialError(lastError) {
+                    throw EngineError.message(Engine.credentialErrorMessage)
+                }
+                engine.log("Entitlements: anisette \(idx + 1)/\(servers.count) failed: \(lastError)")
+                if Engine.isAppleRateLimit(lastError) {
+                    engine.log("Entitlements: Apple is rate-limiting sign-in (HTTP 429) — stopping.")
+                    throw EngineError.message(Engine.appleRateLimitMessage)
+                }
+                // Apple refuses a reported device through every server alike;
+                // see `AnisetteServer.AppleRefusals`.
+                if Engine.isAppleServiceRefusal(lastError) {
+                    appleRefusals.record(ani)
+                    if appleRefusals.endsSignIn(remaining: servers[(idx + 1)...]) {
+                        engine.log("Entitlements: Apple's sign-in server refused \(appleRefusals.count) attempts with HTTP 503 — stopping.")
+                        throw EngineError.message(Engine.appleServiceRefusalMessage)
+                    }
+                }
+                // Every anisette server starts with the same request to Apple, so
+                // when that can't even be sent, more of them won't help.
+                if Engine.isAppleUnreachable(lastError) {
+                    appleUnreachable += 1
+                    if let message = await engine.appleUnreachableStop(
+                        failures: appleUnreachable, logPrefix: "Entitlements: ") {
+                        throw EngineError.message(message)
+                    }
+                } else {
+                    appleUnreachable = 0
+                }
+            }
+        }
+        let tried = servers.count == 1
+            ? L("the anisette server")
+            : L("all %d anisette servers", servers.count)
+        throw EngineError.message(L("Apple ID sign-in failed on %@. Last error: %@", tried, lastError))
+    }
+
+    private func performSignIn(id: String, pw: String, ani: String, dir: String) throws -> String {
+        defer { engine.endTwoFactor() }
+        var newSession: OpaquePointer?
+        var summary: UnsafeMutablePointer<CChar>?
+        var error: UnsafeMutablePointer<CChar>?
+        let rc = si_cert_signin(id, pw, ani, "SwiftInstaller", dir,
+                                entitlementsTwoFactorCallback, nil,
+                                &newSession, &summary, &error)
+        if rc == 0 {
+            if let old = self.session { si_cert_session_free(old) }
+            self.session = newSession
+            let s = summary.map { String(cString: $0) } ?? ""
+            summary.map { si_string_free($0) }
+            return s
+        } else {
+            let msg = error.map { String(cString: $0) } ?? "rc=\(rc)"
+            error.map { si_string_free($0) }
+            throw EngineError.message(msg)
+        }
+    }
+
+    // MARK: FFI
+
+    private func performList() throws -> [AppIdentifier] {
+        guard let session = self.session else { throw EngineError.message("Not signed in.") }
+        var json: UnsafeMutablePointer<CChar>?
+        var error: UnsafeMutablePointer<CChar>?
+        let rc = si_appid_list(session, &json, &error)
+        if rc == 0 {
+            let s = json.map { String(cString: $0) } ?? "[]"
+            json.map { si_string_free($0) }
+            do {
+                return try JSONDecoder().decode([AppIdentifier].self, from: Data(s.utf8))
+            } catch {
+                throw EngineError.message("Couldn't read the App ID list: \(error)")
+            }
+        } else {
+            let msg = error.map { String(cString: $0) } ?? "rc=\(rc)"
+            error.map { si_string_free($0) }
+            throw EngineError.message("Listing App IDs failed: \(msg)")
+        }
+    }
+
+    private func performEnable(appIdId: String, ids: [String]) throws -> [EntitlementOutcome] {
+        guard let session = self.session else { throw EngineError.message("Not signed in.") }
+        var json: UnsafeMutablePointer<CChar>?
+        var error: UnsafeMutablePointer<CChar>?
+        let rc = si_appid_enable(session, appIdId, ids.joined(separator: ","), &json, &error)
+        if rc == 0 {
+            let s = json.map { String(cString: $0) } ?? "[]"
+            json.map { si_string_free($0) }
+            do {
+                return try JSONDecoder().decode([EntitlementOutcome].self, from: Data(s.utf8))
+            } catch {
+                throw EngineError.message("Couldn't read Apple's reply: \(error)")
+            }
+        } else {
+            let msg = error.map { String(cString: $0) } ?? "rc=\(rc)"
+            error.map { si_string_free($0) }
+            throw EngineError.message("Enabling entitlements failed: \(msg)")
+        }
+    }
+
+    // MARK: Helpers
+
+    /// Anisette addresses to try, in the engine's order.
+    private func anisetteCandidates() -> [String] {
+        engine.anisetteCandidates()
+    }
+
+    private var storageDir: String { PrivateStore.isideload.path }
+
+    private func short(_ error: Error) -> String {
+        (error as? LocalizedError)?.errorDescription ?? String(describing: error)
+    }
+
+    private func onQueue<T>(_ work: @escaping () throws -> T) async throws -> T {
+        try await withCheckedThrowingContinuation { cont in
+            queue.async {
+                do { cont.resume(returning: try work()) }
+                catch { cont.resume(throwing: error) }
+            }
+        }
+    }
+}
+
+/// Bridges a 2FA request during entitlement sign-in to the engine's prompt.
+private let entitlementsTwoFactorCallback: SITwoFactorCb = { _, request, outBuf, bufLen in
+    Engine.shared.answerTwoFactor(request: request, outBuf: outBuf, len: Int(bufLen))
+}
+
+// MARK: - View
+
+/// The Entitlements page: sign in, list the Apple ID's App IDs, and ask Apple to
+/// enable capabilities on one. Pushed from Tools, whose `NavigationStack` this
+/// relies on.
+struct EntitlementsView: View {
+    @EnvironmentObject private var engine: Engine
+    /// Observed so labels redraw when the language changes.
+    @EnvironmentObject private var loc: Localizer
+    @ObservedObject var manager: EntitlementsManager
+
+    @State private var showSettings = false
+
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 18) {
+                header.cascadeItem(0)
+                loadButton.cascadeItem(1)
+                // Errors and results show as popups, which `RootView` lays
+                // over the app.
+                appList
+            }
+            .padding(20)
+            .animation(.smooth(duration: 0.35), value: manager.apps)
+            .animation(.smooth(duration: 0.3), value: manager.isWorking)
+            .animation(.smooth(duration: 0.35), value: manager.teamSummary)
+        }
+        .background(AppBackground())
+        .toolbar { settingsToolbarItem(isPresented: $showSettings) }
+        .sheet(isPresented: $showSettings) { SettingsView() }
+        .onAppear { manager.autoLoad() }
+    }
+
+    // MARK: Header
+
+    private var header: some View {
+        BrandHeader(icon: "checklist", image: "EntitlementsLogo", title: L("Entitlements")) {
+            if let team = manager.teamSummary {
+                StatusPill(text: team, systemImage: "person.2.fill", color: .green)
+                    .transition(.opacity.combined(with: .scale(scale: 0.85, anchor: .top)))
+            }
+        }
+    }
+
+    private var loadButton: some View {
+        Button { manager.loadApps() } label: {
+            HStack(spacing: 10) {
+                if manager.isWorking {
+                    ProgressView().tint(.white)
+                    Text(manager.teamSummary == nil ? L("Signing in") : L("Refreshing"))
+                } else {
+                    Image(systemName: manager.hasLoaded ? "arrow.clockwise" : "list.bullet.rectangle")
+                        .contentTransition(.symbolEffect(.replace))
+                    Text(manager.hasLoaded ? L("Refresh") : L("Load apps"))
+                }
+            }
+        }
+        .buttonStyle(PrimaryButtonStyle())
+        .disabled(manager.isBusy || engine.isRunning)
+    }
+
+    // MARK: App list
+
+    @ViewBuilder
+    private var appList: some View {
+        if manager.hasLoaded && manager.apps.isEmpty && !manager.isWorking {
+            emptyApps.transition(.cardAppear)
+        } else if !manager.apps.isEmpty {
+            VStack(spacing: 14) {
+                HStack {
+                    Text(manager.apps.count == 1
+                         ? L("%d App ID", manager.apps.count)
+                         : L("%d App IDs", manager.apps.count))
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                    Spacer()
+                }
+                .cascadeItem(2)
+                ForEach(Array(manager.apps.enumerated()), id: \.element.id) { idx, app in
+                    NavigationLink {
+                        EntitlementPicker(app: app, manager: manager)
+                    } label: {
+                        appRow(app)
+                    }
+                    .buttonStyle(.plain)
+                    .cascadeItem(3 + idx)
+                }
+            }
+        }
+    }
+
+    private func appRow(_ app: AppIdentifier) -> some View {
+        PanelCard {
+            HStack(spacing: 12) {
+                Image(systemName: "app.badge.checkmark")
+                    .font(.title3)
+                    .foregroundStyle(Theme.brand)
+                VStack(alignment: .leading, spacing: 3) {
+                    Text(app.displayName)
+                        .font(.subheadline.weight(.semibold))
+                    Text(app.identifier)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                        .truncationMode(.middle)
+                    if let results = manager.outcomes[app.id] {
+                        Text(L("%d of %d enabled", results.filter(\.ok).count, results.count))
+                            .font(.caption2.weight(.semibold))
+                            .foregroundStyle(results.contains(where: \.ok) ? .green : .orange)
+                    }
+                }
+                Spacer(minLength: 8)
+                Image(systemName: "chevron.right")
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.tertiary)
+            }
+        }
+    }
+
+    private var emptyApps: some View {
+        PanelCard {
+            VStack(spacing: 8) {
+                Image(systemName: "questionmark.app.dashed")
+                    .font(.largeTitle)
+                    .foregroundStyle(Theme.brand)
+                Text(L("No App IDs"))
+                    .font(.headline)
+                Text(L("This Apple ID hasn't registered any apps yet. Install something with SwiftInstaller first, then come back."))
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 8)
+        }
+    }
+
+}
+
+// MARK: - Picker
+
+/// Pick the capabilities to ask for on one App ID, then see what Apple said.
+private struct EntitlementPicker: View {
+    let app: AppIdentifier
+    @ObservedObject var manager: EntitlementsManager
+
+    @EnvironmentObject private var loc: Localizer
+    @State private var selected: Set<String> = Entitlement.recommendedIDs
+
+    private var isApplying: Bool { manager.applyingID == app.id }
+    private var results: [EntitlementOutcome]? { manager.outcomes[app.id] }
+
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 18) {
+                appCard.cascadeItem(0)
+                // What Apple said shows as a popup; the rows keep its marks.
+                ForEach(Array(Entitlement.Group.allCases.enumerated()), id: \.element.id) { idx, group in
+                    groupCard(group).cascadeItem(1 + idx)
+                }
+            }
+            .padding(20)
+            .animation(.smooth(duration: 0.35), value: manager.outcomes[app.id])
+            .animation(.smooth(duration: 0.3), value: manager.applyingID)
+        }
+        .background(AppBackground())
+        .safeAreaInset(edge: .bottom) { applyBar }
+    }
+
+    private var appCard: some View {
+        PanelCard {
+            VStack(alignment: .leading, spacing: 6) {
+                Text(app.displayName)
+                    .font(.title3.weight(.bold))
+                Text(app.identifier)
+                    .font(.caption.monospaced())
+                    .foregroundStyle(.secondary)
+                HStack(spacing: 10) {
+                    Button(L("Recommended")) { selected = Entitlement.recommendedIDs }
+                        .buttonStyle(.bordered)
+                        .controlSize(.small)
+                        .tint(Theme.accent)
+                    Button(L("Select all")) { selected = Set(Entitlement.all.map(\.id)) }
+                        .buttonStyle(.bordered)
+                        .controlSize(.small)
+                        .tint(Theme.accent)
+                    Button(L("None")) { selected = [] }
+                        .buttonStyle(.bordered)
+                        .controlSize(.small)
+                        .tint(.secondary)
+                }
+                .padding(.top, 4)
+            }
+        }
+    }
+
+    private func groupCard(_ group: Entitlement.Group) -> some View {
+        PanelCard {
+            VStack(alignment: .leading, spacing: 12) {
+                HStack(spacing: 8) {
+                    Text(group.title)
+                        .font(.headline)
+                    // Only the memory capabilities are confirmed on free
+                    // accounts, so the rest are marked Beta.
+                    if group == .other {
+                        Text(L("Beta"))
+                            .font(.caption.weight(.bold))
+                            .foregroundStyle(Theme.accent2)
+                    }
+                    Spacer(minLength: 0)
+                }
+                ForEach(Entitlement.inGroup(group)) { entitlement in
+                    row(entitlement)
+                    if entitlement.id != Entitlement.inGroup(group).last?.id {
+                        Divider().overlay(Color.white.opacity(0.06))
+                    }
+                }
+            }
+        }
+    }
+
+    private func row(_ entitlement: Entitlement) -> some View {
+        Button {
+            if selected.contains(entitlement.id) { selected.remove(entitlement.id) }
+            else { selected.insert(entitlement.id) }
+        } label: {
+            HStack(spacing: 12) {
+                Image(systemName: selected.contains(entitlement.id) ? "checkmark.circle.fill" : "circle")
+                    .font(.title3)
+                    .foregroundStyle(selected.contains(entitlement.id) ? Theme.accent : .secondary)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(entitlement.name)
+                        .font(.subheadline.weight(.medium))
+                        .foregroundStyle(.primary)
+                    Text(entitlement.id)
+                        .font(.caption2.monospaced())
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                        .truncationMode(.middle)
+                }
+                Spacer(minLength: 6)
+                if let outcome = results?.first(where: { $0.capability == entitlement.id }) {
+                    Image(systemName: outcome.ok ? "checkmark.seal.fill" : "xmark.circle.fill")
+                        .foregroundStyle(outcome.ok ? .green : .orange)
+                }
+            }
+        }
+        .buttonStyle(.plain)
+    }
+
+    private var applyBar: some View {
+        Button { manager.enable(Array(selected), on: app) } label: {
+            HStack(spacing: 10) {
+                if isApplying {
+                    ProgressView().tint(.white)
+                    Text(L("Asking Apple"))
+                } else {
+                    Image(systemName: "checkmark.seal")
+                    Text(L("Enable %d selected", selected.count))
+                }
+            }
+        }
+        .buttonStyle(PrimaryButtonStyle())
+        .disabled(selected.isEmpty || manager.isBusy)
+        .padding(.horizontal, 20)
+        .padding(.bottom, 12)
+        .background(.ultraThinMaterial)
+    }
+}
+
+// MARK: - Popup
+
+/// One of the Entitlements page's popups, which `RootView` stacks over the whole
+/// app: what Apple said to the last request, or what went wrong. See
+/// `EntitlementsManager.Popup`.
+struct EntitlementsPopup: View {
+    @ObservedObject var manager: EntitlementsManager
+    let popup: EntitlementsManager.Popup
+
+    /// Observed so labels redraw when the language changes.
+    @EnvironmentObject private var loc: Localizer
+
+    var body: some View {
+        switch popup {
+        case .results(let appName, let results):
+            resultsPopup(appName: appName, results: results)
+        case .error(let message):
+            MessagePopup(title: L("Something went wrong"), message: message, isError: true,
+                         onClose: close)
+        }
+    }
+
+    private func close() { manager.closePopup(popup) }
+
+    /// What Apple accepted, and why it refused the rest.
+    private func resultsPopup(appName: String, results: [EntitlementOutcome]) -> some View {
+        let granted = results.filter(\.ok)
+        let refused = results.filter { !$0.ok }
+        return PopupCard(title: L("%d of %d enabled", granted.count, results.count),
+                         systemImage: granted.isEmpty ? "exclamationmark.triangle.fill" : "checkmark.seal.fill",
+                         tint: granted.isEmpty ? .orange : .green,
+                         onClose: close) {
+            VStack(alignment: .leading, spacing: 10) {
+                Text(appName)
+                    .font(.subheadline.weight(.semibold))
+                if !granted.isEmpty {
+                    Text(L("Install the app again for these to take effect."))
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                ForEach(refused) { outcome in
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(outcome.name)
+                            .font(.caption.weight(.semibold))
+                        Text(outcome.error)
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+            }
+        }
+    }
+}

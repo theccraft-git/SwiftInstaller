@@ -1,0 +1,816 @@
+import Foundation
+
+/// Japanese translations (same rules as `spanishStrings`). Uses Apple's ja
+/// wording for Settings paths and "tap", 失効 for "revoke", and omits "you"
+/// where natural (no お客様/あなた unless needed).
+
+let japaneseStrings: [String: String] = [
+
+    // MARK: - Shared
+
+    "Cancel": "キャンセル",
+    "Copy": "コピー",
+    "Email": "メールアドレス",
+    "Password": "パスワード",
+    "Install": "インストール",
+    "Installing": "インストール中",
+    "Cancelling": "キャンセル中",
+    "Installed": "インストール済み",
+    "Something went wrong": "問題が発生しました",
+    "an app by Frizzle": "Frizzle 制作のアプリ",
+    "device": "デバイス",
+
+    // MARK: - Welcome
+
+    "I have accepted the": "同意します：",
+    "Start": "開始",
+
+    // Pre-iOS 27: the pairing file has to be imported
+
+    "You'll need a pairing file": "ペアリングファイルが必要です",
+    "This iPhone runs iOS %@. Only iOS %@ can pair with itself, so you'll have to make a pairing file on a computer — with jitterbugpair or pymobiledevice3 — and import it in the app. SwiftInstaller walks you through it.":
+        "この iPhone は iOS %@ で動作しています。自分自身とペアリングできるのは iOS %@ 以降のみのため、パソコンで jitterbugpair または pymobiledevice3 を使ってペアリングファイルを作成し、アプリにインポートする必要があります。手順は SwiftInstaller が案内します。",
+
+    // MARK: - Account setup & Settings › Account
+
+    "Sign in with your Apple ID": "Apple ID でサインイン",
+    "Don't worry, these are stored locally":
+        "ご安心ください。これらの情報は端末内にのみ保存されます",
+    "Saved in this iPhone's keychain, and sent only to Apple when signing in.":
+        "この iPhone のキーチェーンに保存され、サインイン時にのみ Apple に送信されます。",
+    "Continue": "続ける",
+    "Set this up later": "あとで設定する",
+    "Add Apple ID": "Apple ID を追加",
+    "Edit Apple ID": "Apple ID を編集",
+    "Save": "保存",
+    "Enter the password again to save this Apple ID.": "この Apple ID を保存するには、パスワードをもう一度入力してください。",
+    "Account": "アカウント",
+    "In use": "使用中",
+    "Edit": "編集",
+    "Remove": "削除",
+    "No Apple ID saved yet. Add one and SwiftInstaller will use it for every sign-in.":
+        "保存された Apple ID はまだありません。追加すると、SwiftInstaller はサインインのたびにそれを使用します。",
+    "Saved in this iPhone's keychain, and sent only to Apple when signing in. Swipe a row to edit its password or remove it.":
+        "この iPhone のキーチェーンに保存され、サインイン時にのみ Apple に送信されます。行を左にスワイプするとパスワードの編集や削除ができます。",
+    "Remove this Apple ID?": "この Apple ID を削除しますか？",
+    "“%@” and its saved password will be deleted from this iPhone. Nothing changes on your Apple account.":
+        "「%@」と保存されているパスワードがこの iPhone から削除されます。Apple アカウント自体には影響ありません。",
+    "This iPhone's keychain refused to store the password (error %d), so it's kept only until SwiftInstaller quits.":
+        "この iPhone のキーチェーンがパスワードの保存を拒否したため（エラー %d）、SwiftInstaller を終了するまでの間だけ保持されます。",
+    "No Apple ID saved. Add one in Settings › Account.": "保存された Apple ID がありません。「設定 › アカウント」で追加してください。",
+
+    "Add your Apple ID": "Apple ID を追加",
+    "Open Settings with the gear at the top right.": "右上の歯車アイコンから設定を開きます。",
+    "Under Account, tap “Add Apple ID” and enter your email and password.":
+        "「アカウント」で「Apple ID を追加」をタップし、メールアドレスとパスワードを入力します。",
+
+    // MARK: - Tabs, Tools menu & two-factor prompt
+
+    "Tools": "ツール",
+
+    // MARK: - Tabs & two-factor prompt
+
+    "Pairing": "ペアリング",
+    "Certificates": "証明書",
+    "Two-Factor Code": "二段階認証コード",
+    "6-digit code": "6 桁のコード",
+    "Submit": "送信",
+    "Enter the code Apple just sent to your trusted device.":
+        "信頼できるデバイスに Apple から送信されたコードを入力してください。",
+    "Enter the code Apple texted to %@.":
+        "Apple が SMS で %@ に送信したコードを入力してください。",
+    "Enter the code Apple texted to your phone.":
+        "Apple が SMS でお使いの電話に送信したコードを入力してください。",
+    "Apple is calling %@. Enter the code you hear.":
+        "Apple が %@ に電話をかけています。聞こえたコードを入力してください。",
+    "Apple is calling your phone. Enter the code you hear.":
+        "Apple がお使いの電話に電話をかけています。聞こえたコードを入力してください。",
+    "Choose how Apple should send your verification code.":
+        "Apple から確認コードを受け取る方法を選んでください。",
+    "Choose How to Get a Code":
+        "コードの受け取り方法",
+    "Verify":
+        "確認",
+    "Didn't get it?":
+        "届きませんか？",
+    "Send a new code to my devices":
+        "デバイスに新しいコードを送信",
+    "Text me a new code":
+        "SMS で新しいコードを受け取る",
+    "Call me again":
+        "もう一度電話を受ける",
+    "Send a code to my Apple devices":
+        "Apple デバイスにコードを送信",
+    "Text %@":
+        "%@ に SMS を送信",
+    "Call %@":
+        "%@ に電話",
+    "Checking the code…":
+        "コードを確認しています…",
+    "Requesting a new code…":
+        "新しいコードをリクエストしています…",
+    "Sending a code to your devices…":
+        "デバイスにコードを送信しています…",
+    "Texting a code to %@…":
+        "%@ に SMS でコードを送信しています…",
+    "Calling %@…":
+        "%@ に電話をかけています…",
+
+    // MARK: - Install tab
+
+    "Tunnel connected": "トンネル接続済み",
+    "Tunnel off": "トンネル未接続",
+    "Update available": "アップデートがあります",
+    "SwiftInstaller %@ is available — you're on %@.":
+        "SwiftInstaller %@ が公開されています（現在お使いのバージョン：%@）。",
+    "Get the latest version": "最新バージョンを取得",
+    "Release": "チャンネル",
+    "Reinstall": "再インストール",
+    "Install %@": "%@ をインストール",
+    "Custom .ipa": "カスタム .ipa",
+    "Import .ipa": ".ipa をインポート",
+    "Importing…": "インポート中…",
+    "Replace": "置き換え",
+    "or": "または",
+    "Paste a download link": "ダウンロードリンクを貼り付け",
+    "Downloading… %d%%": "ダウンロード中… %d%%",
+    "iOS %@ required": "iOS %@ が必要です",
+    "This iPhone runs iOS %@, which SwiftInstaller can't install on. Update to iOS %@ or later in Settings › General › Software Update.":
+        "この iPhone は iOS %@ で動作しており、SwiftInstaller ではインストールできません。「設定 › 一般 › ソフトウェア・アップデート」から iOS %@ 以降に更新してください。",
+    "Wi-Fi required": "Wi-Fi が必要です",
+    "Pairing code": "ペアリングコード",
+    "Type this into the prompt in Settings.":
+        "この番号を「設定」のダイアログに入力してください。",
+    "Install stopped": "インストールが停止しました",
+    "Close": "閉じる",
+    "Yes": "はい",
+    "No": "いいえ",
+    "Closing this popup will end the process. Are you sure?":
+        "このポップアップを閉じると処理が終了します。よろしいですか？",
+    "Cancel the install?": "インストールをキャンセルしますか？",
+    "%@ is installed. Finish the trust step above to open it.":
+        "%@ はインストールされています。上記の信頼手順を完了すると開けます。",
+    "%@ is installed. Finish the trust step below to open it.":
+        "%@ はインストールされています。下記の信頼手順を完了すると開けます。",
+    "Success: last steps": "完了：最後の手順",
+    "Action needed": "対応が必要です",
+    "Step %@ of %@": "手順 %@／%@",
+    "Show all steps": "すべての手順を表示",
+    "Show fewer steps": "手順を折りたたむ",
+
+    // MARK: - LocalDevVPN
+
+    "LocalDevVPN required": "LocalDevVPN が必要です",
+    "Install LocalDevVPN and connect it. The install runs over its tunnel.":
+        "LocalDevVPN をインストールして接続してください。インストールはこのトンネル経由で行われます。",
+    "Connect LocalDevVPN to scan and install. The write runs over its tunnel.":
+        "スキャンとインストールを行うには LocalDevVPN を接続してください。書き込みはこのトンネル経由で行われます。",
+    "Connect LocalDevVPN. Spoofing runs over its tunnel, like everything else here.":
+        "LocalDevVPN を接続してください。位置情報の偽装も、ここでの他の処理と同様にこのトンネル経由で行われます。",
+    "LocalDevVPN isn't connected. Connect it, then try again.": "LocalDevVPN が接続されていません。接続してから再度お試しください。",
+    "Connect LocalDevVPN": "LocalDevVPN を接続",
+    "Install LocalDevVPN from the App Store and open it.": "App Store から LocalDevVPN をインストールして開いてください。",
+    "If GitHub is blocked where you are, use a VPN that can proxy your traffic too: iOS runs one VPN at a time, so a local-only tunnel leaves nothing to download SwiftStore through.":
+        "お住まいの地域で GitHub がブロックされている場合は、通信もプロキシできる VPN を使用してください。iOS では一度に 1 つの VPN しか動作しないため、ローカル通信専用のトンネルだけでは SwiftStore をダウンロードする経路がなくなってしまいます。",
+
+    // MARK: - Install steps
+
+    "Connect the VPN": "VPN を接続",
+    "Get pairing file": "ペアリングファイルを取得",
+    "Open the device link": "デバイスへの接続を開く",
+    "Sign in to Apple ID": "Apple ID でサインイン",
+    "Download %@": "%@ をダウンロード",
+    "Use your imported IPA": "インポート済みの IPA を使用",
+    "Sign the app": "アプリに署名",
+    "Finish setup": "設定を完了",
+
+    // MARK: - Pairing tab
+
+    "Pairing file ready": "ペアリングファイルの準備ができました",
+    "No pairing file": "ペアリングファイルがありません",
+    "Pairing file": "ペアリングファイル",
+    "Pairing…": "ペアリング中…",
+    "Regenerate": "再生成",
+    "Generate pairing file": "ペアリングファイルを生成",
+    "Export pairing file": "ペアリングファイルを書き出す",
+    "Pair in Settings": "「設定」でペアリング",
+    "Install into an app": "アプリにインストール",
+    "Scanning": "スキャン中",
+    "Rescan apps": "アプリを再スキャン",
+    "Scan installed apps": "インストール済みアプリをスキャン",
+    "%d supported app installed": "対応アプリが %d 個インストールされています",
+    "%d supported apps installed": "対応アプリが %d 個インストールされています",
+    "No supported apps found": "対応アプリが見つかりません",
+    "Install an app like SwiftStore, StikDebug, or Feather first, then rescan.":
+        "先に SwiftStore、StikDebug、Feather などのアプリをインストールしてから、再度スキャンしてください。",
+    "Install pairing": "ペアリングをインストール",
+    "Pairing file ready. You can export it or install it into an app below.":
+        "ペアリングファイルの準備ができました。書き出すか、以下のアプリにインストールできます。",
+    "Pairing file installed into %@.": "ペアリングファイルを %@ にインストールしました。",
+
+    // Importing a pairing file (required below iOS 27, under Advanced from 27)
+
+    "Import pairing file": "ペアリングファイルをインポート",
+    "How do I make one?": "作成方法は？",
+    "(Optional)": "（任意）",
+    "imported pairing file": "インポート済みのペアリングファイル",
+    "No pairing file yet — tap “Import pairing file” first.": "まだペアリングファイルがありません。先に「ペアリングファイルをインポート」をタップしてください。",
+    "Pairing file missing — import it first.": "ペアリングファイルがありません。先にインポートしてください。",
+    "%@ isn't a pairing file. Pick the file your computer made — a .mobiledevicepairing or .plist holding this iPhone's pair record.":
+        "%@ はペアリングファイルではありません。パソコンで作成した、この iPhone のペアリング情報を含む .mobiledevicepairing または .plist ファイルを選択してください。",
+    "iOS %@ can't create its own pairing file — that needs iOS %@. Import one made on a computer under “Pairing file”, then try again.":
+        "iOS %@ は自分自身のペアリングファイルを作成できません。それには iOS %@ 以降が必要です。「ペアリングファイル」からパソコンで作成したファイルをインポートしてから、再度お試しください。",
+
+    // MARK: - Pairing service status
+
+    "not paired": "未ペアリング",
+    "connected": "接続済み",
+    "requesting Local Network…": "ローカルネットワークの許可を要求中…",
+    "Local Network denied": "ローカルネットワークの許可が拒否されました",
+    "waiting for device…": "デバイスを待機中…",
+    "advertising — open Settings › Privacy & Security › Developer Mode":
+        "アドバタイズ中 —「設定 › プライバシーとセキュリティ › デベロッパモード」を開いてください",
+    "enter PIN %@ in Settings": "「設定」で PIN コード %@ を入力してください",
+    "paired: %@ (%dB)": "ペアリング済み：%@（%d バイト）",
+    "failed: empty pairing file": "失敗：ペアリングファイルが空です",
+    "failed: %@": "失敗：%@",
+    "Pairing is already in progress.": "ペアリングは既に進行中です。",
+    "Local Network permission is off. Enable it in Settings › SwiftInstaller › Local Network, then try again.":
+        "ローカルネットワークの許可がオフになっています。「設定 › SwiftInstaller › ローカルネットワーク」で有効にしてから、再度お試しください。",
+    "Pairing produced an empty file. Make sure you approved the pairing request, then try again.":
+        "ペアリングの結果、空のファイルが生成されました。ペアリングの要求を承認したことを確認してから、再度お試しください。",
+
+    // MARK: - Certificates tab
+
+    "Revoke this certificate?": "この証明書を失効させますか？",
+    "Revoke": "失効させる",
+    "Revoking": "失効処理中",
+    "“%@” will be revoked. Apps already signed with it will stop launching on every device. This can't be undone.":
+        "「%@」が失効します。この証明書で署名済みのアプリは、すべてのデバイスで起動できなくなります。この操作は取り消せません。",
+    "Refreshing": "更新中",
+    "Signing in": "サインイン中",
+    "Refresh": "更新",
+    "Load certificates": "証明書を読み込む",
+    "%d certificate(s)": "証明書 %d 件",
+    "No certificates": "証明書がありません",
+    "This Apple ID has no development certificates to revoke.":
+        "この Apple ID には失効させる開発用証明書がありません。",
+    "Expired": "期限切れ",
+    "Expires %@": "%@ に期限切れ",
+    "Unnamed certificate": "名前のない証明書",
+    "This certificate has no serial number, so it can't be revoked.":
+        "この証明書にはシリアル番号がないため、失効させることができません。",
+
+    // MARK: - Location tab
+
+    "Location spoofing": "位置情報の偽装",
+    "Not simulating": "偽装していません",
+    "Simulated": "位置情報を偽装中",
+    "Pick a place": "場所を選択",
+    "Search for a place": "場所を検索",
+    "Nothing found for “%@”.": "「%@」の検索結果はありませんでした。",
+    "Set location": "位置情報を設定",
+    "Setting": "設定中",
+    "Reset to real location": "実際の位置情報に戻す",
+    "Location set to %@.": "位置情報を %@ に設定しました。",
+    "Location reset. The device is using its own again.": "位置情報をリセットしました。デバイスは再び本来の位置情報を使用します。",
+    "That isn't a valid coordinate.": "有効な座標ではありません。",
+    "Location session closed — set it up again.": "位置情報のセッションが終了しました。もう一度設定してください。",
+    "Downloading %@ failed (HTTP %d).": "%@ のダウンロードに失敗しました（HTTP %d）。",
+    "Couldn't build the download URL for %@.": "%@ のダウンロード URL を作成できませんでした。",
+
+    // MARK: - Entitlements tab
+
+    "Entitlements": "エンタイトルメント",
+    "Load apps": "アプリを読み込む",
+    "%d App ID": "App ID %d 件",
+    "%d App IDs": "App ID %d 件",
+    "No App IDs": "App ID がありません",
+    "This Apple ID hasn't registered any apps yet. Install something with SwiftInstaller first, then come back.":
+        "この Apple ID にはまだ登録されたアプリがありません。先に SwiftInstaller で何かインストールしてから戻ってきてください。",
+    "Memory and performance": "メモリとパフォーマンス",
+    "Other free capabilities": "その他の無料機能",
+    "Beta": "ベータ",
+    "Recommended": "推奨",
+    "Select all": "すべて選択",
+    "None": "選択解除",
+    "Enable %d selected": "選択した %d 項目を有効化",
+    "Asking Apple": "Apple に問い合わせ中",
+    "%d of %d enabled": "%d／%d 件が有効",
+    "Install the app again for these to take effect.": "これらの変更を反映するには、アプリを再インストールしてください。",
+
+    // MARK: - Sideloaded apps tab
+
+    "Sideloaded apps": "サイドロード済みアプリ",
+    "Reading the device": "デバイスを読み取り中",
+
+    // Refresh all: signing the installed apps again.
+    "iOS %@ isn't supported — SwiftInstaller needs iOS %@ or later.":
+        "iOS %@ はサポートされていません。SwiftInstaller には iOS %@ 以降が必要です。",
+    "Apple won't issue a signing certificate for this Apple ID: it reports that one already exists (error 7460). Revoke it under Tools › Certificates, then refresh again.":
+        "Apple はこの Apple ID に署名証明書を発行しません。すでに存在すると報告されています（エラー 7460）。「ツール › 証明書」で失効させてから、もう一度更新してください。",
+    "An install is already running. Wait for it to finish, then refresh.":
+        "インストールがすでに実行中です。終わるまで待ってから更新してください。",
+    "Getting ready": "準備中",
+    "Stopping after this app": "このアプリの後で停止します",
+    "Refreshing %@": "%@ を更新中",
+    "Signed by team %@, not the one you're signed in as — refreshing it here would install a second copy.":
+        "チーム %@ で署名されています。ログイン中のチームとは違うため、ここで更新すると2つ目のコピーがインストールされます。",
+    "Refreshed. Its seven days start again now.": "更新しました。7日間が今から数え直されます。",
+    "Nothing was refreshed.": "何も更新されませんでした。",
+    "Refreshed %d of %d apps.": "%d／%d 個のアプリを更新しました。",
+    "Refresh all apps?": "すべてのアプリを更新しますか？",
+    "Refresh all": "すべて更新",
+    "%@ will be signed again with your Apple ID and installed over the copy on this device. It keeps its data, and its seven days start over.":
+        "%@ をあなたの Apple ID で署名し直し、この端末にあるコピーに上書きインストールします。データはそのまま残り、7日間が数え直されます。",
+    "%d apps will be signed again with your Apple ID and installed over the copies on this device. They keep their data, and their seven days start over.":
+        "%d 個のアプリをあなたの Apple ID で署名し直し、この端末にあるコピーに上書きインストールします。データはそのまま残り、7日間が数え直されます。",
+    "%d app can be signed again from an IPA already on this iPhone.":
+        "この iPhone にある IPA から %d 個のアプリを署名し直せます。",
+    "%d apps can be signed again from IPAs already on this iPhone.":
+        "この iPhone にある IPA から %d 個のアプリを署名し直せます。",
+    "Reload": "再読み込み",
+    "Waiting": "待機中",
+    "In progress": "実行中",
+    "Failed": "失敗",
+    "%d app here has no IPA in SwiftInstaller, so it can't be refreshed from this page. Refresh it in whatever installed it, or import its .ipa first.":
+        "ここにある %d 個のアプリは SwiftInstaller に IPA がないため、このページからは更新できません。インストール元のアプリで更新するか、先に .ipa を読み込んでください。",
+    "%d apps here have no IPA in SwiftInstaller, so they can't be refreshed from this page. Refresh them in whatever installed them, or import their .ipa first.":
+        "ここにある %d 個のアプリは SwiftInstaller に IPA がないため、このページからは更新できません。インストール元のアプリで更新するか、先に .ipa を読み込んでください。",
+    "%d app": "アプリ %d 個",
+    "%d apps": "アプリ %d 個",
+    "%d app needs refreshing": "%d 個のアプリに更新が必要です",
+    "%d apps need refreshing": "%d 個のアプリに更新が必要です",
+    "No sideloaded apps": "サイドロード済みアプリがありません",
+    "Nothing on this device was installed with a provisioning profile. App Store apps don't expire, so they aren't listed here.":
+        "このデバイスにはプロビジョニングプロファイルでインストールされたアプリがありません。App Store のアプリは期限切れにならないため、ここには表示されません。",
+    "No matching profile": "一致するプロファイルがありません",
+    "Expires today": "本日期限切れ",
+    "Expires tomorrow": "明日期限切れ",
+    "Expires in %d days — %@": "あと %d 日で期限切れ — %@",
+    "Expired %@": "%@ に期限切れ",
+    "Unused profiles": "未使用のプロファイル",
+    "Issued to App IDs no installed app is running on.":
+        "インストール済みのアプリが使用していない App ID に発行されたものです。",
+    "Older profiles": "古いプロファイル",
+    "Bundle identifier": "バンドル識別子",
+    "App ID": "App ID",
+    "Version": "バージョン",
+    "Profile name": "プロファイル名",
+    "Team": "チーム",
+    "Team ID": "チーム ID",
+    "Issued": "発行日時",
+    "Profile UUID": "プロファイル UUID",
+    "Capabilities": "機能",
+    "Wildcard App ID — it covers any bundle id under it, and can't carry app-specific capabilities.":
+        "ワイルドカード App ID：配下のあらゆるバンドル ID をカバーするため、アプリ固有の機能を持たせることはできません。",
+    "The device has no provisioning profile for this App ID. The app may already have stopped launching — install it again to fix that.":
+        "デバイスにこの App ID 用のプロビジョニングプロファイルがありません。アプリが既に起動できなくなっている可能性があります。再インストールすれば解決します。",
+
+    // MARK: - Settings
+
+    "Settings": "設定",
+    "Done": "完了",
+    "Language": "言語",
+    "App language": "アプリの言語",
+    "Auto": "自動",
+    // The Tunnel section: starting LocalDevVPN from here.
+    "Tunnel": "トンネル",
+    "Something at %@:%d refused the connection, so the tunnel is carrying traffic — the device just isn't listening on its pairing port. That port only opens while Developer Mode is on, and iOS asks for it again after every restart: turn it on under Settings › Privacy & Security › Developer Mode, then try again. If it's already on, pair this iPhone again under “Pairing file”.":
+        "%@:%d で接続が拒否されました。トンネルは通っていて、デバイスがペアリング用のポートで待ち受けていないだけです。このポートはデベロッパモードが有効なときだけ開き、再起動のたびに iOS が確認を求めます。「設定 › プライバシーとセキュリティ › デベロッパモード」で有効にしてから、もう一度お試しください。すでに有効な場合は、「ペアリングファイル」からこの iPhone をペアリングし直してください。",
+    "Start LocalDevVPN when needed": "必要なときに LocalDevVPN を開始",
+    "Start LocalDevVPN now": "今すぐ LocalDevVPN を開始",
+    "LocalDevVPN isn't installed. Get it from the App Store, and this can start it for you.":
+        "LocalDevVPN がインストールされていません。App Store から入手すると、SwiftInstaller が起動できるようになります。",
+
+    "Downloaded IPAs": "ダウンロード済みの IPA",
+    "%@ used": "%@ を使用中",
+    "imported": "インポート済み",
+    "No downloaded IPAs. Ones you install from the Install tab are cached here.":
+        "ダウンロード済みの IPA はありません。「インストール」タブからインストールしたものがここにキャッシュされます。",
+    "Downloaded %@": "%@ にダウンロード",
+    "Added %@": "%@ に追加",
+    "Delete this download?": "このダウンロードを削除しますか？",
+    "Delete": "削除",
+    "“%@” (%@) will be removed. You can download it again any time from the Install tab.":
+        "「%@」（%@）が削除されます。「インストール」タブからいつでも再ダウンロードできます。",
+    "Couldn't delete %@: %@": "%@ を削除できませんでした：%@",
+    "Server": "サーバー",
+    "Custom…": "カスタム…",
+    "Server URL": "サーバー URL",
+    "Anisette Server": "Anisette サーバー",
+    "Device IP": "デバイス IP",
+    "Advanced": "詳細設定",
+    "Clear": "消去",
+    "Activity Log (%d)": "アクティビティログ（%d）",
+
+    // MARK: - Release channels & downloads
+
+    "Stable": "安定版",
+    "Nightly": "Nightly",
+
+    // Version picker (Advanced)
+
+    "%@ version": "%@ のバージョン",
+    "Latest": "最新",
+    "Latest (%@)": "最新（%@）",
+    "Couldn't load the other versions: %@": "他のバージョンを読み込めませんでした：%@",
+    "Try again": "再試行",
+
+    "couldn't find the IPA in the %@ %@ release":
+        "%@ チャンネルの %@ リリースに IPA が見つかりませんでした",
+    "%@ has no %@ release right now": "%@ には現在 %@ リリースがありません",
+    "bad asset URL": "ダウンロードリソースの URL が不正です",
+    "GitHub is rate-limiting this network — it isn't blocked, and the limit clears itself. Try again %@.":
+        "このネットワークからのアクセスが GitHub によりレート制限されています。ブロックされているわけではなく、制限は自動的に解除されます。%@ 後に再度お試しください。",
+    "GitHub answered HTTP %d%@": "GitHub の応答：HTTP %d%@",
+    "GitHub isn't serving %@ right now — the repository has been taken down, moved or made private, so there's nothing to download. Nothing is wrong with this iPhone or its network.":
+        "GitHub は現在 %@ を提供していません。リポジトリが削除、移動、または非公開にされたため、ダウンロードできるものがありません。この iPhone やネットワークに問題はありません。",
+    "couldn't reach GitHub: %@": "GitHub に接続できませんでした：%@",
+    "GitHub's answer wasn't release information (%@) — something on this network may have replaced it.":
+        "GitHub の応答がリリース情報ではありませんでした（%@）。このネットワーク上の何かが内容を置き換えている可能性があります。",
+    "what downloaded as %@ isn't an IPA — something on this network returned a page instead, or the transfer stopped partway.":
+        "%@ としてダウンロードされたものは IPA ではありません。このネットワーク上の何かがページを返したか、転送が途中で中断された可能性があります。",
+    "that link answered HTTP %d — it isn't a direct download, or it needs a sign-in.":
+        "そのリンクの応答は HTTP %d でした。直接ダウンロードできるリンクではないか、サインインが必要です。",
+
+    // MARK: - Engine failures
+
+    "Two-factor verification was cancelled.": "二段階認証がキャンセルされました。",
+    "Incorrect Apple ID or password. Check your Apple Account email and password, then try again.":
+        "Apple ID またはパスワードが正しくありません。Apple アカウントのメールアドレスとパスワードを確認してから、再度お試しください。",
+    "Apple ID sign-in failed on %@. Last error: %@":
+        "%@ での Apple ID サインインに失敗しました。直近のエラー：%@",
+    "Apple's sign-in server refused the request (HTTP 503). It isn't your password or the anisette server, so trying more servers won't help. Try again later, or update SwiftInstaller.":
+        "Apple のサインインサーバーがリクエストを拒否しました（HTTP 503）。パスワードや anisette サーバーの問題ではないため、別のサーバーを試しても解決しません。しばらくしてから再度お試しいただくか、SwiftInstaller をアップデートしてください。",
+    "SwiftInstaller can't reach Apple's sign-in server (gsa.apple.com), though this iPhone has an internet connection. Something is blocking it: a firewall, a DNS filter or ad blocker, Screen Time content restrictions, or another VPN app. Turn it off or try another network, then try again.":
+        "この iPhone はインターネットに接続されていますが、SwiftInstaller は Apple のサインインサーバー（gsa.apple.com）に接続できません。ファイアウォール、DNS フィルタや広告ブロッカー、スクリーンタイムのコンテンツ制限、または別の VPN App が接続を妨げています。それをオフにするか別のネットワークを試してから、もう一度お試しください。",
+    "SwiftInstaller can't reach Apple: Cellular Data is turned off for it. Turn SwiftInstaller on in Settings › Cellular, or join a Wi-Fi network with internet access, then try again.":
+        "SwiftInstaller が Apple に接続できません。この App のモバイルデータ通信がオフになっています。「設定 › モバイル通信」で SwiftInstaller をオンにするか、インターネットに接続できる Wi-Fi に接続してから、もう一度お試しください。",
+    "SwiftInstaller can't reach Apple: iOS isn't letting it use Wi-Fi. In Settings › Apps › SwiftInstaller › Wireless Data, choose WLAN & Cellular Data, then try again.":
+        "SwiftInstaller が Apple に接続できません。iOS がこの App の Wi-Fi 使用を許可していません。「設定 › アプリ › SwiftInstaller › ワイヤレスデータ」で「WLAN とモバイルデータ通信」を選んでから、もう一度お試しください。",
+    "SwiftInstaller can't reach Apple: a VPN set to carry all traffic is disconnected, so iOS is holding traffic back. Reconnect it, or turn off its kill switch or Connect On Demand, then try again.":
+        "SwiftInstaller が Apple に接続できません。すべての通信を経由させる設定の VPN が切断されているため、iOS が通信を止めています。その VPN を再接続するか、キルスイッチやオンデマンド接続をオフにしてから、もう一度お試しください。",
+    "SwiftInstaller can't reach Apple: this iPhone has no internet connection. Connect to Wi-Fi or turn on cellular data, then try again.":
+        "SwiftInstaller が Apple に接続できません。この iPhone はインターネットに接続されていません。Wi-Fi に接続するかモバイルデータ通信をオンにしてから、もう一度お試しください。",
+    "Apple is temporarily limiting sign-ins for this Apple ID or network (HTTP 429). Trying other servers won't help, and every attempt can extend the wait, so leave it a while before signing in again.":
+        "Apple がこの Apple ID またはネットワークからのサインインを一時的に制限しています（HTTP 429）。別のサーバーを試しても解決せず、試すたびに待ち時間が延びる可能性があるため、しばらく時間をおいてから再度サインインしてください。",
+    "If you're sure the password is right, Apple may be limiting sign-in attempts: wait a while before trying again.":
+        "パスワードが正しいことが確かな場合は、Apple がサインインの試行を制限している可能性があります。しばらく時間をおいてから再度お試しください。",
+    "Apple has locked this Apple Account for security reasons (error -20209), so every sign-in fails until it's unlocked. Reset its password at iforgot.apple.com, then sign in again with the new password.":
+        "セキュリティ上の理由により、Apple はこの Apple アカウントをロックしました（エラー -20209）。ロックが解除されるまで、サインインはすべて失敗します。iforgot.apple.com でパスワードをリセットしてから、新しいパスワードでもう一度サインインしてください。",
+    "the anisette server": "anisette サーバー",
+    "all %d anisette servers": "%d 個すべての anisette サーバー",
+    "Not signed in.": "サインインしていません。",
+    "No SwiftStore IPA downloaded.": "SwiftStore の IPA がダウンロードされていません。",
+    "Signing failed: %@": "署名に失敗しました：%@",
+    "No signed bundle to install.": "インストールできる署名済みのバンドルがありません。",
+    "Device link dropped — reconnect.":
+        "デバイスとの接続が切断されました。再接続してください。",
+    "Pairing didn't finish — no pairing file yet.":
+        "ペアリングが完了していません。まだペアリングファイルがありません。",
+    "Pairing file missing — pairing must run first.":
+        "ペアリングファイルがありません。先にペアリングを行う必要があります。",
+    "Pairing file missing — generate it first.":
+        "ペアリングファイルがありません。先に生成してください。",
+    "No pairing file yet — tap “Generate pairing file” first.":
+        "まだペアリングファイルがありません。先に「ペアリングファイルを生成」をタップしてください。",
+    "%@ isn't installed yet — install must run first.":
+        "%@ はまだインストールされていません。先にインストールを行う必要があります。",
+    "%@ isn't a valid IPA — the download it came from probably returned an error page, or the copy stopped partway. Replace it and tap Install again.":
+        "%@ は有効な IPA ではありません。ダウンロード元がエラーページを返したか、コピーが途中で中断された可能性があります。差し替えてから、もう一度「インストール」をタップしてください。",
+    "%@ isn't an IPA. Pick the .ipa file itself — if it looks right, the download may have saved an error page instead, or stopped partway.":
+        "%@ は IPA ではありません。.ipa ファイル自体を選択してください。問題なさそうに見える場合は、ダウンロード時にエラーページが保存されたか、途中で中断された可能性があります。",
+    "No IPA imported yet. Tap “Import .ipa” and pick one.":
+        "まだ IPA がインポートされていません。「.ipa をインポート」をタップして選択してください。",
+    "Couldn't import %@: %@": "%@ をインポートできませんでした：%@",
+    "That isn't a link SwiftInstaller can download. Paste the whole https:// address the .ipa downloads from.":
+        "SwiftInstaller がダウンロードできるリンクではありません。.ipa のダウンロード元となる https:// で始まる完全なアドレスを貼り付けてください。",
+    "That link didn't return an IPA. It has to download the file itself — a page that only links to the .ipa, or one that asks you to sign in first, arrives here as a web page.":
+        "そのリンクは IPA を返しませんでした。ファイル自体を直接ダウンロードできるリンクである必要があります。.ipa へのリンクを掲載しているだけのページや、先にサインインを求めるページは、ここでは単なる Web ページとして扱われます。",
+    "Couldn't download that link: %@": "そのリンクをダウンロードできませんでした：%@",
+    "there's nothing to download for a custom IPA — import one first":
+        "カスタム IPA にはダウンロードする内容がありません。先にインポートしてください",
+    "your app": "お使いのアプリ",
+    "Apple won't issue a signing certificate for this Apple ID: it reports that one already exists, or that a request for one is still pending (error 7460). SwiftInstaller couldn't reuse the certificate that's already there, so it stopped instead of replacing it. See the steps above.":
+        "Apple はこの Apple ID に署名用証明書を発行しません。既に証明書が存在するか、発行のリクエストが処理中であると報告されています（エラー 7460）。SwiftInstaller は既存の証明書を再利用できなかったため、それを置き換えずに処理を停止しました。上記の手順をご覧ください。",
+    " (UDID %@)": "（UDID %@）",
+    "Couldn't register this iPhone%@ with your Apple ID's developer team, so Apple won't issue a provisioning profile. %@ — see the steps above.":
+        "この iPhone%@ を Apple ID の Developer チームに登録できなかったため、Apple はプロビジョニングプロファイルを発行しません。%@ — 上記の手順をご覧ください。",
+    "Connect to Wi-Fi": "Wi-Fi に接続",
+    "Open Settings › Wi-Fi and join a network.": "「設定 › Wi-Fi」を開き、ネットワークに接続してください。",
+    "Then come back here — this continues automatically.": "その後こちらに戻ってください。続きは自動的に進みます。",
+    "Tap Connect so the toggle turns on.": "「Connect」をタップしてスイッチをオンにしてください。",
+    "Keep Wi-Fi on, then come back here — this continues automatically.":
+        "Wi-Fi をオンのままにして、こちらに戻ってください。続きは自動的に進みます。",
+    "Get LocalDevVPN": "LocalDevVPN を入手",
+    "Import an .ipa first": "先に .ipa をインポートしてください",
+    "Tap “Import .ipa” above and pick the file — it can live anywhere the Files app can reach, including iCloud Drive or a USB drive.":
+        "上の「.ipa をインポート」をタップしてファイルを選択してください。iCloud Drive や USB ドライブなど、「ファイル」アプリからアクセスできる場所であればどこでも構いません。",
+    "Or paste a direct download link under that button, and SwiftInstaller fetches the .ipa itself.":
+        "または、そのボタンの下にダウンロードリンクを直接貼り付ければ、SwiftInstaller が自動的に .ipa を取得します。",
+    "Or open the Files app, press and hold the .ipa, tap Share, and pick SwiftInstaller — that hands the file over without the picker.":
+        "または「ファイル」アプリを開き、.ipa を長押しして「共有」をタップし、SwiftInstaller を選択してください。ファイル選択画面を経由せずに渡せます。",
+    "Or copy it into Files › On My iPhone › SwiftInstaller, where SwiftInstaller also finds it.":
+        "あるいは「ファイル › このiPhone内 › SwiftInstaller」にコピーしておいても、SwiftInstaller が見つけられます。",
+    "This is the way in where GitHub is blocked: fetch the IPA on any device, bring it over, and install it here.":
+        "GitHub がブロックされている環境では、この方法が有効です。別のデバイスで IPA を取得し、こちらに持ってきてインストールしてください。",
+    "Bring the .ipa yourself": ".ipa を自分で用意する",
+    "%@ can't be downloaded while its GitHub repository is offline. The other apps still install as usual.":
+        "GitHub リポジトリがオフラインの間、%@ はダウンロードできません。ほかのアプリは通常どおりインストールできます。",
+    "To install it anyway, get its .ipa from somewhere you trust, name it %@, and copy it into Files › On My iPhone › SwiftInstaller.":
+        "それでもインストールするには、信頼できる入手先から .ipa を入手し、名前を %@ にして「ファイル › このiPhone内 › SwiftInstaller」にコピーしてください。",
+    "Then tap Install again — SwiftInstaller uses your file instead of downloading one.":
+        "その後、もう一度「インストール」をタップしてください。SwiftInstaller はダウンロードの代わりにそのファイルを使います。",
+    "Pair this iPhone in Settings": "「設定」でこの iPhone をペアリング",
+    "Open the Settings app, then go to Privacy & Security › Developer Mode.":
+        "「設定」アプリを開き、「プライバシーとセキュリティ › デベロッパモード」に進んでください。",
+    "Tap “Pair with SwiftInstaller”.": "「SwiftInstaller とペアリング」をタップしてください。",
+    "Enter your iPhone’s passcode if it asks for it.": "パスコードの入力を求められた場合は、iPhone のパスコードを入力してください。",
+    "Come back to SwiftInstaller, read the code it shows you, then type that same code into the prompt in Settings.":
+        "SwiftInstaller に戻り、表示されているコードを確認したら、同じコードを「設定」のダイアログに入力してください。",
+    "Type the code that appears at the top of the screen into the prompt in Settings. If none appears, come back to SwiftInstaller to read it.":
+        "画面上部に表示されるコードを「設定」のダイアログに入力してください。表示されない場合は、SwiftInstaller に戻ってコードを確認してください。",
+    "Allow notifications when SwiftInstaller asks: that's how the pairing code reaches you in Settings.":
+        "SwiftInstaller から求められたら通知を許可してください。ペアリングコードは通知で「設定」の上に表示されます。",
+
+    // The pairing Live Activity
+    "Privacy & Security › Developer Mode › Pair with SwiftInstaller":
+        "プライバシーとセキュリティ › デベロッパモード › SwiftInstaller とペアリング",
+    "Paired": "ペアリング完了",
+    "Tap to return to SwiftInstaller.": "タップして SwiftInstaller に戻ります。",
+
+    "A signing certificate already exists": "既に署名用証明書が存在します",
+    "Apple returned error 7460: this Apple ID already has an iOS development certificate, or a request for one is still pending.":
+        "Apple からエラー 7460 が返されました。この Apple ID には既に iOS 開発用証明書が存在するか、発行のリクエストが処理中です。",
+    "SwiftInstaller couldn't reuse it. That happens when the certificate was issued somewhere else — AltStore, SideStore, Sideloadly or Xcode on another device — so the private key it needs isn't on this iPhone.":
+        "SwiftInstaller はその証明書を再利用できませんでした。これは、証明書が他の場所（別のデバイスの AltStore、SwiftStore、Sideloadly、Xcode など）で発行された場合に起こります。必要な秘密鍵がこの iPhone にないためです。",
+    "Use “Revoke and retry” above, or open Certificates in the Tools tab, tap “Load certificates”, and revoke it there.":
+        "上の「失効させて再試行」を使うか、「ツール」タブの「証明書」を開いて「証明書を読み込む」をタップし、そこで失効させてください。",
+    "Revoking is permanent: every app already signed with that certificate stops launching, on every device.":
+        "証明書の失効は取り消せません。その証明書で署名済みのすべてのアプリが、すべてのデバイスで起動できなくなります。",
+    "Alternatively, sign in with a different (or spare) Apple ID above, then tap Install again.":
+        "または、上で別の（もしくは予備の）Apple ID でサインインしてから、もう一度「インストール」をタップしてください。",
+
+    // MARK: - Guide cards
+
+    // Guide: reset a locked Apple Account
+
+    "Reset your Apple Account password": "Apple アカウントのパスワードをリセット",
+    "Apple has locked this Apple Account for security reasons, often after too many sign-in attempts. Every sign-in fails until it's unlocked, so tapping Install again won't help yet.":
+        "セキュリティ上の理由により、Apple はこの Apple アカウントをロックしました。多くの場合、サインインの試行回数が多すぎたことが原因です。ロックが解除されるまでサインインはすべて失敗するため、今「インストール」をもう一度タップしても解決しません。",
+    "Open iForgot, enter this Apple Account's email, and follow Apple's steps to unlock it and reset its password.":
+        "iForgot を開き、この Apple アカウントのメールアドレスを入力して、Apple の手順に従ってロックを解除し、パスワードをリセットしてください。",
+    "Back in SwiftInstaller, open Settings › Account, swipe left on this Apple ID, tap Edit, and enter the new password.":
+        "SwiftInstaller に戻り、「設定 › アカウント」を開いて、この Apple ID を左にスワイプし、「編集」をタップして新しいパスワードを入力してください。",
+    "Then tap Install again.": "その後、もう一度「インストール」をタップしてください。",
+    "Open iForgot": "iForgot を開く",
+    "Apple won't let this Apple Account use developer services because of its owner's age (error 1102). Sign in with an adult's Apple Account instead.":
+        "所有者の年齢を理由に、Apple はこの Apple アカウントでのデベロッパサービスの利用を許可していません（エラー 1102）。代わりに成人の Apple アカウントでサインインしてください。",
+    "This Apple ID has no App IDs left (error 9120). A free Apple ID can register 10 a week, and each one counts for 7 days, so wait for some to expire or sign in with another Apple ID.":
+        "この Apple ID には使える App ID が残っていません（エラー 9120）。無料の Apple ID で登録できるのは週に 10 個までで、それぞれ 7 日間カウントされます。いくつか期限切れになるのを待つか、別の Apple ID でサインインしてください。",
+    "This iPhone already has three apps signed with a free Apple ID, the most iOS allows, counting expired ones. Delete one of them, then try again.":
+        "この iPhone には、無料の Apple ID で署名されたアプリがすでに iOS の上限である 3 つあります（期限切れのものも含みます）。いずれかを削除してから、もう一度お試しください。",
+    "This Apple Account can't sign apps": "この Apple アカウントではアプリに署名できません",
+    "Apple only lets adults use the developer services SwiftInstaller signs apps with, and it reports that this Apple Account belongs to someone younger (error 1102).":
+        "SwiftInstaller がアプリの署名に使うデベロッパサービスを Apple は成人にしか許可しておらず、この Apple アカウントは未成年のものだと報告しています（エラー 1102）。",
+    "Sign in with an adult's Apple Account instead: open Settings › Account and add it there.":
+        "代わりに成人の Apple アカウントでサインインしてください：「設定 › アカウント」を開いて追加します。",
+    "Apple won't let this Apple Account use developer services until its email address is verified (error 2160). Verify it at account.apple.com, then try again.":
+        "メールアドレスの確認が済むまで、Apple はこの Apple アカウントでのデベロッパサービスの利用を許可しません（エラー 2160）。account.apple.com で確認してから、もう一度お試しください。",
+    "Verify your Apple Account's email":
+        "Apple アカウントのメールアドレスを確認",
+    "Apple won't let this Apple Account sign apps until its email address is verified (error 2160). Signing in again or through another anisette server won't change that.":
+        "メールアドレスの確認が済むまで、Apple はこの Apple アカウントでのアプリへの署名を許可しません（エラー 2160）。サインインし直しても、別の anisette サーバーを使っても変わりません。",
+    "Sign in at account.apple.com with this Apple Account and verify its email address when Apple asks. Apple sends the code or link to that address, so check its spam folder too.":
+        "この Apple アカウントで account.apple.com にサインインし、Apple に求められたらメールアドレスを確認してください。確認コードまたはリンクはそのアドレスに届くので、迷惑メールフォルダも確認してください。",
+    "Open Apple Account":
+        "Apple アカウントを開く",
+    "No App IDs left this week": "今週使える App ID がありません",
+    "Every app and app extension SwiftInstaller signs needs an App ID. A free Apple ID can register 10 a week, and each one counts for 7 days.":
+        "SwiftInstaller が署名するアプリとアプリ拡張機能には、それぞれ App ID が必要です。無料の Apple ID で登録できるのは週に 10 個までで、それぞれ 7 日間カウントされます。",
+    "They can't be deleted sooner. Wait until some expire, then tap Install again.":
+        "期限前に削除することはできません。いくつか期限切れになったら、もう一度「インストール」をタップしてください。",
+    "Or sign in with a different (or spare) Apple ID in Settings › Account, then tap Install again.":
+        "または、「設定 › アカウント」で別の（もしくは予備の）Apple ID でサインインしてから、もう一度「インストール」をタップしてください。",
+    "Three sideloaded apps already": "サイドロード済みアプリがすでに 3 つあります",
+    "iOS allows three apps signed with a free Apple ID on an iPhone at a time, and it refused a fourth.":
+        "iOS では、無料の Apple ID で署名されたアプリは 1 台の iPhone に同時に 3 つまでしかインストールできず、4 つ目が拒否されました。",
+    "Expired apps count too. Delete one you no longer need from the Home Screen.":
+        "期限切れのアプリも数に含まれます。不要になったアプリをホーム画面から削除してください。",
+
+    // Guide: import a pairing file
+
+    "Import a pairing file": "ペアリングファイルをインポート",
+    "iOS %@ is the first version an iPhone can pair with itself on. On this one the pairing file has to be made on a computer.":
+        "iOS %@ は、iPhone が自分自身とペアリングできるようになった最初のバージョンです。それ以前のバージョンでは、ペアリングファイルをパソコンで作成する必要があります。",
+    "On a Mac, Windows PC or Linux box, plug this iPhone in, trust the computer, and run jitterbugpair (or “pymobiledevice3 lockdown pair”).":
+        "Mac、Windows パソコン、または Linux マシンにこの iPhone を接続し、そのコンピュータを信頼したうえで、jitterbugpair（または「pymobiledevice3 lockdown pair」）を実行してください。",
+    "Send the file it writes — a .mobiledevicepairing or .plist — to this iPhone, by AirDrop, iCloud Drive or a cable.":
+        "生成されたファイル（.mobiledevicepairing または .plist）を、AirDrop、iCloud Drive、またはケーブルでこの iPhone に転送してください。",
+    "Come back here, tap “Import pairing file”, and pick it. Everything after that works as it does on iOS %@.":
+        "こちらに戻り、「ペアリングファイルをインポート」をタップして選択してください。それ以降の流れは iOS %@ と同じです。",
+    "Get jitterbugpair": "jitterbugpair を入手",
+
+    // MARK: - Revoke-and-retry (Apple error 7460)
+
+    "A certificate already exists": "既に証明書が存在します",
+    "Apple won't issue a second signing certificate for this Apple ID. Revoking the one it already has lets the install continue — but it can't be undone.":
+        "Apple はこの Apple ID に 2 つ目の署名用証明書を発行しません。既存の証明書を失効させればインストールを続行できますが、この操作は取り消せません。",
+    "Loading certificates": "証明書を読み込み中",
+    "Revoke and retry": "失効させて再試行",
+    "Which certificate should be revoked?": "どの証明書を失効させますか？",
+    "Apple reports a certificate on this Apple ID, but none came back in the list. It may be a request that's still pending — wait a few minutes and tap Install again.":
+        "Apple はこの Apple ID に証明書があると報告していますが、一覧には表示されませんでした。発行リクエストがまだ処理中の可能性があります。数分待ってから、もう一度「インストール」をタップしてください。",
+    "Every app already signed with the certificate you pick will stop launching, on every device — including apps installed by AltStore, SideStore, or a computer. This can't be undone. The install retries straight afterwards.":
+        "選択した証明書で署名済みのすべてのアプリが、AltStore、SideStore、パソコンでインストールしたものも含め、すべてのデバイスで起動できなくなります。この操作は取り消せません。失効後、インストールは自動的に再試行されます。",
+    " (expired)": "（期限切れ）",
+
+    "Couldn't register this device": "このデバイスを登録できませんでした",
+    "Your Apple ID has hit its limit of registered devices. Free accounts can only register a handful of devices per year and can't remove old ones until the year resets.":
+        "この Apple ID は登録デバイス数の上限に達しています。無料アカウントでは年間に登録できるデバイス数がわずかで、年が切り替わるまで古いデバイスを削除することもできません。",
+    "Easiest fix: put a different (or spare) Apple ID in the fields above, then tap Install again.":
+        "最も簡単な解決方法は、上の入力欄に別の（もしくは予備の）Apple ID を入力し、もう一度「インストール」をタップすることです。",
+    "SwiftInstaller couldn't add this iPhone to your Apple ID's developer team automatically. Tapping Install again often works — Apple's developer service is sometimes briefly unavailable.":
+        "SwiftInstaller はこの iPhone を Apple ID の Developer チームに自動で追加できませんでした。もう一度「インストール」をタップすると成功することがよくあります。Apple の開発者向けサービスが一時的に利用できないことがあるためです。",
+    "If it keeps failing, add the device by hand. Its UDID is:":
+        "それでも失敗する場合は、手動でデバイスを追加してください。UDID は次のとおりです：",
+    "Paste that into the “Register a Device” form in the Apple Developer portal (this requires a paid Apple Developer account), then tap Install again.":
+        "それを Apple Developer サイトの「Register a Device」フォームに貼り付けてください（有料の Apple Developer アカウントが必要です）。その後、もう一度「インストール」をタップしてください。",
+    "Open device list": "デバイス一覧を開く",
+
+    "Last step: trust %@": "最後の手順：%@ を信頼",
+    "Open Settings › General › VPN & Device Management.":
+        "「設定 › 一般 › VPN とデバイス管理」を開いてください。",
+    "Tap your Apple ID under “Developer App”, then tap Trust.":
+        "「デベロッパ App」の下にある自分の Apple ID をタップし、「信頼」をタップしてください。",
+    "Open %@ from your Home Screen — you're done.":
+        "ホーム画面から %@ を開けば完了です。",
+
+    "Import the certificate into SwiftContainer": "証明書を SwiftContainer にインポート",
+    "Open SwiftContainer from your Home Screen.": "ホーム画面から SwiftContainer を開いてください。",
+    "Tap the Settings tab.": "「Settings」タブをタップしてください。",
+    "Tap “Import Certificate From SideStore”.":
+        "「Import Certificate From SideStore」をタップしてください。",
+    "Wrong device IP": "デバイス IP が正しくありません",
+    "The address in Settings › Advanced › Device IP is one this iPhone already holds, so there's nothing at the other end to connect to.":
+        "「設定 › 詳細設定 › デバイス IP」に入力されているアドレスは、この iPhone が既に持っているものです。そのため、接続先が存在しません。",
+    "Set it back to 10.7.0.1, the default. In LocalDevVPN that's the value under Settings › Device IP — not the address on its main screen, which is the tunnel's own end.":
+        "初期値の 10.7.0.1 に戻してください。LocalDevVPN では、これは「Settings › Device IP」にある値です。メイン画面に表示されているアドレス（トンネル自身の端点）とは異なります。",
+    "If you changed LocalDevVPN's addresses, copy its Device IP here — including the /32, if it shows one.":
+        "LocalDevVPN のアドレスを変更している場合は、その Device IP をここにコピーしてください。末尾に /32 が付いていれば、そのまま含めて構いません。",
+    "Pairing this iPhone needs it: SwiftInstaller advertises itself on the local network for Settings to find.":
+        "この iPhone のペアリングには Wi-Fi が必要です。SwiftInstaller は「設定」アプリから見つけてもらうために、ローカルネットワーク上で自身をアドバタイズします。",
+    "Connect to a Wi-Fi network. Pairing this iPhone needs it — SwiftInstaller has to be findable on the local network.":
+        "Wi-Fi ネットワークに接続してください。この iPhone のペアリングには、SwiftInstaller がローカルネットワーク上で見つけられる状態である必要があります。",
+
+    // MARK: - Side by Side tool
+
+    // The tool's name is left in English everywhere, as SideStore's is.
+    "Side by Side": "Side by Side",
+    "Set up someone else's iPhone": "他の人の iPhone をセットアップ",
+    "Steps": "手順",
+    "Same Wi-Fi network": "同じ Wi-Fi ネットワーク",
+    "Their iPhone needs iOS %@ — SwiftInstaller pairs itself once it's installed, and nothing older can.":
+        "相手の iPhone には iOS %@ が必要です。インストール後、SwiftInstaller は自分でペアリングしますが、それより古いバージョンではできません。",
+    "Their iPhone": "相手の iPhone",
+    "This iPhone is %@, so theirs will look similar.": "この iPhone は %@ です。相手のアドレスもこれに近い形になります。",
+    "IP address (e.g. 192.168.1.42)": "IP アドレス（例：192.168.1.42）",
+    "Enter the other iPhone's IP address. It's in Settings › Wi-Fi, next to the network it's on.":
+        "相手の iPhone の IP アドレスを入力してください。「設定」>「Wi-Fi」の、接続中のネットワークの横で確認できます。",
+    "On their iPhone: Settings › Wi-Fi › ⓘ next to the network, then “IP Address”.":
+        "相手の iPhone で「設定」>「Wi-Fi」>ネットワーク横の ⓘ >「IP アドレス」の順に開きます。",
+    "“%@” isn't an IPv4 address. It should look like 192.168.1.42.":
+        "「%@」は IPv4 アドレスではありません。192.168.1.42 のような形式で入力してください。",
+    "%@ is an address this iPhone already holds. Side by Side installs onto someone else's iPhone — use theirs. To install on this one, use the Install tab.":
+        "%@ はこの iPhone 自身のアドレスです。Side by Side は他の人の iPhone にインストールするための機能なので、相手のアドレスを入力してください。この iPhone にインストールするには「インストール」タブを使用してください。",
+    "Wi-Fi is off. Both iPhones have to be on the same Wi-Fi network for this to work.":
+        "Wi-Fi がオフになっています。この機能を使うには、両方の iPhone が同じ Wi-Fi ネットワークに接続されている必要があります。",
+    "Pair with their iPhone": "相手の iPhone とペアリング",
+    "No pair record for their iPhone.": "相手の iPhone のペアリングレコードがありません。",
+    "The link to their iPhone dropped — start again.": "相手の iPhone との接続が切断されました。最初からやり直してください。",
+    "Sign in to their Apple ID": "相手の Apple ID でサインイン",
+    "Apple ID to sign with": "署名に使用する Apple ID",
+    "Enter the Apple ID to sign with, and its password.": "署名に使用する Apple ID とそのパスワードを入力してください。",
+    "Tip: Use the iPhone/iPad owner's Apple account credentials":
+        "ヒント：その iPhone/iPad の持ち主の Apple アカウントの認証情報を使ってください",
+    "Use my saved Apple ID instead": "保存済みの自分の Apple ID を使用",
+    "Clear their details": "入力した情報を消去",
+    "Download SwiftInstaller": "SwiftInstaller をダウンロード",
+    "Couldn't download the latest SwiftInstaller release: %@": "SwiftInstaller の最新リリースをダウンロードできませんでした：%@",
+    "The release download wasn't an IPA. GitHub may be returning an error page — try again in a minute.":
+        "ダウンロードされたファイルが IPA ではありませんでした。GitHub がエラーページを返している可能性があります。しばらくしてからもう一度お試しください。",
+    "No SwiftInstaller IPA downloaded.": "SwiftInstaller の IPA がダウンロードされていません。",
+    "Start the install": "インストールを開始",
+    "Install on their iPhone": "相手の iPhone にインストール",
+    "Install again": "もう一度インストール",
+    "%d%% downloaded": "%d%% ダウンロード済み",
+    "%d%% uploaded": "%d%% アップロード済み",
+    "Apple wouldn't register their iPhone with this Apple ID's developer team, so it won't issue a provisioning profile. %@":
+        "Apple がこの Apple ID の開発者チームに相手の iPhone を登録できなかったため、プロビジョニングプロファイルが発行されません。%@",
+    "Apple won't issue a signing certificate for this Apple ID: it reports that one already exists (error 7460). One has to be revoked first — with the Certificates tool if this is the Apple ID saved in Settings › Account, and at developer.apple.com signed in as it otherwise.":
+        "Apple がこの Apple ID の署名証明書を発行しません。すでに証明書が存在すると報告されています（エラー 7460）。まず既存の証明書を失効させる必要があります。「設定」>「アカウント」に保存されている Apple ID の場合は「証明書」ツールで、それ以外の場合は developer.apple.com にその Apple ID でサインインして失効させてください。",
+    "Last step: they trust %@": "最後の手順：相手が %@ を信頼します",
+    "Waiting for them to tap Trust…": "相手が「信頼」をタップするのを待っています…",
+    "Waiting for them to pair in Settings…":
+        "相手が「設定」でペアリングするのを待っています…",
+    "Waiting for them to enter the code…":
+        "相手がコードを入力するのを待っています…",
+    "Pair their iPhone in Settings":
+        "「設定」で相手の iPhone をペアリング",
+    "Their iPhone won't ask by itself — pairing starts from its Settings.":
+        "相手の iPhone には何も表示されません。ペアリングはその iPhone の「設定」から始めます。",
+    "On their iPhone, open Settings › Privacy & Security › Developer Mode.":
+        "相手の iPhone で「設定 › プライバシーとセキュリティ › デベロッパモード」を開いてください。",
+    "Tap “Pair with %@”.":
+        "「%@ とペアリング」をタップしてください。",
+    "Enter their iPhone’s passcode if it asks for it.":
+        "パスコードの入力を求められた場合は、相手の iPhone のパスコードを入力してください。",
+    "Type the code that appears here into the prompt on their iPhone.":
+        "ここに表示されるコードを、相手の iPhone のダイアログに入力してください。",
+    "Type this into the prompt on their iPhone.":
+        "この番号を相手の iPhone のダイアログに入力してください。",
+    "They tapped “Don't Trust” on their iPhone. Start again, and have them tap Trust.":
+        "相手が iPhone で「信頼しない」をタップしました。最初からやり直し、「信頼」をタップしてもらってください。",
+    "SwiftInstaller is already waiting for an iPhone to pair with it — from the Install tab, the Pairing page, or an earlier attempt here. Finish that pairing, or close and reopen SwiftInstaller, then try again.":
+        "SwiftInstaller はすでに iPhone とのペアリングを待っています（「インストール」タブ、「ペアリング」画面、またはここでの前回の試行によるもの）。そのペアリングを完了するか、SwiftInstaller を閉じて開き直してから、もう一度お試しください。",
+    "Pairing with their iPhone didn't finish: %@":
+        "相手の iPhone とのペアリングが完了しませんでした：%@",
+    "Their iPhone at %@ refused the connection. It only accepts one while Developer Mode is on, and iOS asks to confirm Developer Mode again after every restart: on their iPhone, turn it on under Settings › Privacy & Security › Developer Mode, then try again.":
+        "%@ の相手の iPhone が接続を拒否しました。デベロッパモードが有効なときだけ接続を受け付け、再起動のたびに iOS が確認を求めます。相手の iPhone で「設定 › プライバシーとセキュリティ › デベロッパモード」を有効にしてから、もう一度お試しください。",
+    "Couldn't reach their iPhone at %@. Check the address (Settings › Wi-Fi › ⓘ on their iPhone), that both iPhones are on the same Wi-Fi network, and that Local Network is on for SwiftInstaller in this iPhone's Settings. Guest and public networks often keep devices from reaching each other.":
+        "%@ の相手の iPhone に接続できませんでした。アドレス（相手の iPhone の「設定」>「Wi-Fi」> ⓘ）、両方の iPhone が同じ Wi-Fi ネットワークに接続されていること、この iPhone の「設定」で SwiftInstaller のローカルネットワークがオンになっていることを確認してください。ゲストネットワークや公共のネットワークでは、デバイス同士の通信が遮断されることがよくあります。",
+    "The link to their iPhone didn't come up: %@":
+        "相手の iPhone との接続を確立できませんでした：%@",
+    "On their iPhone: Settings › General › VPN & Device Management.":
+        "相手の iPhone で「設定」>「一般」>「VPN とデバイス管理」を開きます。",
+    "Tap the Apple ID under “Developer App”, then tap Trust.":
+        "「デベロッパ App」の下にある Apple ID をタップし、「信頼」をタップします。",
+    "Open it from their Home Screen — they're set up.": "あとはホーム画面から開くだけで、セットアップは完了です。",
+
+    // MARK: - About
+
+    "About": "このアプリについて",
+    "Version %@ (%@)": "バージョン %@（%@）",
+    "SwiftInstaller installs SwiftStore and SwiftContainer straight onto your iPhone, with no PC involved.":
+        "SwiftInstaller は、パソコンを使わずに SwiftStore と SwiftContainer を iPhone に直接インストールします。",
+
+    "Links": "リンク",
+    "Source code": "ソースコード",
+    "Support the project": "プロジェクトを支援",
+    "Crypto": "暗号資産",
+    "Donation wallets for Bitcoin, Ethereum and Solana.":
+        "Bitcoin・Ethereum・Solana の寄付用ウォレット。",
+    "Crypto donations": "暗号資産での寄付",
+    "Donations are entirely optional. They don't buy anything, unlock any feature or get you anything in return; they're just a way to say thanks if SwiftInstaller has helped you.":
+        "寄付は完全に任意です。何かを購入したり、機能が解放されたり、見返りがあったりするものではありません。SwiftInstaller が役に立ったときに感謝を伝えるための手段です。",
+    "Coin": "通貨",
+    "Network: %@": "ネットワーク：%@",
+    "QR code for the %@ address": "%@ アドレスの QR コード",
+    "Copied": "コピーしました",
+    "Send each coin only on the network shown. Crypto sent on another network can't be recovered.":
+        "各通貨は表示されたネットワークでのみ送金してください。別のネットワークで送金した暗号資産は取り戻せません。",
+
+    "Special thanks": "特別な感謝",
+    "For idevice, the library SwiftInstaller talks to your iPhone through. None of this exists without it.":
+        "idevice に感謝します。SwiftInstaller はこのライブラリを通じて iPhone と通信しています。これがなければ何も成り立ちません。",
+    "For the support, and for spotting the bugs that got fixed because of it.":
+        "これまでのご支援と、そのおかげで発見・修正できたバグに感謝します。",
+    "For the Japanese translation.": "日本語への翻訳に感謝します。",
+
+    "Built with": "使用しているオープンソース",
+    "The open source work this app is built on:": "このアプリの基盤となっているオープンソースの成果：",
+    "Pairing, the tunnel and the install itself. By jkcoxson, MIT.":
+        "ペアリング、トンネル、インストール本体。jkcoxson 開発、MIT ライセンス。",
+    "Apple ID sign in, certificates and signing on the device. By nab138, MIT.":
+        "Apple ID サインイン、証明書、デバイス上での署名。nab138 開発、MIT ライセンス。",
+    "The sideloading app this installs for you.":
+        "このアプリがインストールするサイドロード用アプリです。",
+    "Runs sideloaded apps without spending an app slot on each one.":
+        "アプリごとにスロットを消費することなく、サイドロードしたアプリを実行します。",
+    "The developer disk image location spoofing mounts. Mirrored by doronz88.":
+        "位置情報の偽装に使用する Developer Disk Image をマウントします。doronz88 によりミラーされています。",
+
+    "Where to get it": "入手先について",
+    "Only the builds on the official install page and repository are mine. Anyone can fork the source, add a credential stealer and ship it under the same name and icon — so don't trust your Apple ID to a copy from anywhere else.":
+        "公式のインストールページとリポジトリにあるビルドのみが本物です。誰でもソースコードを fork し、認証情報を盗むコードを仕込んで、同じ名前とアイコンで配布することができます。そのため、他所から入手したコピーに Apple ID を入力しないでください。",
+    "Install page": "インストールページ",
+    "Terms": "利用規約",
+
+    // MARK: - Madeira
+
+    "%@ needs iOS %d or later. This iPhone runs iOS %@.": "%@ には iOS %d 以降が必要です。この iPhone は iOS %@ です。",
+    "Open Madeira from your Home Screen.": "ホーム画面から Madeira を開いてください。",
+    "In its setup, under “Set up JIT”, pick “In-app with pairing file”: SwiftInstaller already put the file there, so tap “Continue”.":
+        "初期設定の「Set up JIT」で「In-app with pairing file」を選んでください。ファイルは SwiftInstaller がすでに入れてあるので、「Continue」をタップします。",
+    "In its setup, under “Set up JIT”, pick how this iPhone gets JIT.":
+        "初期設定の「Set up JIT」で、この iPhone で JIT を使う方法を選んでください。",
+    "Madeira renews its own signing from now on, when it's open and LocalDevVPN is connected. SwiftInstaller gave it a sign-in for that: a token for Apple's developer service, not your password. Madeira can forget it under Settings › Signing.":
+        "今後は、Madeira を開いていて LocalDevVPN が接続されているときに、Madeira が自分で署名を更新します。そのために SwiftInstaller がサインイン情報を渡しました。Apple の開発者サービス用のトークンで、パスワードではありません。Madeira の Settings › Signing で削除できます。",
+    "Its signing lasts 7 days. Before they run out, refresh it here under Tools › Sideloaded apps.":
+        "署名の有効期間は7日間です。期限が切れる前に、このアプリの「ツール › サイドロード済みアプリ」で更新してください。",
+    "This pairing file has no RPPairing record, the only kind %@ reads.":
+        "このペアリングファイルには、%@ が読み取れる唯一の形式である RPPairing レコードがありません。",
+    "Runs Windows PC games on your iPhone. By Will Faust, GPL-3.0.":
+        "Windows 向け PC ゲームを iPhone で動かします。Will Faust 開発、GPL-3.0 ライセンス。",
+]

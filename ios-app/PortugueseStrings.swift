@@ -1,0 +1,828 @@
+import Foundation
+
+/// Brazilian Portuguese translations, keyed by the English string passed to
+/// `L(_:)`. Missing keys fall back to English. Keep `%@`/`%d` placeholders, and
+/// leave product and third-party UI names in English.
+///
+/// Uses the pt-BR terms iOS shows (Ajustes, Arquivos, Tela de Início).
+
+let portugueseStrings: [String: String] = [
+
+    // MARK: - Shared
+
+    "Cancel": "Cancelar",
+    "Copy": "Copiar",
+    "Email": "E-mail",
+    "Password": "Senha",
+    "Install": "Instalar",
+    "Installing": "Instalando",
+    "Cancelling": "Cancelando",
+    "Installed": "Instalado",
+    "Something went wrong": "Algo deu errado",
+    "an app by Frizzle": "um app de Frizzle",
+    "device": "dispositivo",
+
+    // MARK: - Welcome
+
+    "I have accepted the": "Eu aceito os",
+    "Start": "Começar",
+
+    "You'll need a pairing file": "Você vai precisar de um arquivo de pareamento",
+    "This iPhone runs iOS %@. Only iOS %@ can pair with itself, so you'll have to make a pairing file on a computer — with jitterbugpair or pymobiledevice3 — and import it in the app. SwiftInstaller walks you through it.":
+        "Este iPhone tem o iOS %@. Só o iOS %@ consegue parear consigo mesmo, então você vai precisar criar um arquivo de pareamento num computador — com o jitterbugpair ou o pymobiledevice3 — e importá-lo no app. O SwiftInstaller te guia pelo processo.",
+
+    // MARK: - Account setup & Settings › Account
+
+    "Sign in with your Apple ID": "Entre com seu Apple ID",
+    "Don't worry, these are stored locally": "Fique tranquilo: isso fica guardado só neste iPhone",
+    "Saved in this iPhone's keychain, and sent only to Apple when signing in.":
+        "Guardado no chaveiro deste iPhone e enviado apenas à Apple no momento de entrar.",
+    "Continue": "Continuar",
+    "Set this up later": "Configurar depois",
+    "Add Apple ID": "Adicionar Apple ID",
+    "Edit Apple ID": "Editar Apple ID",
+    "Save": "Salvar",
+    "Enter the password again to save this Apple ID.":
+        "Digite a senha novamente para salvar este Apple ID.",
+    "Account": "Conta",
+    "In use": "Em uso",
+    "Edit": "Editar",
+    "Remove": "Remover",
+    "No Apple ID saved yet. Add one and SwiftInstaller will use it for every sign-in.":
+        "Nenhum Apple ID salvo ainda. Adicione um e o SwiftInstaller vai usá-lo sempre que precisar entrar.",
+    "Saved in this iPhone's keychain, and sent only to Apple when signing in. Swipe a row to edit its password or remove it.":
+        "Guardado no chaveiro deste iPhone e enviado apenas à Apple no momento de entrar. Deslize uma linha para editar a senha ou removê-la.",
+    "Remove this Apple ID?": "Remover este Apple ID?",
+    "“%@” and its saved password will be deleted from this iPhone. Nothing changes on your Apple account.":
+        "“%@” e a senha salva serão apagados deste iPhone. Nada muda na sua conta Apple.",
+    "This iPhone's keychain refused to store the password (error %d), so it's kept only until SwiftInstaller quits.":
+        "O chaveiro deste iPhone recusou guardar a senha (erro %d), então ela fica na memória só até o SwiftInstaller ser encerrado.",
+    "No Apple ID saved. Add one in Settings › Account.":
+        "Nenhum Apple ID salvo. Adicione um em Ajustes › Conta.",
+
+    "Add your Apple ID": "Adicione seu Apple ID",
+    "Open Settings with the gear at the top right.":
+        "Abra os ajustes na engrenagem no canto superior direito.",
+    "Under Account, tap “Add Apple ID” and enter your email and password.":
+        "Em Conta, toque em “Adicionar Apple ID” e digite seu e-mail e sua senha.",
+
+    // MARK: - Tabs, Tools menu & two-factor prompt
+
+    "Tools": "Ferramentas",
+
+    // MARK: - Tabs & two-factor prompt
+
+    "Pairing": "Pareamento",
+    "Certificates": "Certificados",
+    "Two-Factor Code": "Código de dois fatores",
+    "6-digit code": "Código de 6 dígitos",
+    "Submit": "Enviar",
+    "Enter the code Apple just sent to your trusted device.":
+        "Digite o código que a Apple acabou de enviar ao seu dispositivo confiável.",
+    "Enter the code Apple texted to %@.":
+        "Digite o código que a Apple enviou por SMS para %@.",
+    "Enter the code Apple texted to your phone.":
+        "Digite o código que a Apple enviou por SMS para o seu telefone.",
+    "Apple is calling %@. Enter the code you hear.":
+        "A Apple está ligando para %@. Digite o código que você ouvir.",
+    "Apple is calling your phone. Enter the code you hear.":
+        "A Apple está ligando para o seu telefone. Digite o código que você ouvir.",
+    "Choose how Apple should send your verification code.":
+        "Escolha como a Apple deve enviar o seu código de verificação.",
+    "Choose How to Get a Code":
+        "Escolha como receber o código",
+    "Verify":
+        "Verificar",
+    "Didn't get it?":
+        "Não recebeu?",
+    "Send a new code to my devices":
+        "Enviar um novo código para meus dispositivos",
+    "Text me a new code":
+        "Enviar um novo código por SMS",
+    "Call me again":
+        "Ligar de novo",
+    "Send a code to my Apple devices":
+        "Enviar um código para meus dispositivos Apple",
+    "Text %@":
+        "SMS para %@",
+    "Call %@":
+        "Ligar para %@",
+    "Checking the code…":
+        "Verificando o código…",
+    "Requesting a new code…":
+        "Solicitando um novo código…",
+    "Sending a code to your devices…":
+        "Enviando um código para seus dispositivos…",
+    "Texting a code to %@…":
+        "Enviando um código por SMS para %@…",
+    "Calling %@…":
+        "Ligando para %@…",
+
+    // MARK: - Install tab
+
+    "Tunnel connected": "Túnel conectado",
+    "Tunnel off": "Túnel desligado",
+    "Update available": "Atualização disponível",
+    "SwiftInstaller %@ is available — you're on %@.":
+        "O SwiftInstaller %@ está disponível — você está no %@.",
+    "Get the latest version": "Baixar a versão mais recente",
+    "Release": "Versão",
+    "Reinstall": "Reinstalar",
+    "Install %@": "Instalar %@",
+    "Custom .ipa": ".ipa personalizado",
+    "Import .ipa": "Importar .ipa",
+    "Importing…": "Importando…",
+    "Replace": "Substituir",
+    "or": "ou",
+    "Paste a download link": "Cole um link de download",
+    "Downloading… %d%%": "Baixando… %d%%",
+    "iOS %@ required": "É necessário o iOS %@",
+    "This iPhone runs iOS %@, which SwiftInstaller can't install on. Update to iOS %@ or later in Settings › General › Software Update.":
+        "Este iPhone tem o iOS %@, e nessa versão o SwiftInstaller não consegue instalar nada. Atualize para o iOS %@ ou mais recente em Ajustes › Geral › Atualização de Software.",
+    "Wi-Fi required": "É necessário Wi-Fi",
+    "Pairing code": "Código de pareamento",
+    "Type this into the prompt in Settings.":
+        "Digite este código no aviso que aparece nos Ajustes.",
+    "Install stopped": "Instalação interrompida",
+    "Close": "Fechar",
+    "Yes": "Sim",
+    "No": "Não",
+    "Closing this popup will end the process. Are you sure?":
+        "Fechar este pop-up vai encerrar o processo. Tem certeza?",
+    "Cancel the install?": "Cancelar a instalação?",
+    "%@ is installed. Finish the trust step above to open it.":
+        "O %@ está instalado. Conclua a etapa de confiança acima para abri-lo.",
+    "%@ is installed. Finish the trust step below to open it.":
+        "O %@ está instalado. Conclua a etapa de confiança abaixo para abri-lo.",
+    "Success: last steps": "Pronto: últimas etapas",
+    "Action needed": "Ação necessária",
+    "Step %@ of %@": "Etapa %@ de %@",
+    "Show all steps": "Mostrar todas as etapas",
+    "Show fewer steps": "Mostrar menos etapas",
+
+    // MARK: - LocalDevVPN
+
+    "LocalDevVPN required": "É necessário o LocalDevVPN",
+    "Install LocalDevVPN and connect it. The install runs over its tunnel.":
+        "Instale o LocalDevVPN e conecte-o. A instalação passa pelo túnel dele.",
+    "Connect LocalDevVPN to scan and install. The write runs over its tunnel.":
+        "Conecte o LocalDevVPN para buscar e instalar. A gravação passa pelo túnel dele.",
+    "Connect LocalDevVPN. Spoofing runs over its tunnel, like everything else here.":
+        "Conecte o LocalDevVPN. A simulação passa pelo túnel dele, como todo o resto aqui.",
+    "LocalDevVPN isn't connected. Connect it, then try again.":
+        "O LocalDevVPN não está conectado. Conecte-o e tente de novo.",
+    "Connect LocalDevVPN": "Conectar o LocalDevVPN",
+    "Install LocalDevVPN from the App Store and open it.":
+        "Instale o LocalDevVPN pela App Store e abra-o.",
+    "If GitHub is blocked where you are, use a VPN that can proxy your traffic too: iOS runs one VPN at a time, so a local-only tunnel leaves nothing to download SwiftStore through.":
+        "Se o GitHub estiver bloqueado onde você está, use uma VPN que também encaminhe seu tráfego: o iOS mantém uma VPN por vez, então um túnel apenas local não deixa nenhum caminho para baixar o SwiftStore.",
+
+    // MARK: - Install steps
+
+    "Connect the VPN": "Conectar a VPN",
+    "Get pairing file": "Obter o arquivo de pareamento",
+    "Open the device link": "Abrir a conexão com o dispositivo",
+    "Sign in to Apple ID": "Entrar no Apple ID",
+    "Download %@": "Baixar o %@",
+    "Use your imported IPA": "Usar o IPA importado",
+    "Sign the app": "Assinar o app",
+    "Finish setup": "Concluir a configuração",
+
+    // MARK: - Pairing tab
+
+    "Pairing file ready": "Arquivo de pareamento pronto",
+    "No pairing file": "Sem arquivo de pareamento",
+    "Pairing file": "Arquivo de pareamento",
+    "Pairing…": "Pareando…",
+    "Regenerate": "Gerar de novo",
+    "Generate pairing file": "Gerar arquivo de pareamento",
+    "Export pairing file": "Exportar arquivo de pareamento",
+    "Pair in Settings": "Parear nos Ajustes",
+    "Install into an app": "Instalar em um app",
+    "Scanning": "Procurando",
+    "Rescan apps": "Procurar apps de novo",
+    "Scan installed apps": "Procurar apps instalados",
+    "%d supported app installed": "%d app compatível instalado",
+    "%d supported apps installed": "%d apps compatíveis instalados",
+    "No supported apps found": "Nenhum app compatível encontrado",
+    "Install an app like SwiftStore, StikDebug, or Feather first, then rescan.":
+        "Instale antes um app como SwiftStore, StikDebug ou Feather e procure de novo.",
+    "Install pairing": "Instalar pareamento",
+    "Pairing file ready. You can export it or install it into an app below.":
+        "Arquivo de pareamento pronto. Você pode exportá-lo ou instalá-lo em um app abaixo.",
+    "Pairing file installed into %@.": "Arquivo de pareamento instalado no %@.",
+
+    "Import pairing file": "Importar arquivo de pareamento",
+    "How do I make one?": "Como faço um?",
+    "(Optional)": "(Opcional)",
+    "imported pairing file": "arquivo de pareamento importado",
+    "No pairing file yet — tap “Import pairing file” first.":
+        "Ainda não há arquivo de pareamento — toque em “Importar arquivo de pareamento” primeiro.",
+    "Pairing file missing — import it first.":
+        "Arquivo de pareamento ausente — importe-o primeiro.",
+    "%@ isn't a pairing file. Pick the file your computer made — a .mobiledevicepairing or .plist holding this iPhone's pair record.":
+        "%@ não é um arquivo de pareamento. Escolha o arquivo que seu computador criou — um .mobiledevicepairing ou .plist com o registro de pareamento deste iPhone.",
+    "iOS %@ can't create its own pairing file — that needs iOS %@. Import one made on a computer under “Pairing file”, then try again.":
+        "O iOS %@ não consegue criar o próprio arquivo de pareamento — isso exige o iOS %@. Importe um feito num computador em “Arquivo de pareamento” e tente de novo.",
+
+    // MARK: - Pairing service status
+
+    "not paired": "não pareado",
+    "connected": "conectado",
+    "requesting Local Network…": "solicitando acesso à rede local…",
+    "Local Network denied": "acesso à rede local negado",
+    "waiting for device…": "aguardando o dispositivo…",
+    "advertising — open Settings › Privacy & Security › Developer Mode":
+        "anunciando — abra Ajustes › Privacidade e Segurança › Modo de Desenvolvedor",
+    "enter PIN %@ in Settings": "digite o PIN %@ nos Ajustes",
+    "paired: %@ (%dB)": "pareado: %@ (%d B)",
+    "failed: empty pairing file": "falhou: arquivo de pareamento vazio",
+    "failed: %@": "falhou: %@",
+    "Pairing is already in progress.": "Já há um pareamento em andamento.",
+    "Local Network permission is off. Enable it in Settings › SwiftInstaller › Local Network, then try again.":
+        "A permissão de rede local está desativada. Ative-a em Ajustes › SwiftInstaller › Rede Local e tente de novo.",
+    "Pairing produced an empty file. Make sure you approved the pairing request, then try again.":
+        "O pareamento gerou um arquivo vazio. Confirme que você aprovou a solicitação de pareamento e tente de novo.",
+
+    // MARK: - Certificates tab
+
+    "Revoke this certificate?": "Revogar este certificado?",
+    "Revoke": "Revogar",
+    "Revoking": "Revogando",
+    "“%@” will be revoked. Apps already signed with it will stop launching on every device. This can't be undone.":
+        "“%@” será revogado. Os apps já assinados com ele vão parar de abrir em todos os dispositivos. Isso não pode ser desfeito.",
+    "Refreshing": "Atualizando",
+    "Signing in": "Entrando",
+    "Refresh": "Atualizar",
+    "Load certificates": "Carregar certificados",
+    "%d certificate(s)": "%d certificado(s)",
+    "No certificates": "Nenhum certificado",
+    "This Apple ID has no development certificates to revoke.":
+        "Este Apple ID não tem certificados de desenvolvimento para revogar.",
+    "Expired": "Expirado",
+    "Expires %@": "Expira em %@",
+    "Unnamed certificate": "Certificado sem nome",
+    "This certificate has no serial number, so it can't be revoked.":
+        "Este certificado não tem número de série, então não pode ser revogado.",
+
+    // MARK: - Location tab
+
+    "Location spoofing": "Simulação de localização",
+    "Not simulating": "Sem simulação",
+    "Simulated": "Simulada",
+    "Pick a place": "Escolha um lugar",
+    "Search for a place": "Buscar um lugar",
+    "Nothing found for “%@”.": "Nada encontrado para “%@”.",
+    "Set location": "Definir localização",
+    "Setting": "Definindo",
+    "Reset to real location": "Voltar à localização real",
+    "Location set to %@.": "Localização definida para %@.",
+    "Location reset. The device is using its own again.":
+        "Localização restaurada. O dispositivo voltou a usar a própria.",
+    "That isn't a valid coordinate.": "Isso não é uma coordenada válida.",
+    "Location session closed — set it up again.":
+        "A sessão de localização foi encerrada — configure-a de novo.",
+    "Downloading %@ failed (HTTP %d).": "Falha ao baixar %@ (HTTP %d).",
+    "Couldn't build the download URL for %@.":
+        "Não foi possível montar o endereço de download de %@.",
+
+    // MARK: - Entitlements tab
+
+    "Entitlements": "Entitlements",
+    "Load apps": "Carregar apps",
+    "%d App ID": "%d App ID",
+    "%d App IDs": "%d App IDs",
+    "No App IDs": "Nenhum App ID",
+    "This Apple ID hasn't registered any apps yet. Install something with SwiftInstaller first, then come back.":
+        "Este Apple ID ainda não registrou nenhum app. Instale algo com o SwiftInstaller primeiro e volte aqui.",
+    "Memory and performance": "Memória e desempenho",
+    "Other free capabilities": "Outros recursos gratuitos",
+    "Beta": "Beta",
+    "Recommended": "Recomendado",
+    "Select all": "Selecionar tudo",
+    "None": "Nenhum",
+    "Enable %d selected": "Ativar %d selecionados",
+    "Asking Apple": "Consultando a Apple",
+    "%d of %d enabled": "%d de %d ativados",
+    "Install the app again for these to take effect.":
+        "Instale o app de novo para que isso passe a valer.",
+
+    // MARK: - Sideloaded apps tab
+
+    "Sideloaded apps": "Apps instalados por sideload",
+    "Reading the device": "Lendo o dispositivo",
+
+    // Refresh all: signing the installed apps again.
+    "iOS %@ isn't supported — SwiftInstaller needs iOS %@ or later.":
+        "O iOS %@ não é compatível: o SwiftInstaller precisa do iOS %@ ou posterior.",
+    "Apple won't issue a signing certificate for this Apple ID: it reports that one already exists (error 7460). Revoke it under Tools › Certificates, then refresh again.":
+        "A Apple não emite um certificado de assinatura para este Apple ID: ela informa que já existe um (erro 7460). Revogue-o em Ferramentas › Certificados e renove de novo.",
+    "An install is already running. Wait for it to finish, then refresh.":
+        "Já tem uma instalação em andamento. Espere ela terminar e renove depois.",
+    "Getting ready": "Preparando",
+    "Stopping after this app": "Parando depois deste app",
+    "Refreshing %@": "Renovando %@",
+    "Signed by team %@, not the one you're signed in as — refreshing it here would install a second copy.":
+        "Assinado pela equipe %@, não pela que você usou para entrar: renovar aqui instalaria uma segunda cópia.",
+    "Refreshed. Its seven days start again now.":
+        "Renovado. Os sete dias começam de novo agora.",
+    "Nothing was refreshed.": "Nada foi renovado.",
+    "Refreshed %d of %d apps.": "%d de %d apps renovados.",
+    "Refresh all apps?": "Renovar todos os apps?",
+    "Refresh all": "Renovar todos",
+    "%@ will be signed again with your Apple ID and installed over the copy on this device. It keeps its data, and its seven days start over.":
+        "%@ será assinado de novo com o seu Apple ID e instalado por cima da cópia que está neste dispositivo. Ele mantém os dados, e os sete dias recomeçam.",
+    "%d apps will be signed again with your Apple ID and installed over the copies on this device. They keep their data, and their seven days start over.":
+        "%d apps serão assinados de novo com o seu Apple ID e instalados por cima das cópias que estão neste dispositivo. Eles mantêm os dados, e os sete dias recomeçam.",
+    "%d app can be signed again from an IPA already on this iPhone.":
+        "%d app pode ser assinado de novo a partir de um IPA que já está neste iPhone.",
+    "%d apps can be signed again from IPAs already on this iPhone.":
+        "%d apps podem ser assinados de novo a partir de IPAs que já estão neste iPhone.",
+    "Reload": "Recarregar",
+    "Waiting": "Aguardando",
+    "In progress": "Em andamento",
+    "Failed": "Falhou",
+    "%d app here has no IPA in SwiftInstaller, so it can't be refreshed from this page. Refresh it in whatever installed it, or import its .ipa first.":
+        "%d app aqui não tem IPA no SwiftInstaller, então não dá para renová-lo por esta página. Renove-o no app que o instalou, ou importe o .ipa dele antes.",
+    "%d apps here have no IPA in SwiftInstaller, so they can't be refreshed from this page. Refresh them in whatever installed them, or import their .ipa first.":
+        "%d apps aqui não têm IPA no SwiftInstaller, então não dá para renová-los por esta página. Renove-os no app que os instalou, ou importe os .ipa deles antes.",
+    "%d app": "%d app",
+    "%d apps": "%d apps",
+    "%d app needs refreshing": "%d app precisa ser renovado",
+    "%d apps need refreshing": "%d apps precisam ser renovados",
+    "No sideloaded apps": "Nenhum app por sideload",
+    "Nothing on this device was installed with a provisioning profile. App Store apps don't expire, so they aren't listed here.":
+        "Nada neste dispositivo foi instalado com um perfil de provisionamento. Apps da App Store não expiram, por isso não aparecem aqui.",
+    "No matching profile": "Nenhum perfil correspondente",
+    "Expires today": "Expira hoje",
+    "Expires tomorrow": "Expira amanhã",
+    "Expires in %d days — %@": "Expira em %d dias — %@",
+    "Expired %@": "Expirou em %@",
+    "Unused profiles": "Perfis sem uso",
+    "Issued to App IDs no installed app is running on.":
+        "Emitidos para App IDs que nenhum app instalado está usando.",
+    "Older profiles": "Perfis mais antigos",
+    "Bundle identifier": "Identificador do pacote",
+    "App ID": "App ID",
+    "Version": "Versão",
+    "Profile name": "Nome do perfil",
+    "Team": "Equipe",
+    "Team ID": "ID da equipe",
+    "Issued": "Emitido",
+    "Profile UUID": "UUID do perfil",
+    "Capabilities": "Recursos",
+    "Wildcard App ID — it covers any bundle id under it, and can't carry app-specific capabilities.":
+        "App ID curinga — abrange qualquer identificador de pacote abaixo dele e não pode ter recursos específicos de um app.",
+    "The device has no provisioning profile for this App ID. The app may already have stopped launching — install it again to fix that.":
+        "O dispositivo não tem perfil de provisionamento para este App ID. O app pode já ter parado de abrir — instale-o de novo para resolver.",
+
+    // MARK: - Side by Side tool
+
+    "Side by Side": "Side by Side",
+    "Pair with their iPhone": "Parear com o iPhone dele",
+    "Sign in to their Apple ID": "Entrar no Apple ID dele",
+    "Download SwiftInstaller": "Baixar o SwiftInstaller",
+    "Install on their iPhone": "Instalar no iPhone dele",
+    "Enter the other iPhone's IP address. It's in Settings › Wi-Fi, next to the network it's on.":
+        "Digite o endereço IP do outro iPhone. Ele está em Ajustes › Wi-Fi, ao lado da rede em que o aparelho está.",
+    "“%@” isn't an IPv4 address. It should look like 192.168.1.42.":
+        "“%@” não é um endereço IPv4. Ele deve ser parecido com 192.168.1.42.",
+    "%@ is an address this iPhone already holds. Side by Side installs onto someone else's iPhone — use theirs. To install on this one, use the Install tab.":
+        "%@ é um endereço que este iPhone já tem. O Side by Side instala no iPhone de outra pessoa — use o dela. Para instalar neste aqui, use a aba Instalar.",
+    "Enter the Apple ID to sign with, and its password.":
+        "Digite o Apple ID que vai assinar o app e a senha dele.",
+    "Wi-Fi is off. Both iPhones have to be on the same Wi-Fi network for this to work.":
+        "O Wi-Fi está desligado. Os dois iPhones precisam estar na mesma rede Wi-Fi para isso funcionar.",
+    "The release download wasn't an IPA. GitHub may be returning an error page — try again in a minute.":
+        "O download da versão não era um IPA. O GitHub pode estar devolvendo uma página de erro — tente de novo daqui a pouco.",
+    "Couldn't download the latest SwiftInstaller release: %@":
+        "Não foi possível baixar a versão mais recente do SwiftInstaller: %@",
+    "No SwiftInstaller IPA downloaded.": "Nenhum IPA do SwiftInstaller foi baixado.",
+    "Apple won't issue a signing certificate for this Apple ID: it reports that one already exists (error 7460). One has to be revoked first — with the Certificates tool if this is the Apple ID saved in Settings › Account, and at developer.apple.com signed in as it otherwise.":
+        "A Apple não emite um certificado de assinatura para este Apple ID: ela informa que já existe um (erro 7460). É preciso revogar um antes — pela ferramenta Certificados, se este for o Apple ID salvo em Ajustes › Conta, ou em developer.apple.com conectado com ele, caso contrário.",
+    "Apple wouldn't register their iPhone with this Apple ID's developer team, so it won't issue a provisioning profile. %@":
+        "A Apple não registrou o iPhone dele na equipe de desenvolvimento deste Apple ID, então não vai emitir um perfil de provisionamento. %@",
+    "No pair record for their iPhone.": "Nenhum registro de pareamento para o iPhone dele.",
+    "The link to their iPhone dropped — start again.":
+        "A conexão com o iPhone dele caiu — comece de novo.",
+    "Set up someone else's iPhone": "Configure o iPhone de outra pessoa",
+    "Same Wi-Fi network": "Mesma rede Wi-Fi",
+    "Their iPhone needs iOS %@ — SwiftInstaller pairs itself once it's installed, and nothing older can.":
+        "O iPhone dele precisa do iOS %@: depois de instalado, o SwiftInstaller se pareia sozinho, e versões anteriores não conseguem.",
+    "Their iPhone": "O iPhone dele",
+    "IP address (e.g. 192.168.1.42)": "Endereço IP (ex.: 192.168.1.42)",
+    "On their iPhone: Settings › Wi-Fi › ⓘ next to the network, then “IP Address”.":
+        "No iPhone dele: Ajustes › Wi-Fi › ⓘ ao lado da rede e depois “Endereço IP”.",
+    "This iPhone is %@, so theirs will look similar.":
+        "Este iPhone é %@, então o dele será parecido.",
+    "Apple ID to sign with": "Apple ID que vai assinar",
+    "Tip: Use the iPhone/iPad owner's Apple account credentials":
+        "Dica: use as credenciais da conta Apple do dono do iPhone/iPad",
+    "Use my saved Apple ID instead": "Usar o meu Apple ID salvo",
+    "Steps": "Etapas",
+    "Waiting for them to tap Trust…": "Aguardando ele tocar em Confiar…",
+    "Waiting for them to pair in Settings…":
+        "Aguardando ele parear nos Ajustes…",
+    "Waiting for them to enter the code…":
+        "Aguardando ele digitar o código…",
+    "Pair their iPhone in Settings":
+        "Pareie o iPhone dele nos Ajustes",
+    "Their iPhone won't ask by itself — pairing starts from its Settings.":
+        "O iPhone dele não vai pedir sozinho — o pareamento começa nos Ajustes dele.",
+    "On their iPhone, open Settings › Privacy & Security › Developer Mode.":
+        "No iPhone dele, abra Ajustes › Privacidade e Segurança › Modo de Desenvolvedor.",
+    "Tap “Pair with %@”.":
+        "Toque em “Parear com o %@”.",
+    "Enter their iPhone’s passcode if it asks for it.":
+        "Digite o código do iPhone dele, se ele pedir.",
+    "Type the code that appears here into the prompt on their iPhone.":
+        "Digite o código que aparece aqui no aviso do iPhone dele.",
+    "Type this into the prompt on their iPhone.":
+        "Digite este código no aviso que aparece no iPhone dele.",
+    "They tapped “Don't Trust” on their iPhone. Start again, and have them tap Trust.":
+        "Ele tocou em “Não Confiar” no iPhone dele. Comece de novo e peça para ele tocar em Confiar.",
+    "SwiftInstaller is already waiting for an iPhone to pair with it — from the Install tab, the Pairing page, or an earlier attempt here. Finish that pairing, or close and reopen SwiftInstaller, then try again.":
+        "O SwiftInstaller já está esperando um iPhone parear com ele — pela aba Instalar, pela página Pareamento ou por uma tentativa anterior aqui. Termine esse pareamento, ou feche e abra o SwiftInstaller de novo, e tente outra vez.",
+    "Pairing with their iPhone didn't finish: %@":
+        "O pareamento com o iPhone dele não terminou: %@",
+    "Their iPhone at %@ refused the connection. It only accepts one while Developer Mode is on, and iOS asks to confirm Developer Mode again after every restart: on their iPhone, turn it on under Settings › Privacy & Security › Developer Mode, then try again.":
+        "O iPhone dele em %@ recusou a conexão. Ele só aceita com o Modo de Desenvolvedor ligado, e o iOS pede para confirmar de novo depois de cada reinício: no iPhone dele, ative em Ajustes › Privacidade e Segurança › Modo de Desenvolvedor e tente outra vez.",
+    "Couldn't reach their iPhone at %@. Check the address (Settings › Wi-Fi › ⓘ on their iPhone), that both iPhones are on the same Wi-Fi network, and that Local Network is on for SwiftInstaller in this iPhone's Settings. Guest and public networks often keep devices from reaching each other.":
+        "Não foi possível alcançar o iPhone dele em %@. Confira o endereço (Ajustes › Wi-Fi › ⓘ no iPhone dele), se os dois iPhones estão na mesma rede Wi-Fi e se a Rede Local está ativada para o SwiftInstaller nos Ajustes deste iPhone. Redes de convidados e redes públicas muitas vezes impedem que os aparelhos se comuniquem.",
+    "The link to their iPhone didn't come up: %@":
+        "Não foi possível abrir a conexão com o iPhone dele: %@",
+    "%d%% downloaded": "%d%% baixado",
+    "%d%% uploaded": "%d%% enviado",
+    "Start the install": "Iniciar a instalação",
+    "Install again": "Instalar de novo",
+    "Clear their details": "Limpar os dados dele",
+    "Last step: they trust %@": "Última etapa: ele confia no %@",
+    "On their iPhone: Settings › General › VPN & Device Management.":
+        "No iPhone dele: Ajustes › Geral › VPN e Gerenciamento de Dispositivo.",
+    "Tap the Apple ID under “Developer App”, then tap Trust.":
+        "Toque no Apple ID em “App do Desenvolvedor” e depois em Confiar.",
+    "Open it from their Home Screen — they're set up.":
+        "Abra pela Tela de Início dele — está tudo pronto.",
+
+    // MARK: - Settings
+
+    "Settings": "Ajustes",
+    "Done": "OK",
+    "Language": "Idioma",
+    "App language": "Idioma do app",
+    "Auto": "Automático",
+    // The Tunnel section: starting LocalDevVPN from here.
+    "Tunnel": "Túnel",
+    "Something at %@:%d refused the connection, so the tunnel is carrying traffic — the device just isn't listening on its pairing port. That port only opens while Developer Mode is on, and iOS asks for it again after every restart: turn it on under Settings › Privacy & Security › Developer Mode, then try again. If it's already on, pair this iPhone again under “Pairing file”.":
+        "Algo em %@:%d recusou a conexão, então o túnel está funcionando: é o dispositivo que não está escutando na porta de pareamento. Essa porta só abre com o Modo de Desenvolvedor ligado, e o iOS pede de novo depois de cada reinício: ative em Ajustes › Privacidade e Segurança › Modo de Desenvolvedor e tente outra vez. Se já estiver ligado, pareie este iPhone de novo em “Arquivo de pareamento”.",
+    "Start LocalDevVPN when needed": "Iniciar o LocalDevVPN quando for preciso",
+    "Start LocalDevVPN now": "Iniciar o LocalDevVPN agora",
+    "LocalDevVPN isn't installed. Get it from the App Store, and this can start it for you.":
+        "O LocalDevVPN não está instalado. Baixe-o na App Store e o SwiftInstaller poderá iniciá-lo para você.",
+
+    "Downloaded IPAs": "IPAs baixados",
+    "%@ used": "%@ em uso",
+    "imported": "importado",
+    "No downloaded IPAs. Ones you install from the Install tab are cached here.":
+        "Nenhum IPA baixado. Os que você instala pela aba Instalar ficam guardados aqui.",
+    "Downloaded %@": "Baixado em %@",
+    "Added %@": "Adicionado em %@",
+    "Delete this download?": "Apagar este download?",
+    "Delete": "Apagar",
+    "“%@” (%@) will be removed. You can download it again any time from the Install tab.":
+        "“%@” (%@) será removido. Você pode baixá-lo de novo quando quiser pela aba Instalar.",
+    "Couldn't delete %@: %@": "Não foi possível apagar %@: %@",
+    "Server": "Servidor",
+    "Custom…": "Personalizado…",
+    "Server URL": "URL do servidor",
+    "Anisette Server": "Servidor Anisette",
+    "Device IP": "IP do dispositivo",
+    "Advanced": "Avançado",
+    "Clear": "Limpar",
+    "Activity Log (%d)": "Registro de atividade (%d)",
+
+    // MARK: - Release channels & downloads
+
+    "Stable": "Estável",
+    "Nightly": "Nightly",
+
+    // Version picker (Advanced)
+
+    "%@ version": "Versão do %@",
+    "Latest": "Mais recente",
+    "Latest (%@)": "Mais recente (%@)",
+    "Couldn't load the other versions: %@": "Não foi possível carregar as outras versões: %@",
+    "Try again": "Tentar de novo",
+
+    "couldn't find the IPA in the %@ %@ release":
+        "não foi possível encontrar o IPA na versão %@ %@",
+    "%@ has no %@ release right now": "o %@ não tem nenhuma versão %@ no momento",
+    "bad asset URL": "endereço de arquivo inválido",
+    "GitHub is rate-limiting this network — it isn't blocked, and the limit clears itself. Try again %@.":
+        "O GitHub está limitando as requisições desta rede — ela não está bloqueada, e o limite se resolve sozinho. Tente de novo %@.",
+    "GitHub answered HTTP %d%@": "O GitHub respondeu HTTP %d%@",
+    "GitHub isn't serving %@ right now — the repository has been taken down, moved or made private, so there's nothing to download. Nothing is wrong with this iPhone or its network.":
+        "O GitHub não está disponibilizando %@ no momento — o repositório foi removido, movido ou tornado privado, então não há nada para baixar. Não há nada de errado com este iPhone nem com a rede dele.",
+    "couldn't reach GitHub: %@": "não foi possível acessar o GitHub: %@",
+    "GitHub's answer wasn't release information (%@) — something on this network may have replaced it.":
+        "A resposta do GitHub não trazia informações de versão (%@) — algo nesta rede pode tê-la substituído.",
+    "what downloaded as %@ isn't an IPA — something on this network returned a page instead, or the transfer stopped partway.":
+        "o que foi baixado como %@ não é um IPA — algo nesta rede devolveu uma página no lugar, ou a transferência parou no meio.",
+    "that link answered HTTP %d — it isn't a direct download, or it needs a sign-in.":
+        "esse link respondeu HTTP %d — ele não é um download direto, ou exige que você entre numa conta.",
+
+    // MARK: - Engine failures
+
+    "Two-factor verification was cancelled.": "A verificação em duas etapas foi cancelada.",
+    "Incorrect Apple ID or password. Check your Apple Account email and password, then try again.":
+        "Apple ID ou senha incorretos. Confira o e-mail e a senha da sua conta Apple e tente de novo.",
+    "Apple ID sign-in failed on %@. Last error: %@":
+        "Falha ao entrar no Apple ID em %@. Último erro: %@",
+    "Apple's sign-in server refused the request (HTTP 503). It isn't your password or the anisette server, so trying more servers won't help. Try again later, or update SwiftInstaller.":
+        "O servidor de login da Apple recusou a solicitação (HTTP 503). Não é a sua senha nem o servidor anisette, então tentar outros servidores não vai adiantar. Tente de novo mais tarde ou atualize o SwiftInstaller.",
+    "SwiftInstaller can't reach Apple's sign-in server (gsa.apple.com), though this iPhone has an internet connection. Something is blocking it: a firewall, a DNS filter or ad blocker, Screen Time content restrictions, or another VPN app. Turn it off or try another network, then try again.":
+        "O SwiftInstaller não consegue acessar o servidor de login da Apple (gsa.apple.com), embora este iPhone esteja conectado à internet. Algo está bloqueando: um firewall, um filtro de DNS ou bloqueador de anúncios, as restrições de conteúdo do Tempo de Uso ou outro app de VPN. Desative-o ou tente outra rede e tente de novo.",
+    "SwiftInstaller can't reach Apple: Cellular Data is turned off for it. Turn SwiftInstaller on in Settings › Cellular, or join a Wi-Fi network with internet access, then try again.":
+        "O SwiftInstaller não consegue acessar a Apple: os dados celulares estão desativados para ele. Ative o SwiftInstaller em Ajustes › Celular ou conecte-se a uma rede Wi-Fi com acesso à internet e tente de novo.",
+    "SwiftInstaller can't reach Apple: iOS isn't letting it use Wi-Fi. In Settings › Apps › SwiftInstaller › Wireless Data, choose WLAN & Cellular Data, then try again.":
+        "O SwiftInstaller não consegue acessar a Apple: o iOS não permite que ele use o Wi-Fi. Em Ajustes › Apps › SwiftInstaller › Dados Sem Fio, escolha WLAN e Dados Celulares e tente de novo.",
+    "SwiftInstaller can't reach Apple: a VPN set to carry all traffic is disconnected, so iOS is holding traffic back. Reconnect it, or turn off its kill switch or Connect On Demand, then try again.":
+        "O SwiftInstaller não consegue acessar a Apple: uma VPN configurada para levar todo o tráfego está desconectada, então o iOS está retendo o tráfego. Reconecte-a ou desative o kill switch ou a conexão sob demanda dela e tente de novo.",
+    "SwiftInstaller can't reach Apple: this iPhone has no internet connection. Connect to Wi-Fi or turn on cellular data, then try again.":
+        "O SwiftInstaller não consegue acessar a Apple: este iPhone está sem conexão com a internet. Conecte-se a uma rede Wi-Fi ou ative os dados celulares e tente de novo.",
+    "Apple is temporarily limiting sign-ins for this Apple ID or network (HTTP 429). Trying other servers won't help, and every attempt can extend the wait, so leave it a while before signing in again.":
+        "A Apple está limitando temporariamente os logins deste Apple ID ou desta rede (HTTP 429). Tentar outros servidores não vai adiantar, e cada tentativa pode aumentar a espera, então aguarde um pouco antes de entrar de novo.",
+    "If you're sure the password is right, Apple may be limiting sign-in attempts: wait a while before trying again.":
+        "Se você tem certeza de que a senha está correta, a Apple pode estar limitando as tentativas de login: aguarde um pouco antes de tentar de novo.",
+    "Apple has locked this Apple Account for security reasons (error -20209), so every sign-in fails until it's unlocked. Reset its password at iforgot.apple.com, then sign in again with the new password.":
+        "A Apple bloqueou esta conta Apple por motivos de segurança (erro -20209), então todo login falha até ela ser desbloqueada. Redefina a senha em iforgot.apple.com e entre de novo com a nova senha.",
+    "the anisette server": "o servidor anisette",
+    "all %d anisette servers": "todos os %d servidores anisette",
+    "Not signed in.": "Não conectado.",
+    "No SwiftStore IPA downloaded.": "Nenhum IPA do SwiftStore foi baixado.",
+    "Signing failed: %@": "Falha ao assinar: %@",
+    "No signed bundle to install.": "Nenhum pacote assinado para instalar.",
+    "Device link dropped — reconnect.": "A conexão com o dispositivo caiu — reconecte.",
+    "Pairing didn't finish — no pairing file yet.":
+        "O pareamento não foi concluído — ainda não há arquivo de pareamento.",
+    "Pairing file missing — pairing must run first.":
+        "Arquivo de pareamento ausente — o pareamento precisa ser feito antes.",
+    "Pairing file missing — generate it first.": "Arquivo de pareamento ausente — gere-o primeiro.",
+    "No pairing file yet — tap “Generate pairing file” first.":
+        "Ainda não há arquivo de pareamento — toque em “Gerar arquivo de pareamento” primeiro.",
+    "%@ isn't installed yet — install must run first.":
+        "O %@ ainda não está instalado — a instalação precisa ser feita antes.",
+    "%@ isn't a valid IPA — the download it came from probably returned an error page, or the copy stopped partway. Replace it and tap Install again.":
+        "%@ não é um IPA válido — o download provavelmente devolveu uma página de erro, ou a cópia parou no meio. Substitua-o e toque em Instalar de novo.",
+    "%@ isn't an IPA. Pick the .ipa file itself — if it looks right, the download may have saved an error page instead, or stopped partway.":
+        "%@ não é um IPA. Escolha o próprio arquivo .ipa — se ele parece correto, o download pode ter salvado uma página de erro no lugar, ou parado no meio.",
+    "No IPA imported yet. Tap “Import .ipa” and pick one.":
+        "Nenhum IPA importado ainda. Toque em “Importar .ipa” e escolha um.",
+    "Couldn't import %@: %@": "Não foi possível importar %@: %@",
+    "That isn't a link SwiftInstaller can download. Paste the whole https:// address the .ipa downloads from.":
+        "Esse não é um link que o SwiftInstaller consiga baixar. Cole o endereço https:// completo de onde o .ipa é baixado.",
+    "That link didn't return an IPA. It has to download the file itself — a page that only links to the .ipa, or one that asks you to sign in first, arrives here as a web page.":
+        "Esse link não devolveu um IPA. Ele precisa baixar o próprio arquivo — uma página que só aponta para o .ipa, ou que pede login antes, chega aqui como página da web.",
+    "Couldn't download that link: %@": "Não foi possível baixar esse link: %@",
+    "there's nothing to download for a custom IPA — import one first":
+        "não há o que baixar para um IPA personalizado — importe um primeiro",
+    "your app": "seu app",
+    "Apple won't issue a signing certificate for this Apple ID: it reports that one already exists, or that a request for one is still pending (error 7460). SwiftInstaller couldn't reuse the certificate that's already there, so it stopped instead of replacing it. See the steps above.":
+        "A Apple não emite um certificado de assinatura para este Apple ID: ela informa que já existe um, ou que um pedido continua pendente (erro 7460). O SwiftInstaller não conseguiu reaproveitar o certificado que já está lá, então parou em vez de substituí-lo. Veja as etapas acima.",
+    " (UDID %@)": " (UDID %@)",
+    "Couldn't register this iPhone%@ with your Apple ID's developer team, so Apple won't issue a provisioning profile. %@ — see the steps above.":
+        "Não foi possível registrar este iPhone%@ na equipe de desenvolvimento do seu Apple ID, então a Apple não vai emitir um perfil de provisionamento. %@ — veja as etapas acima.",
+    "Connect to Wi-Fi": "Conecte-se ao Wi-Fi",
+    "Open Settings › Wi-Fi and join a network.": "Abra Ajustes › Wi-Fi e entre numa rede.",
+    "Then come back here — this continues automatically.":
+        "Depois volte para cá — isto continua automaticamente.",
+    "Tap Connect so the toggle turns on.": "Toque em Connect para a chave ligar.",
+    "Keep Wi-Fi on, then come back here — this continues automatically.":
+        "Mantenha o Wi-Fi ligado e volte para cá — isto continua automaticamente.",
+    "Get LocalDevVPN": "Baixar o LocalDevVPN",
+    "Import an .ipa first": "Importe um .ipa primeiro",
+    "Tap “Import .ipa” above and pick the file — it can live anywhere the Files app can reach, including iCloud Drive or a USB drive.":
+        "Toque em “Importar .ipa” acima e escolha o arquivo — ele pode estar em qualquer lugar que o app Arquivos alcance, inclusive no iCloud Drive ou num pen drive.",
+    "Or paste a direct download link under that button, and SwiftInstaller fetches the .ipa itself.":
+        "Ou cole um link de download direto abaixo desse botão, e o SwiftInstaller busca o .ipa sozinho.",
+    "Or open the Files app, press and hold the .ipa, tap Share, and pick SwiftInstaller — that hands the file over without the picker.":
+        "Ou abra o app Arquivos, mantenha o .ipa pressionado, toque em Compartilhar e escolha o SwiftInstaller — assim o arquivo é entregue sem passar pelo seletor.",
+    "Or copy it into Files › On My iPhone › SwiftInstaller, where SwiftInstaller also finds it.":
+        "Ou copie-o para Arquivos › No meu iPhone › SwiftInstaller, onde o SwiftInstaller também o encontra.",
+    "This is the way in where GitHub is blocked: fetch the IPA on any device, bring it over, and install it here.":
+        "É por aqui que se resolve onde o GitHub está bloqueado: baixe o IPA em qualquer aparelho, traga-o para cá e instale-o aqui.",
+    "Bring the .ipa yourself": "Traga você mesmo o .ipa",
+    "%@ can't be downloaded while its GitHub repository is offline. The other apps still install as usual.":
+        "Não dá para baixar o %@ enquanto o repositório dele no GitHub estiver fora do ar. Os outros apps continuam instalando normalmente.",
+    "To install it anyway, get its .ipa from somewhere you trust, name it %@, and copy it into Files › On My iPhone › SwiftInstaller.":
+        "Para instalá-lo mesmo assim, consiga o .ipa dele em uma fonte em que você confie, dê a ele o nome %@ e copie-o para Arquivos › No meu iPhone › SwiftInstaller.",
+    "Then tap Install again — SwiftInstaller uses your file instead of downloading one.":
+        "Depois, toque em Instalar de novo — o SwiftInstaller usa o seu arquivo em vez de baixar um.",
+    "Pair this iPhone in Settings": "Pareie este iPhone nos Ajustes",
+    "Open the Settings app, then go to Privacy & Security › Developer Mode.":
+        "Abra o app Ajustes e vá em Privacidade e Segurança › Modo de Desenvolvedor.",
+    "Tap “Pair with SwiftInstaller”.": "Toque em “Parear com o SwiftInstaller”.",
+    "Enter your iPhone’s passcode if it asks for it.":
+        "Digite o código do seu iPhone, se ele pedir.",
+    "Come back to SwiftInstaller, read the code it shows you, then type that same code into the prompt in Settings.":
+        "Volte ao SwiftInstaller, veja o código que ele mostra e digite esse mesmo código no aviso que aparece nos Ajustes.",
+    "Type the code that appears at the top of the screen into the prompt in Settings. If none appears, come back to SwiftInstaller to read it.":
+        "Digite o código que aparece no topo da tela no aviso que aparece nos Ajustes. Se não aparecer nenhum, volte ao SwiftInstaller para ver.",
+    "Allow notifications when SwiftInstaller asks: that's how the pairing code reaches you in Settings.":
+        "Permita as notificações quando o SwiftInstaller pedir: é assim que o código de pareamento chega até você nos Ajustes.",
+
+    // The pairing Live Activity
+    "Privacy & Security › Developer Mode › Pair with SwiftInstaller":
+        "Privacidade e Segurança › Modo de Desenvolvedor › Parear com o SwiftInstaller",
+    "Paired": "Pareado",
+    "Tap to return to SwiftInstaller.": "Toque para voltar ao SwiftInstaller.",
+
+    "A signing certificate already exists": "Já existe um certificado de assinatura",
+    "Apple returned error 7460: this Apple ID already has an iOS development certificate, or a request for one is still pending.":
+        "A Apple devolveu o erro 7460: este Apple ID já tem um certificado de desenvolvimento iOS, ou um pedido continua pendente.",
+    "SwiftInstaller couldn't reuse it. That happens when the certificate was issued somewhere else — AltStore, SideStore, Sideloadly or Xcode on another device — so the private key it needs isn't on this iPhone.":
+        "O SwiftInstaller não conseguiu reaproveitá-lo. Isso acontece quando o certificado foi emitido em outro lugar — AltStore, SideStore, Sideloadly ou Xcode em outro aparelho — e a chave privada de que ele precisa não está neste iPhone.",
+    "Use “Revoke and retry” above, or open Certificates in the Tools tab, tap “Load certificates”, and revoke it there.":
+        "Use “Revogar e tentar de novo” acima, ou abra Certificados na aba Ferramentas, toque em “Carregar certificados” e revogue por lá.",
+    "Revoking is permanent: every app already signed with that certificate stops launching, on every device.":
+        "Revogar é definitivo: todo app já assinado com esse certificado para de abrir, em todos os aparelhos.",
+    "Alternatively, sign in with a different (or spare) Apple ID above, then tap Install again.":
+        "Como alternativa, entre com outro Apple ID (ou um reserva) acima e toque em Instalar de novo.",
+
+    // MARK: - Guide cards
+
+    // Guide: reset a locked Apple Account
+
+    "Reset your Apple Account password": "Redefina a senha da sua conta Apple",
+    "Apple has locked this Apple Account for security reasons, often after too many sign-in attempts. Every sign-in fails until it's unlocked, so tapping Install again won't help yet.":
+        "A Apple bloqueou esta conta Apple por motivos de segurança, geralmente depois de tentativas de login demais. Todo login falha até ela ser desbloqueada, então tocar em Instalar de novo ainda não adianta.",
+    "Open iForgot, enter this Apple Account's email, and follow Apple's steps to unlock it and reset its password.":
+        "Abra o iForgot, digite o e-mail desta conta Apple e siga os passos da Apple para desbloqueá-la e redefinir a senha.",
+    "Back in SwiftInstaller, open Settings › Account, swipe left on this Apple ID, tap Edit, and enter the new password.":
+        "De volta ao SwiftInstaller, abra Ajustes › Conta, deslize este Apple ID para a esquerda, toque em Editar e digite a nova senha.",
+    "Then tap Install again.": "Depois, toque em Instalar de novo.",
+    "Open iForgot": "Abrir o iForgot",
+    "Apple won't let this Apple Account use developer services because of its owner's age (error 1102). Sign in with an adult's Apple Account instead.":
+        "A Apple não deixa esta conta Apple usar os serviços para desenvolvedores por causa da idade do titular (erro 1102). Entre com a conta Apple de um adulto.",
+    "This Apple ID has no App IDs left (error 9120). A free Apple ID can register 10 a week, and each one counts for 7 days, so wait for some to expire or sign in with another Apple ID.":
+        "Este Apple ID não tem mais App IDs disponíveis (erro 9120). Um Apple ID gratuito pode registrar 10 por semana, e cada um conta por 7 dias, então espere alguns expirarem ou entre com outro Apple ID.",
+    "This iPhone already has three apps signed with a free Apple ID, the most iOS allows, counting expired ones. Delete one of them, then try again.":
+        "Este iPhone já tem três apps assinados com um Apple ID gratuito, o máximo que o iOS permite, contando os expirados. Apague um deles e tente de novo.",
+    "This Apple Account can't sign apps":
+        "Esta conta Apple não pode assinar apps",
+    "Apple only lets adults use the developer services SwiftInstaller signs apps with, and it reports that this Apple Account belongs to someone younger (error 1102).":
+        "A Apple só deixa adultos usarem os serviços para desenvolvedores com que o SwiftInstaller assina apps, e informa que esta conta Apple pertence a alguém mais novo (erro 1102).",
+    "Sign in with an adult's Apple Account instead: open Settings › Account and add it there.":
+        "Entre com a conta Apple de um adulto: abra Ajustes › Conta e adicione-a lá.",
+    "Apple won't let this Apple Account use developer services until its email address is verified (error 2160). Verify it at account.apple.com, then try again.":
+        "A Apple não deixa esta conta Apple usar os serviços para desenvolvedores até o endereço de e-mail dela ser verificado (erro 2160). Verifique-o em account.apple.com e tente de novo.",
+    "Verify your Apple Account's email":
+        "Verifique o e-mail da sua conta Apple",
+    "Apple won't let this Apple Account sign apps until its email address is verified (error 2160). Signing in again or through another anisette server won't change that.":
+        "A Apple não deixa esta conta Apple assinar apps até o endereço de e-mail dela ser verificado (erro 2160). Entrar de novo ou usar outro servidor anisette não muda isso.",
+    "Sign in at account.apple.com with this Apple Account and verify its email address when Apple asks. Apple sends the code or link to that address, so check its spam folder too.":
+        "Entre em account.apple.com com esta conta Apple e verifique o endereço de e-mail quando a Apple pedir. A Apple envia o código ou o link para esse endereço, então confira também a pasta de spam.",
+    "Open Apple Account":
+        "Abrir a conta Apple",
+    "No App IDs left this week": "Sem App IDs nesta semana",
+    "Every app and app extension SwiftInstaller signs needs an App ID. A free Apple ID can register 10 a week, and each one counts for 7 days.":
+        "Todo app e extensão de app que o SwiftInstaller assina precisa de um App ID. Um Apple ID gratuito pode registrar 10 por semana, e cada um conta por 7 dias.",
+    "They can't be deleted sooner. Wait until some expire, then tap Install again.":
+        "Não dá para apagá-los antes. Espere alguns expirarem e toque em Instalar de novo.",
+    "Or sign in with a different (or spare) Apple ID in Settings › Account, then tap Install again.":
+        "Ou entre com outro Apple ID (ou um reserva) em Ajustes › Conta e toque em Instalar de novo.",
+    "Three sideloaded apps already": "Já há três apps por sideload",
+    "iOS allows three apps signed with a free Apple ID on an iPhone at a time, and it refused a fourth.":
+        "O iOS permite três apps assinados com um Apple ID gratuito em um iPhone ao mesmo tempo, e recusou um quarto.",
+    "Expired apps count too. Delete one you no longer need from the Home Screen.":
+        "Apps expirados também contam. Apague da Tela de Início um que você não usa mais.",
+
+    "Import a pairing file": "Importe um arquivo de pareamento",
+    "iOS %@ is the first version an iPhone can pair with itself on. On this one the pairing file has to be made on a computer.":
+        "O iOS %@ é a primeira versão em que um iPhone consegue parear consigo mesmo. Neste aqui, o arquivo de pareamento precisa ser feito num computador.",
+    "On a Mac, Windows PC or Linux box, plug this iPhone in, trust the computer, and run jitterbugpair (or “pymobiledevice3 lockdown pair”).":
+        "Num Mac, PC com Windows ou máquina Linux, conecte este iPhone, confie no computador e rode o jitterbugpair (ou “pymobiledevice3 lockdown pair”).",
+    "Send the file it writes — a .mobiledevicepairing or .plist — to this iPhone, by AirDrop, iCloud Drive or a cable.":
+        "Envie o arquivo que ele gerar — um .mobiledevicepairing ou .plist — para este iPhone, por AirDrop, iCloud Drive ou cabo.",
+    "Come back here, tap “Import pairing file”, and pick it. Everything after that works as it does on iOS %@.":
+        "Volte para cá, toque em “Importar arquivo de pareamento” e escolha-o. Daí em diante tudo funciona como no iOS %@.",
+    "Get jitterbugpair": "Baixar o jitterbugpair",
+
+    // MARK: - Revoke-and-retry (Apple error 7460)
+
+    "A certificate already exists": "Já existe um certificado",
+    "Apple won't issue a second signing certificate for this Apple ID. Revoking the one it already has lets the install continue — but it can't be undone.":
+        "A Apple não emite um segundo certificado de assinatura para este Apple ID. Revogar o que já existe deixa a instalação seguir — mas isso não pode ser desfeito.",
+    "Loading certificates": "Carregando certificados",
+    "Revoke and retry": "Revogar e tentar de novo",
+    "Which certificate should be revoked?": "Qual certificado deve ser revogado?",
+    "Apple reports a certificate on this Apple ID, but none came back in the list. It may be a request that's still pending — wait a few minutes and tap Install again.":
+        "A Apple informa que há um certificado neste Apple ID, mas nenhum veio na lista. Pode ser um pedido ainda pendente — espere alguns minutos e toque em Instalar de novo.",
+    "Every app already signed with the certificate you pick will stop launching, on every device — including apps installed by AltStore, SideStore, or a computer. This can't be undone. The install retries straight afterwards.":
+        "Todo app já assinado com o certificado que você escolher vai parar de abrir, em todos os aparelhos — inclusive apps instalados pelo AltStore, pelo SwiftStore ou por um computador. Isso não pode ser desfeito. A instalação é repetida logo em seguida.",
+    " (expired)": " (expirado)",
+
+    "Couldn't register this device": "Não foi possível registrar este dispositivo",
+    "Your Apple ID has hit its limit of registered devices. Free accounts can only register a handful of devices per year and can't remove old ones until the year resets.":
+        "Seu Apple ID atingiu o limite de dispositivos registrados. Contas gratuitas só podem registrar alguns aparelhos por ano e não conseguem remover os antigos até o ano virar.",
+    "Easiest fix: put a different (or spare) Apple ID in the fields above, then tap Install again.":
+        "Solução mais simples: coloque outro Apple ID (ou um reserva) nos campos acima e toque em Instalar de novo.",
+    "SwiftInstaller couldn't add this iPhone to your Apple ID's developer team automatically. Tapping Install again often works — Apple's developer service is sometimes briefly unavailable.":
+        "O SwiftInstaller não conseguiu adicionar este iPhone à equipe de desenvolvimento do seu Apple ID automaticamente. Tocar em Instalar de novo costuma funcionar — o serviço de desenvolvedor da Apple fica indisponível de vez em quando.",
+    "If it keeps failing, add the device by hand. Its UDID is:":
+        "Se continuar falhando, adicione o dispositivo manualmente. O UDID dele é:",
+    "Paste that into the “Register a Device” form in the Apple Developer portal (this requires a paid Apple Developer account), then tap Install again.":
+        "Cole isso no formulário “Register a Device” do portal Apple Developer (isso exige uma conta paga do Apple Developer) e toque em Instalar de novo.",
+    "Open device list": "Abrir a lista de dispositivos",
+
+    "Last step: trust %@": "Última etapa: confie no %@",
+    "Open Settings › General › VPN & Device Management.":
+        "Abra Ajustes › Geral › VPN e Gerenciamento de Dispositivo.",
+    "Tap your Apple ID under “Developer App”, then tap Trust.":
+        "Toque no seu Apple ID em “App do Desenvolvedor” e depois em Confiar.",
+    "Open %@ from your Home Screen — you're done.":
+        "Abra o %@ pela Tela de Início — está tudo pronto.",
+
+    "Import the certificate into SwiftContainer": "Importe o certificado no SwiftContainer",
+    "Open SwiftContainer from your Home Screen.": "Abra o SwiftContainer pela Tela de Início.",
+    "Tap the Settings tab.": "Toque na aba Settings.",
+    "Tap “Import Certificate From SideStore”.": "Toque em “Import Certificate From SideStore”.",
+    "Wrong device IP": "IP do dispositivo incorreto",
+    "The address in Settings › Advanced › Device IP is one this iPhone already holds, so there's nothing at the other end to connect to.":
+        "O endereço em Ajustes › Avançado › IP do dispositivo é um que este iPhone já tem, então não há nada do outro lado para se conectar.",
+    "Set it back to 10.7.0.1, the default. In LocalDevVPN that's the value under Settings › Device IP — not the address on its main screen, which is the tunnel's own end.":
+        "Volte para 10.7.0.1, o padrão. No LocalDevVPN esse é o valor em Settings › Device IP — não o endereço da tela principal, que é a ponta do próprio túnel.",
+    "If you changed LocalDevVPN's addresses, copy its Device IP here — including the /32, if it shows one.":
+        "Se você mudou os endereços do LocalDevVPN, copie o Device IP dele para cá — inclusive o /32, se aparecer um.",
+    "Pairing this iPhone needs it: SwiftInstaller advertises itself on the local network for Settings to find.":
+        "Parear este iPhone depende disso: o SwiftInstaller se anuncia na rede local para os Ajustes o encontrarem.",
+    "Connect to a Wi-Fi network. Pairing this iPhone needs it — SwiftInstaller has to be findable on the local network.":
+        "Conecte-se a uma rede Wi-Fi. Parear este iPhone depende disso — o SwiftInstaller precisa ser encontrável na rede local.",
+
+    // MARK: - About
+
+    "About": "Sobre",
+    "Version %@ (%@)": "Versão %@ (%@)",
+    "SwiftInstaller installs SwiftStore and SwiftContainer straight onto your iPhone, with no PC involved.":
+        "O SwiftInstaller instala o SwiftStore e o SwiftContainer direto no seu iPhone, sem precisar de computador.",
+
+    "Links": "Links",
+    "Source code": "Código-fonte",
+    "Support the project": "Apoie o projeto",
+    "Crypto": "Cripto",
+    "Donation wallets for Bitcoin, Ethereum and Solana.":
+        "Carteiras para doações em Bitcoin, Ethereum e Solana.",
+    "Crypto donations": "Doações em cripto",
+    "Donations are entirely optional. They don't buy anything, unlock any feature or get you anything in return; they're just a way to say thanks if SwiftInstaller has helped you.":
+        "As doações são totalmente opcionais. Elas não compram nada, não desbloqueiam nenhum recurso nem dão nada em troca; são só uma forma de agradecer se o SwiftInstaller te ajudou.",
+    "Coin": "Moeda",
+    "Network: %@": "Rede: %@",
+    "QR code for the %@ address": "Código QR do endereço %@",
+    "Copied": "Copiado",
+    "Send each coin only on the network shown. Crypto sent on another network can't be recovered.":
+        "Envie cada moeda apenas pela rede indicada. Criptomoedas enviadas por outra rede não podem ser recuperadas.",
+
+    "Special thanks": "Agradecimentos especiais",
+    "For idevice, the library SwiftInstaller talks to your iPhone through. None of this exists without it.":
+        "Pelo idevice, a biblioteca com que o SwiftInstaller conversa com o seu iPhone. Nada disso existe sem ela.",
+    "For the support, and for spotting the bugs that got fixed because of it.":
+        "Pelo apoio e por apontar os erros que foram corrigidos por causa dele.",
+    "For the Japanese translation.": "Pela tradução para o japonês.",
+
+    "Built with": "Feito com",
+    "The open source work this app is built on:":
+        "O trabalho de código aberto em que este app se apoia:",
+    "Pairing, the tunnel and the install itself. By jkcoxson, MIT.":
+        "O pareamento, o túnel e a própria instalação. De jkcoxson, MIT.",
+    "Apple ID sign in, certificates and signing on the device. By nab138, MIT.":
+        "Login no Apple ID, certificados e assinatura no próprio aparelho. De nab138, MIT.",
+    "The sideloading app this installs for you.": "O app de sideload que isto instala para você.",
+    "Runs sideloaded apps without spending an app slot on each one.":
+        "Roda apps de sideload sem gastar um espaço de app com cada um.",
+    "The developer disk image location spoofing mounts. Mirrored by doronz88.":
+        "A imagem de disco de desenvolvedor que a simulação de localização monta. Espelhada por doronz88.",
+
+    "Where to get it": "Onde baixar",
+    "Only the builds on the official install page and repository are mine. Anyone can fork the source, add a credential stealer and ship it under the same name and icon — so don't trust your Apple ID to a copy from anywhere else.":
+        "Só as versões da página de instalação e do repositório oficiais são minhas. Qualquer um pode bifurcar o código, acrescentar um ladrão de credenciais e publicá-lo com o mesmo nome e ícone — então não confie seu Apple ID a uma cópia de outro lugar.",
+    "Install page": "Página de instalação",
+    "Terms": "Termos",
+
+    // MARK: - Madeira
+
+    "%@ needs iOS %d or later. This iPhone runs iOS %@.":
+        "O %@ precisa do iOS %d ou posterior. Este iPhone usa o iOS %@.",
+    "Open Madeira from your Home Screen.": "Abra o Madeira pela Tela de Início.",
+    "In its setup, under “Set up JIT”, pick “In-app with pairing file”: SwiftInstaller already put the file there, so tap “Continue”.":
+        "Na configuração dele, em “Set up JIT”, escolha “In-app with pairing file”: o SwiftInstaller já colocou o arquivo lá, então toque em “Continue”.",
+    "In its setup, under “Set up JIT”, pick how this iPhone gets JIT.":
+        "Na configuração dele, em “Set up JIT”, escolha como este iPhone vai ter JIT.",
+    "Madeira renews its own signing from now on, when it's open and LocalDevVPN is connected. SwiftInstaller gave it a sign-in for that: a token for Apple's developer service, not your password. Madeira can forget it under Settings › Signing.":
+        "A partir de agora o Madeira renova a própria assinatura, quando está aberto e o LocalDevVPN está conectado. O SwiftInstaller deu a ele um acesso para isso: um token do serviço de desenvolvedor da Apple, não a sua senha. O Madeira pode esquecê-lo em Settings › Signing.",
+    "Its signing lasts 7 days. Before they run out, refresh it here under Tools › Sideloaded apps.":
+        "A assinatura dele dura 7 dias. Antes de acabarem, renove aqui em Ferramentas › Apps instalados por sideload.",
+    "This pairing file has no RPPairing record, the only kind %@ reads.":
+        "Este arquivo de pareamento não tem um registro RPPairing, o único tipo que o %@ lê.",
+    "Runs Windows PC games on your iPhone. By Will Faust, GPL-3.0.":
+        "Roda jogos de PC para Windows no seu iPhone. De Will Faust, GPL-3.0.",
+]

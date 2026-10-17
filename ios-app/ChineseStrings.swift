@@ -1,0 +1,816 @@
+import Foundation
+
+/// Simplified Chinese translations (same rules as `spanishStrings`). Uses Apple's
+/// zh-Hans wording for Settings paths and "tap", full-width punctuation, 吊销 for
+/// "revoke", and 你 for "you".
+
+let chineseStrings: [String: String] = [
+
+    // MARK: - Shared
+
+    "Cancel": "取消",
+    "Copy": "复制",
+    "Email": "电子邮件",
+    "Password": "密码",
+    "Install": "安装",
+    "Installing": "正在安装",
+    "Cancelling": "正在取消",
+    "Installed": "已安装",
+    "Something went wrong": "出了点问题",
+    "an app by Frizzle": "由 Frizzle 打造的应用",
+    "device": "设备",
+
+    // MARK: - Welcome
+
+    "I have accepted the": "我已接受",
+    "Start": "开始",
+
+    // Pre-iOS 27: the pairing file has to be imported
+
+    "You'll need a pairing file": "你需要一个配对文件",
+    "This iPhone runs iOS %@. Only iOS %@ can pair with itself, so you'll have to make a pairing file on a computer — with jitterbugpair or pymobiledevice3 — and import it in the app. SwiftInstaller walks you through it.":
+        "本机运行 iOS %@。只有 iOS %@ 能与自身配对，因此你需要在电脑上用 jitterbugpair 或 pymobiledevice3 生成配对文件，再导入到 App 中。SwiftInstaller 会逐步引导你。",
+
+    // MARK: - Account setup & Settings › Account
+
+    "Sign in with your Apple ID": "使用你的 Apple ID 登录",
+    "Don't worry, these are stored locally":
+        "别担心，这些信息只保存在本机",
+    "Saved in this iPhone's keychain, and sent only to Apple when signing in.":
+        "保存在本机的钥匙串中，仅在登录时发送给 Apple。",
+    "Continue": "继续",
+    "Set this up later": "稍后设置",
+    "Add Apple ID": "添加 Apple ID",
+    "Edit Apple ID": "编辑 Apple ID",
+    "Save": "存储",
+    "Enter the password again to save this Apple ID.": "请再次输入密码以保存此 Apple ID。",
+    "Account": "账户",
+    "In use": "使用中",
+    "Edit": "编辑",
+    "Remove": "移除",
+    "No Apple ID saved yet. Add one and SwiftInstaller will use it for every sign-in.":
+        "尚未保存 Apple ID。添加一个后，SwiftInstaller 每次登录都会使用它。",
+    "Saved in this iPhone's keychain, and sent only to Apple when signing in. Swipe a row to edit its password or remove it.":
+        "保存在本机的钥匙串中，仅在登录时发送给 Apple。左滑某一行可修改其密码或将其移除。",
+    "Remove this Apple ID?": "移除此 Apple ID？",
+    "“%@” and its saved password will be deleted from this iPhone. Nothing changes on your Apple account.":
+        "“%@”及其保存的密码将从本机删除。你的 Apple 账户不会有任何变化。",
+    "This iPhone's keychain refused to store the password (error %d), so it's kept only until SwiftInstaller quits.":
+        "本机钥匙串拒绝保存该密码（错误 %d），因此密码只会保留到 SwiftInstaller 退出为止。",
+    "No Apple ID saved. Add one in Settings › Account.": "尚未保存 Apple ID。请在“设置 › 账户”中添加一个。",
+
+    "Add your Apple ID": "添加你的 Apple ID",
+    "Open Settings with the gear at the top right.": "点按右上角的齿轮打开设置。",
+    "Under Account, tap “Add Apple ID” and enter your email and password.":
+        "在“账户”一节中点按“添加 Apple ID”，然后输入你的电子邮件和密码。",
+
+    // MARK: - Tabs, Tools menu & two-factor prompt
+
+    "Tools": "工具",
+
+    // MARK: - Tabs & two-factor prompt
+
+    "Pairing": "配对",
+    "Certificates": "证书",
+    "Two-Factor Code": "双重认证验证码",
+    "6-digit code": "6 位验证码",
+    "Submit": "提交",
+    "Enter the code Apple just sent to your trusted device.":
+        "请输入 Apple 刚刚发送到你受信任设备的验证码。",
+    "Enter the code Apple texted to %@.":
+        "输入 Apple 通过短信发送到 %@ 的验证码。",
+    "Enter the code Apple texted to your phone.":
+        "输入 Apple 通过短信发送到你手机的验证码。",
+    "Apple is calling %@. Enter the code you hear.":
+        "Apple 正在拨打 %@。请输入你听到的验证码。",
+    "Apple is calling your phone. Enter the code you hear.":
+        "Apple 正在拨打你的电话。请输入你听到的验证码。",
+    "Choose how Apple should send your verification code.":
+        "选择 Apple 发送验证码的方式。",
+    "Choose How to Get a Code":
+        "选择获取验证码的方式",
+    "Verify":
+        "验证",
+    "Didn't get it?":
+        "没有收到？",
+    "Send a new code to my devices":
+        "向我的设备发送新验证码",
+    "Text me a new code":
+        "通过短信给我发送新验证码",
+    "Call me again":
+        "再次给我打电话",
+    "Send a code to my Apple devices":
+        "向我的 Apple 设备发送验证码",
+    "Text %@":
+        "发短信到 %@",
+    "Call %@":
+        "拨打 %@",
+    "Checking the code…":
+        "正在验证验证码…",
+    "Requesting a new code…":
+        "正在请求新验证码…",
+    "Sending a code to your devices…":
+        "正在向你的设备发送验证码…",
+    "Texting a code to %@…":
+        "正在通过短信将验证码发送到 %@…",
+    "Calling %@…":
+        "正在拨打 %@…",
+
+    // MARK: - Install tab
+
+    "Tunnel connected": "隧道已连接",
+    "Tunnel off": "隧道已关闭",
+    "Update available": "有可用更新",
+    "SwiftInstaller %@ is available — you're on %@.":
+        "SwiftInstaller %@ 已发布 —— 你当前使用的是 %@。",
+    "Get the latest version": "获取最新版本",
+    "Release": "渠道",
+    "Reinstall": "重新安装",
+    "Install %@": "安装 %@",
+    "Custom .ipa": "自定义 .ipa",
+    "Import .ipa": "导入 .ipa",
+    "Importing…": "正在导入…",
+    "Replace": "更换",
+    "or": "或",
+    "Paste a download link": "粘贴下载链接",
+    "Downloading… %d%%": "正在下载… %d%%",
+    "iOS %@ required": "需要 iOS %@",
+    "This iPhone runs iOS %@, which SwiftInstaller can't install on. Update to iOS %@ or later in Settings › General › Software Update.":
+        "此 iPhone 运行的是 iOS %@，SwiftInstaller 无法在该版本上安装。请在 设置 › 通用 › 软件更新 中更新到 iOS %@ 或更高版本。",
+    "Wi-Fi required": "需要 Wi-Fi",
+    "Pairing code": "配对码",
+    "Type this into the prompt in Settings.":
+        "将它输入到 设置 中的提示框内。",
+    "Install stopped": "安装已停止",
+    "Close": "关闭",
+    "Yes": "是",
+    "No": "否",
+    "Closing this popup will end the process. Are you sure?":
+        "关闭此弹窗将终止当前流程。确定要关闭吗？",
+    "Cancel the install?": "要取消安装吗？",
+    "%@ is installed. Finish the trust step above to open it.":
+        "%@ 已安装。完成上面的信任步骤即可打开。",
+    "%@ is installed. Finish the trust step below to open it.":
+        "%@ 已安装。完成下面的信任步骤即可打开。",
+    "Success: last steps": "成功：最后几步",
+    "Action needed": "需要操作",
+    "Step %@ of %@": "第 %@ 步，共 %@ 步",
+    "Show all steps": "显示所有步骤",
+    "Show fewer steps": "收起步骤",
+
+    // MARK: - LocalDevVPN
+
+    "LocalDevVPN required": "需要 LocalDevVPN",
+    "Install LocalDevVPN and connect it. The install runs over its tunnel.":
+        "安装 LocalDevVPN 并连接。安装过程走它的隧道。",
+    "Connect LocalDevVPN to scan and install. The write runs over its tunnel.":
+        "连接 LocalDevVPN 以扫描和安装。写入走它的隧道。",
+    "Connect LocalDevVPN. Spoofing runs over its tunnel, like everything else here.":
+        "连接 LocalDevVPN。和这里的其他功能一样，模拟也走它的隧道。",
+    "LocalDevVPN isn't connected. Connect it, then try again.": "LocalDevVPN 未连接。请先连接，然后重试。",
+    "Connect LocalDevVPN": "连接 LocalDevVPN",
+    "Install LocalDevVPN from the App Store and open it.": "从 App Store 安装 LocalDevVPN 并打开它。",
+    "If GitHub is blocked where you are, use a VPN that can proxy your traffic too: iOS runs one VPN at a time, so a local-only tunnel leaves nothing to download SwiftStore through.":
+        "如果你所在的地区无法访问 GitHub，请使用同时能代理流量的 VPN：iOS 一次只能运行一个 VPN，仅限本地的隧道会让 SwiftStore 无法下载。",
+
+    // MARK: - Install steps
+
+    "Connect the VPN": "连接 VPN",
+    "Get pairing file": "获取配对文件",
+    "Open the device link": "打开设备连接",
+    "Sign in to Apple ID": "登录 Apple ID",
+    "Download %@": "下载 %@",
+    "Use your imported IPA": "使用已导入的 IPA",
+    "Sign the app": "为应用签名",
+    "Finish setup": "完成设置",
+
+    // MARK: - Pairing tab
+
+    "Pairing file ready": "配对文件已就绪",
+    "No pairing file": "没有配对文件",
+    "Pairing file": "配对文件",
+    "Pairing…": "正在配对…",
+    "Regenerate": "重新生成",
+    "Generate pairing file": "生成配对文件",
+    "Export pairing file": "导出配对文件",
+    "Pair in Settings": "在 设置 中配对",
+    "Install into an app": "安装到应用",
+    "Scanning": "正在扫描",
+    "Rescan apps": "重新扫描应用",
+    "Scan installed apps": "扫描已安装的应用",
+    "%d supported app installed": "已安装 %d 个受支持的应用",
+    "%d supported apps installed": "已安装 %d 个受支持的应用",
+    "No supported apps found": "未找到受支持的应用",
+    "Install an app like SwiftStore, StikDebug, or Feather first, then rescan.":
+        "请先安装 SwiftStore、StikDebug 或 Feather 之类的应用，然后重新扫描。",
+    "Install pairing": "安装配对文件",
+    "Pairing file ready. You can export it or install it into an app below.":
+        "配对文件已就绪。你可以导出，或安装到下面的某个应用中。",
+    "Pairing file installed into %@.": "配对文件已安装到 %@。",
+
+    // Importing a pairing file (required below iOS 27, under Advanced from 27)
+
+    "Import pairing file": "导入配对文件",
+    "How do I make one?": "怎么生成？",
+    "(Optional)": "（可选）",
+    "imported pairing file": "已导入配对文件",
+    "No pairing file yet — tap “Import pairing file” first.": "还没有配对文件 — 请先点按“导入配对文件”。",
+    "Pairing file missing — import it first.": "缺少配对文件 — 请先导入。",
+    "%@ isn't a pairing file. Pick the file your computer made — a .mobiledevicepairing or .plist holding this iPhone's pair record.":
+        "%@ 不是配对文件。请选择电脑生成的文件 — 包含本机配对记录的 .mobiledevicepairing 或 .plist。",
+    "iOS %@ can't create its own pairing file — that needs iOS %@. Import one made on a computer under “Pairing file”, then try again.":
+        "iOS %@ 无法自行生成配对文件，那需要 iOS %@。请在“配对文件”中导入一个在电脑上生成的文件，然后重试。",
+
+    // MARK: - Pairing service status
+
+    "not paired": "未配对",
+    "connected": "已连接",
+    "requesting Local Network…": "正在请求本地网络权限…",
+    "Local Network denied": "本地网络权限被拒绝",
+    "waiting for device…": "正在等待设备…",
+    "advertising — open Settings › Privacy & Security › Developer Mode":
+        "正在广播 —— 打开 设置 › 隐私与安全性 › 开发者模式",
+    "enter PIN %@ in Settings": "在 设置 中输入 PIN 码 %@",
+    "paired: %@ (%dB)": "已配对：%@（%d B）",
+    "failed: empty pairing file": "失败：配对文件为空",
+    "failed: %@": "失败：%@",
+    "Pairing is already in progress.": "配对已在进行中。",
+    "Local Network permission is off. Enable it in Settings › SwiftInstaller › Local Network, then try again.":
+        "本地网络权限已关闭。请在 设置 › SwiftInstaller › 本地网络 中开启，然后重试。",
+    "Pairing produced an empty file. Make sure you approved the pairing request, then try again.":
+        "配对生成了一个空文件。请确认你已同意配对请求，然后重试。",
+
+    // MARK: - Certificates tab
+
+    "Revoke this certificate?": "吊销此证书？",
+    "Revoke": "吊销",
+    "Revoking": "正在吊销",
+    "“%@” will be revoked. Apps already signed with it will stop launching on every device. This can't be undone.":
+        "“%@”将被吊销。已用它签名的应用将无法在任何设备上启动。此操作无法撤销。",
+    "Refreshing": "正在刷新",
+    "Signing in": "正在登录",
+    "Refresh": "刷新",
+    "Load certificates": "加载证书",
+    "%d certificate(s)": "%d 个证书",
+    "No certificates": "没有证书",
+    "This Apple ID has no development certificates to revoke.":
+        "此 Apple ID 没有可吊销的开发证书。",
+    "Expired": "已过期",
+    "Expires %@": "%@ 到期",
+    "Unnamed certificate": "未命名的证书",
+    "This certificate has no serial number, so it can't be revoked.":
+        "此证书没有序列号，因此无法吊销。",
+
+    // MARK: - Location tab
+
+    "Location spoofing": "位置模拟",
+    "Not simulating": "未模拟",
+    "Simulated": "模拟位置",
+    "Pick a place": "选择地点",
+    "Search for a place": "搜索地点",
+    "Nothing found for “%@”.": "找不到“%@”的结果。",
+    "Set location": "设置位置",
+    "Setting": "正在设置",
+    "Reset to real location": "恢复真实位置",
+    "Location set to %@.": "位置已设为 %@。",
+    "Location reset. The device is using its own again.": "位置已恢复。设备重新使用自己的位置。",
+    "That isn't a valid coordinate.": "该坐标无效。",
+    "Location session closed — set it up again.": "位置会话已关闭 — 请重新设置。",
+    "Downloading %@ failed (HTTP %d).": "下载 %@ 失败（HTTP %d）。",
+    "Couldn't build the download URL for %@.": "无法为 %@ 构建下载链接。",
+
+    // MARK: - Entitlements tab
+
+    "Entitlements": "权限",
+    "Load apps": "加载应用",
+    "%d App ID": "%d 个 App ID",
+    "%d App IDs": "%d 个 App ID",
+    "No App IDs": "没有 App ID",
+    "This Apple ID hasn't registered any apps yet. Install something with SwiftInstaller first, then come back.":
+        "此 Apple ID 还没有注册任何应用。请先用 SwiftInstaller 安装一个，然后再回来。",
+    "Memory and performance": "内存与性能",
+    "Other free capabilities": "其他免费能力",
+    "Beta": "测试版",
+    "Recommended": "推荐",
+    "Select all": "全选",
+    "None": "全不选",
+    "Enable %d selected": "启用所选的 %d 项",
+    "Asking Apple": "正在询问 Apple",
+    "%d of %d enabled": "已启用 %d/%d",
+    "Install the app again for these to take effect.": "重新安装应用后这些权限才会生效。",
+
+    // MARK: - Sideloaded apps tab
+
+    "Sideloaded apps": "侧载应用",
+    "Reading the device": "正在读取设备",
+
+    // Refresh all: signing the installed apps again.
+    "iOS %@ isn't supported — SwiftInstaller needs iOS %@ or later.":
+        "不支持 iOS %@：SwiftInstaller 需要 iOS %@ 或更高版本。",
+    "Apple won't issue a signing certificate for this Apple ID: it reports that one already exists (error 7460). Revoke it under Tools › Certificates, then refresh again.":
+        "Apple 不会为此 Apple ID 签发签名证书：它报告已经存在一个（错误 7460）。请在“工具 › 证书”中吊销它，然后重新续签。",
+    "An install is already running. Wait for it to finish, then refresh.":
+        "已有安装正在进行。请等它完成后再续签。",
+    "Getting ready": "正在准备",
+    "Stopping after this app": "将在这个应用之后停止",
+    "Refreshing %@": "正在续签 %@",
+    "Signed by team %@, not the one you're signed in as — refreshing it here would install a second copy.":
+        "由团队 %@ 签名，与你登录的团队不同：在这里续签会另外安装一个副本。",
+    "Refreshed. Its seven days start again now.": "已续签。七天从现在重新开始。",
+    "Nothing was refreshed.": "没有续签任何应用。",
+    "Refreshed %d of %d apps.": "已续签 %d 个应用，共 %d 个。",
+    "Refresh all apps?": "续签所有应用？",
+    "Refresh all": "全部续签",
+    "%@ will be signed again with your Apple ID and installed over the copy on this device. It keeps its data, and its seven days start over.":
+        "%@ 将用你的 Apple ID 重新签名，并覆盖安装到本设备上的副本。数据会保留，七天重新开始计算。",
+    "%d apps will be signed again with your Apple ID and installed over the copies on this device. They keep their data, and their seven days start over.":
+        "%d 个应用将用你的 Apple ID 重新签名，并覆盖安装到本设备上的副本。数据会保留，七天重新开始计算。",
+    "%d app can be signed again from an IPA already on this iPhone.":
+        "有 %d 个应用可以用这台 iPhone 上已有的 IPA 重新签名。",
+    "%d apps can be signed again from IPAs already on this iPhone.":
+        "有 %d 个应用可以用这台 iPhone 上已有的 IPA 重新签名。",
+    "Reload": "重新读取",
+    "Waiting": "等待中",
+    "In progress": "进行中",
+    "Failed": "失败",
+    "%d app here has no IPA in SwiftInstaller, so it can't be refreshed from this page. Refresh it in whatever installed it, or import its .ipa first.":
+        "这里有 %d 个应用在 SwiftInstaller 中没有对应的 IPA，因此无法从本页续签。请在安装它的应用里续签，或先导入它的 .ipa。",
+    "%d apps here have no IPA in SwiftInstaller, so they can't be refreshed from this page. Refresh them in whatever installed them, or import their .ipa first.":
+        "这里有 %d 个应用在 SwiftInstaller 中没有对应的 IPA，因此无法从本页续签。请在安装它们的应用里续签，或先导入它们的 .ipa。",
+    "%d app": "%d 个应用",
+    "%d apps": "%d 个应用",
+    "%d app needs refreshing": "%d 个应用需要续签",
+    "%d apps need refreshing": "%d 个应用需要续签",
+    "No sideloaded apps": "没有侧载应用",
+    "Nothing on this device was installed with a provisioning profile. App Store apps don't expire, so they aren't listed here.":
+        "这台设备上没有任何应用是用描述文件安装的。App Store 的应用不会过期，因此不会列在这里。",
+    "No matching profile": "没有匹配的描述文件",
+    "Expires today": "今天过期",
+    "Expires tomorrow": "明天过期",
+    "Expires in %d days — %@": "%d 天后过期 — %@",
+    "Expired %@": "已于 %@ 过期",
+    "Unused profiles": "未使用的描述文件",
+    "Issued to App IDs no installed app is running on.":
+        "签发给了没有任何已安装应用在使用的 App ID。",
+    "Older profiles": "较旧的描述文件",
+    "Bundle identifier": "Bundle 标识符",
+    "App ID": "App ID",
+    "Version": "版本",
+    "Profile name": "描述文件名称",
+    "Team": "团队",
+    "Team ID": "团队 ID",
+    "Issued": "签发时间",
+    "Profile UUID": "描述文件 UUID",
+    "Capabilities": "功能",
+    "Wildcard App ID — it covers any bundle id under it, and can't carry app-specific capabilities.":
+        "通配符 App ID：它涵盖其下的任意 bundle id，因此无法携带针对单个应用的功能。",
+    "The device has no provisioning profile for this App ID. The app may already have stopped launching — install it again to fix that.":
+        "设备上没有这个 App ID 的描述文件。该应用可能已经无法启动——重新安装一次即可解决。",
+
+    // MARK: - Side by Side tool
+
+    // The tool's name is left in English everywhere, as SideStore's is.
+    "Side by Side": "Side by Side",
+    "Pair with their iPhone": "与对方的 iPhone 配对",
+    "Sign in to their Apple ID": "登录对方的 Apple ID",
+    "Download SwiftInstaller": "下载 SwiftInstaller",
+    "Install on their iPhone": "安装到对方的 iPhone",
+    "Enter the other iPhone's IP address. It's in Settings › Wi-Fi, next to the network it's on.":
+        "输入另一台 iPhone 的 IP 地址。在 设置 › 无线局域网 中，所连网络旁边可以找到。",
+    "“%@” isn't an IPv4 address. It should look like 192.168.1.42.":
+        "“%@”不是 IPv4 地址。它应该形如 192.168.1.42。",
+    "%@ is an address this iPhone already holds. Side by Side installs onto someone else's iPhone — use theirs. To install on this one, use the Install tab.":
+        "%@ 是这台 iPhone 自己的地址。Side by Side 用于安装到别人的 iPhone 上，请填对方的地址。要安装到这台设备，请使用“安装”标签页。",
+    "Enter the Apple ID to sign with, and its password.": "请输入用于签名的 Apple ID 及其密码。",
+    "Wi-Fi is off. Both iPhones have to be on the same Wi-Fi network for this to work.":
+        "无线局域网已关闭。两台 iPhone 必须连接同一个 Wi-Fi 网络才能使用。",
+    "The release download wasn't an IPA. GitHub may be returning an error page — try again in a minute.":
+        "下载到的发行版不是 IPA 文件。GitHub 可能返回了错误页面——请过一分钟再试。",
+    "Couldn't download the latest SwiftInstaller release: %@":
+        "无法下载最新的 SwiftInstaller 发行版：%@",
+    "No SwiftInstaller IPA downloaded.": "尚未下载 SwiftInstaller 的 IPA。",
+    "Apple won't issue a signing certificate for this Apple ID: it reports that one already exists (error 7460). One has to be revoked first — with the Certificates tool if this is the Apple ID saved in Settings › Account, and at developer.apple.com signed in as it otherwise.":
+        "Apple 不会为此 Apple ID 签发签名证书：它报告已经存在一个（错误 7460）。必须先吊销一个——如果这就是“设置 › 账户”中保存的 Apple ID，可用“证书”工具；否则请用该账户登录 developer.apple.com 吊销。",
+    "Apple wouldn't register their iPhone with this Apple ID's developer team, so it won't issue a provisioning profile. %@":
+        "Apple 未能将对方的 iPhone 注册到此 Apple ID 的开发团队，因此不会签发描述文件。%@",
+    "No pair record for their iPhone.": "没有对方 iPhone 的配对记录。",
+    "The link to their iPhone dropped — start again.": "与对方 iPhone 的连接已断开——请重新开始。",
+    "Set up someone else's iPhone": "为别人的 iPhone 完成设置",
+    "Same Wi-Fi network": "同一个 Wi-Fi 网络",
+    "Their iPhone needs iOS %@ — SwiftInstaller pairs itself once it's installed, and nothing older can.":
+        "对方的 iPhone 需要 iOS %@：装好之后 SwiftInstaller 会自己配对，更早的版本做不到。",
+    "Their iPhone": "对方的 iPhone",
+    "IP address (e.g. 192.168.1.42)": "IP 地址（例如 192.168.1.42）",
+    "On their iPhone: Settings › Wi-Fi › ⓘ next to the network, then “IP Address”.":
+        "在对方的 iPhone 上：设置 › 无线局域网 › 网络旁的 ⓘ，然后查看“IP 地址”。",
+    "This iPhone is %@, so theirs will look similar.": "这台 iPhone 是 %@，对方的地址会与之相近。",
+    "Apple ID to sign with": "用于签名的 Apple ID",
+    "Tip: Use the iPhone/iPad owner's Apple account credentials":
+        "提示：请使用该 iPhone/iPad 机主的 Apple 账户凭据",
+    "Use my saved Apple ID instead": "改用我保存的 Apple ID",
+    "Steps": "步骤",
+    "Waiting for them to tap Trust…": "等待对方轻点“信任”…",
+    "Waiting for them to pair in Settings…":
+        "等待对方在 设置 中配对…",
+    "Waiting for them to enter the code…":
+        "等待对方输入验证码…",
+    "Pair their iPhone in Settings":
+        "在 设置 中配对对方的 iPhone",
+    "Their iPhone won't ask by itself — pairing starts from its Settings.":
+        "对方的 iPhone 不会自己弹出提示——配对要从它的 设置 开始。",
+    "On their iPhone, open Settings › Privacy & Security › Developer Mode.":
+        "在对方的 iPhone 上，打开 设置 › 隐私与安全性 › 开发者模式。",
+    "Tap “Pair with %@”.":
+        "轻点“与 %@ 配对”。",
+    "Enter their iPhone’s passcode if it asks for it.":
+        "如果系统要求，请输入对方 iPhone 的密码。",
+    "Type the code that appears here into the prompt on their iPhone.":
+        "把这里显示的验证码输入到对方 iPhone 上的提示框内。",
+    "Type this into the prompt on their iPhone.":
+        "将它输入到对方 iPhone 上的提示框内。",
+    "They tapped “Don't Trust” on their iPhone. Start again, and have them tap Trust.":
+        "对方在 iPhone 上轻点了“不信任”。请重新开始，并让对方轻点“信任”。",
+    "SwiftInstaller is already waiting for an iPhone to pair with it — from the Install tab, the Pairing page, or an earlier attempt here. Finish that pairing, or close and reopen SwiftInstaller, then try again.":
+        "SwiftInstaller 已在等待某台 iPhone 与它配对——来自“安装”标签页、“配对”页面，或这里之前的一次尝试。请先完成那次配对，或关闭后重新打开 SwiftInstaller，然后重试。",
+    "Pairing with their iPhone didn't finish: %@":
+        "与对方 iPhone 的配对未完成：%@",
+    "Their iPhone at %@ refused the connection. It only accepts one while Developer Mode is on, and iOS asks to confirm Developer Mode again after every restart: on their iPhone, turn it on under Settings › Privacy & Security › Developer Mode, then try again.":
+        "对方位于 %@ 的 iPhone 拒绝了连接。只有开启开发者模式时它才接受连接，而且每次重启后 iOS 都会要求再次确认：请在对方 iPhone 的 设置 › 隐私与安全性 › 开发者模式 中打开它，然后重试。",
+    "Couldn't reach their iPhone at %@. Check the address (Settings › Wi-Fi › ⓘ on their iPhone), that both iPhones are on the same Wi-Fi network, and that Local Network is on for SwiftInstaller in this iPhone's Settings. Guest and public networks often keep devices from reaching each other.":
+        "无法连接到位于 %@ 的对方 iPhone。请检查地址（在对方 iPhone 的 设置 › 无线局域网 › ⓘ 中），确认两台 iPhone 连接的是同一个 Wi-Fi 网络，并确认已在这台 iPhone 的 设置 中为 SwiftInstaller 打开本地网络。访客网络和公共网络通常会阻止设备之间互相连接。",
+    "The link to their iPhone didn't come up: %@":
+        "未能建立与对方 iPhone 的连接：%@",
+    "%d%% downloaded": "已下载 %d%%",
+    "%d%% uploaded": "已上传 %d%%",
+    "Start the install": "开始安装",
+    "Install again": "再次安装",
+    "Clear their details": "清除对方的信息",
+    "Last step: they trust %@": "最后一步：让对方信任 %@",
+    "On their iPhone: Settings › General › VPN & Device Management.":
+        "在对方的 iPhone 上：设置 › 通用 › VPN 与设备管理。",
+    "Tap the Apple ID under “Developer App”, then tap Trust.":
+        "在“开发者 App”下轻点该 Apple ID，然后轻点“信任”。",
+    "Open it from their Home Screen — they're set up.": "从他们的主屏幕打开它——设置完成。",
+
+    // MARK: - Settings
+
+    "Settings": "设置",
+    "Done": "完成",
+    "Language": "语言",
+    "App language": "应用语言",
+    "Auto": "自动",
+    // The Tunnel section: starting LocalDevVPN from here.
+    "Tunnel": "隧道",
+    "Something at %@:%d refused the connection, so the tunnel is carrying traffic — the device just isn't listening on its pairing port. That port only opens while Developer Mode is on, and iOS asks for it again after every restart: turn it on under Settings › Privacy & Security › Developer Mode, then try again. If it's already on, pair this iPhone again under “Pairing file”.":
+        "%@:%d 上有东西拒绝了连接，说明隧道是通的，只是设备没有在它的配对端口上监听。该端口只有在开启开发者模式时才会打开，而且每次重启后 iOS 都会再次要求确认：请在 设置 › 隐私与安全性 › 开发者模式 中打开它，然后重试。如果已经打开，请在“配对文件”中重新配对这台 iPhone。",
+    "Start LocalDevVPN when needed": "需要时打开 LocalDevVPN",
+    "Start LocalDevVPN now": "立即启动 LocalDevVPN",
+    "LocalDevVPN isn't installed. Get it from the App Store, and this can start it for you.":
+        "未安装 LocalDevVPN。请从 App Store 获取，SwiftInstaller 就能为你启动它。",
+
+    "Downloaded IPAs": "已下载的 IPA",
+    "%@ used": "已用 %@",
+    "imported": "已导入",
+    "No downloaded IPAs. Ones you install from the Install tab are cached here.":
+        "还没有已下载的 IPA。你从“安装”标签页安装的 IPA 会缓存在这里。",
+    "Downloaded %@": "下载于 %@",
+    "Added %@": "添加于 %@",
+    "Delete this download?": "删除此下载项？",
+    "Delete": "删除",
+    "“%@” (%@) will be removed. You can download it again any time from the Install tab.":
+        "“%@”（%@）将被移除。你随时可以从“安装”标签页重新下载。",
+    "Couldn't delete %@: %@": "无法删除 %@：%@",
+    "Server": "服务器",
+    "Custom…": "自定义…",
+    "Server URL": "服务器 URL",
+    "Anisette Server": "Anisette 服务器",
+    "Device IP": "设备 IP",
+    "Advanced": "高级",
+    "Clear": "清除",
+    "Activity Log (%d)": "活动日志（%d）",
+
+    // MARK: - Release channels & downloads
+
+    "Stable": "稳定版",
+    "Nightly": "Nightly",
+
+    // Version picker (Advanced)
+
+    "%@ version": "%@ 版本",
+    "Latest": "最新",
+    "Latest (%@)": "最新（%@）",
+    "Couldn't load the other versions: %@": "无法加载其他版本：%@",
+    "Try again": "重试",
+
+    "couldn't find the IPA in the %@ %@ release":
+        "在 %@ 渠道的 %@ 发行版中找不到 IPA 文件",
+    "%@ has no %@ release right now": "%@ 目前没有任何 %@ 发行版",
+    "bad asset URL": "下载资源的 URL 无效",
+    "GitHub is rate-limiting this network — it isn't blocked, and the limit clears itself. Try again %@.":
+        "GitHub 正在限制此网络的请求频率 —— 它没有被屏蔽，限制会自动解除。请在%@重试。",
+    "GitHub answered HTTP %d%@": "GitHub 返回了 HTTP %d%@",
+    "GitHub isn't serving %@ right now — the repository has been taken down, moved or made private, so there's nothing to download. Nothing is wrong with this iPhone or its network.":
+        "GitHub 目前无法提供 %@ —— 该代码仓库已被下架、迁移或设为私有，因此没有可下载的内容。这台 iPhone 及其网络没有任何问题。",
+    "couldn't reach GitHub: %@": "无法连接到 GitHub：%@",
+    "GitHub's answer wasn't release information (%@) — something on this network may have replaced it.":
+        "GitHub 的响应不是发行版信息（%@）—— 此网络上的某个环节可能替换了它。",
+    "what downloaded as %@ isn't an IPA — something on this network returned a page instead, or the transfer stopped partway.":
+        "以 %@ 为名下载到的文件不是 IPA —— 此网络上的某个环节可能返回了一个网页，或者传输中断了。",
+    "that link answered HTTP %d — it isn't a direct download, or it needs a sign-in.":
+        "该链接返回 HTTP %d — 它不是直接下载链接，或者需要登录。",
+
+    // MARK: - Engine failures
+
+    "Two-factor verification was cancelled.": "双重认证验证已取消。",
+    "Incorrect Apple ID or password. Check your Apple Account email and password, then try again.":
+        "Apple ID 或密码不正确。请检查你的 Apple 账户电子邮件和密码，然后重试。",
+    "Apple ID sign-in failed on %@. Last error: %@":
+        "在 %@ 上登录 Apple ID 失败。最后的错误：%@",
+    "Apple's sign-in server refused the request (HTTP 503). It isn't your password or the anisette server, so trying more servers won't help. Try again later, or update SwiftInstaller.":
+        "Apple 登录服务器拒绝了请求（HTTP 503）。这不是你的密码或 anisette 服务器的问题，换用其他服务器也无济于事。请稍后重试，或更新 SwiftInstaller。",
+    "SwiftInstaller can't reach Apple's sign-in server (gsa.apple.com), though this iPhone has an internet connection. Something is blocking it: a firewall, a DNS filter or ad blocker, Screen Time content restrictions, or another VPN app. Turn it off or try another network, then try again.":
+        "SwiftInstaller 无法连接 Apple 登录服务器（gsa.apple.com），但这台 iPhone 已连接互联网。有东西在拦截它：防火墙、DNS 过滤或广告拦截工具、屏幕使用时间的内容限制，或其他 VPN App。请将其关闭或换一个网络，然后重试。",
+    "SwiftInstaller can't reach Apple: Cellular Data is turned off for it. Turn SwiftInstaller on in Settings › Cellular, or join a Wi-Fi network with internet access, then try again.":
+        "SwiftInstaller 无法连接 Apple：它的蜂窝数据已被关闭。请在 设置 › 蜂窝网络 中打开 SwiftInstaller，或连接可以上网的无线局域网，然后重试。",
+    "SwiftInstaller can't reach Apple: iOS isn't letting it use Wi-Fi. In Settings › Apps › SwiftInstaller › Wireless Data, choose WLAN & Cellular Data, then try again.":
+        "SwiftInstaller 无法连接 Apple：iOS 不允许它使用无线局域网。请在 设置 › App › SwiftInstaller › 无线数据 中选择“无线局域网与蜂窝网络”，然后重试。",
+    "SwiftInstaller can't reach Apple: a VPN set to carry all traffic is disconnected, so iOS is holding traffic back. Reconnect it, or turn off its kill switch or Connect On Demand, then try again.":
+        "SwiftInstaller 无法连接 Apple：一个设为承载所有流量的 VPN 已断开，因此 iOS 暂停了网络流量。请重新连接它，或关闭它的断网保护（kill switch）或按需连接，然后重试。",
+    "SwiftInstaller can't reach Apple: this iPhone has no internet connection. Connect to Wi-Fi or turn on cellular data, then try again.":
+        "SwiftInstaller 无法连接 Apple：这台 iPhone 没有连接互联网。请连接无线局域网或打开蜂窝数据，然后重试。",
+    "Apple is temporarily limiting sign-ins for this Apple ID or network (HTTP 429). Trying other servers won't help, and every attempt can extend the wait, so leave it a while before signing in again.":
+        "Apple 正在暂时限制此 Apple ID 或此网络的登录（HTTP 429）。换用其他服务器无济于事，每次尝试还可能延长等待时间，请过一段时间再登录。",
+    "If you're sure the password is right, Apple may be limiting sign-in attempts: wait a while before trying again.":
+        "如果你确定密码正确，可能是 Apple 正在限制登录尝试：请过一段时间再试。",
+    "Apple has locked this Apple Account for security reasons (error -20209), so every sign-in fails until it's unlocked. Reset its password at iforgot.apple.com, then sign in again with the new password.":
+        "出于安全原因，Apple 已锁定此 Apple 账户（错误 -20209），在解锁之前每次登录都会失败。请在 iforgot.apple.com 重设其密码，然后用新密码重新登录。",
+    "the anisette server": "anisette 服务器",
+    "all %d anisette servers": "全部 %d 个 anisette 服务器",
+    "Not signed in.": "尚未登录。",
+    "No SwiftStore IPA downloaded.": "尚未下载 SwiftStore 的 IPA。",
+    "Signing failed: %@": "签名失败：%@",
+    "No signed bundle to install.": "没有可安装的已签名程序包。",
+    "Device link dropped — reconnect.":
+        "与设备的连接已断开 —— 请重新连接。",
+    "Pairing didn't finish — no pairing file yet.":
+        "配对未完成 —— 还没有配对文件。",
+    "Pairing file missing — pairing must run first.":
+        "缺少配对文件 —— 必须先进行配对。",
+    "Pairing file missing — generate it first.":
+        "缺少配对文件 —— 请先生成。",
+    "No pairing file yet — tap “Generate pairing file” first.":
+        "还没有配对文件 —— 请先轻点“生成配对文件”。",
+    "%@ isn't installed yet — install must run first.":
+        "%@ 尚未安装 —— 必须先进行安装。",
+    "%@ isn't a valid IPA — the download it came from probably returned an error page, or the copy stopped partway. Replace it and tap Install again.":
+        "%@ 不是有效的 IPA —— 多半是下载时返回了一个错误页面，或者复制中途中断。请替换它，然后再次轻点“安装”。",
+    "%@ isn't an IPA. Pick the .ipa file itself — if it looks right, the download may have saved an error page instead, or stopped partway.":
+        "%@ 不是 IPA。请选择 .ipa 文件本身；如果看起来没错，可能是下载时保存的是错误页面，或者中途中断了。",
+    "No IPA imported yet. Tap “Import .ipa” and pick one.":
+        "还没有导入任何 IPA。请轻点“导入 .ipa”并选择一个文件。",
+    "Couldn't import %@: %@": "无法导入 %@：%@",
+    "That isn't a link SwiftInstaller can download. Paste the whole https:// address the .ipa downloads from.":
+        "SwiftInstaller 无法下载该链接。请粘贴 .ipa 的完整 https:// 下载地址。",
+    "That link didn't return an IPA. It has to download the file itself — a page that only links to the .ipa, or one that asks you to sign in first, arrives here as a web page.":
+        "该链接返回的不是 IPA。它必须直接下载文件——只是指向 .ipa 的网页，或先要求登录的网页，到这里都只是一个网页。",
+    "Couldn't download that link: %@": "无法下载该链接：%@",
+    "there's nothing to download for a custom IPA — import one first":
+        "自定义 IPA 没有可下载的内容 —— 请先导入一个文件",
+    "your app": "你的应用",
+    "Apple won't issue a signing certificate for this Apple ID: it reports that one already exists, or that a request for one is still pending (error 7460). SwiftInstaller couldn't reuse the certificate that's already there, so it stopped instead of replacing it. See the steps above.":
+        "Apple 不会为此 Apple ID 签发签名证书：它报告已经存在一个证书，或者仍有一个申请在处理中（错误 7460）。SwiftInstaller 无法复用已有的证书，因此停止了操作，而不是替换它。请参见上面的步骤。",
+    " (UDID %@)": " (UDID %@)",
+    "Couldn't register this iPhone%@ with your Apple ID's developer team, so Apple won't issue a provisioning profile. %@ — see the steps above.":
+        "无法将此 iPhone%@ 注册到你 Apple ID 的开发者团队，因此 Apple 不会签发描述文件。%@ —— 请参见上面的步骤。",
+    "Connect to Wi-Fi": "连接 Wi-Fi",
+    "Open Settings › Wi-Fi and join a network.": "打开 设置 › Wi-Fi 并加入一个网络。",
+    "Then come back here — this continues automatically.": "然后回到这里 —— 接下来会自动继续。",
+    "Tap Connect so the toggle turns on.": "轻点 Connect，让开关打开。",
+    "Keep Wi-Fi on, then come back here — this continues automatically.":
+        "保持 Wi-Fi 开启，然后回到这里 —— 接下来会自动继续。",
+    "Get LocalDevVPN": "获取 LocalDevVPN",
+    "Import an .ipa first": "请先导入一个 .ipa",
+    "Tap “Import .ipa” above and pick the file — it can live anywhere the Files app can reach, including iCloud Drive or a USB drive.":
+        "轻点上方的“导入 .ipa”并选择文件 —— 文件可以放在“文件”App 能访问的任何位置，包括 iCloud 云盘或 U 盘。",
+    "Or paste a direct download link under that button, and SwiftInstaller fetches the .ipa itself.":
+        "或者在该按钮下方粘贴直接下载链接，SwiftInstaller 会自己把 .ipa 取回来。",
+    "Or open the Files app, press and hold the .ipa, tap Share, and pick SwiftInstaller — that hands the file over without the picker.":
+        "或者打开“文件”App，长按该 .ipa，点按“共享”并选择 SwiftInstaller——这样文件不经过选择器就能交过来。",
+    "Or copy it into Files › On My iPhone › SwiftInstaller, where SwiftInstaller also finds it.":
+        "也可以把它复制到 文件 › 我的 iPhone › SwiftInstaller，SwiftInstaller 同样能找到。",
+    "This is the way in where GitHub is blocked: fetch the IPA on any device, bring it over, and install it here.":
+        "在 GitHub 被封锁的地区，这就是可行的办法：在任何设备上取得 IPA，带过来，然后在这里安装。",
+    "Bring the .ipa yourself": "自行提供 .ipa",
+    "%@ can't be downloaded while its GitHub repository is offline. The other apps still install as usual.":
+        "%@ 的 GitHub 代码仓库下线期间无法下载。其他 App 仍可照常安装。",
+    "To install it anyway, get its .ipa from somewhere you trust, name it %@, and copy it into Files › On My iPhone › SwiftInstaller.":
+        "如果仍想安装，请从你信任的来源取得它的 .ipa，命名为 %@，然后复制到 文件 › 我的 iPhone › SwiftInstaller。",
+    "Then tap Install again — SwiftInstaller uses your file instead of downloading one.":
+        "然后再次轻点“安装”—— SwiftInstaller 会使用你的文件，而不再下载。",
+    "Pair this iPhone in Settings": "在 设置 中配对此 iPhone",
+    "Open the Settings app, then go to Privacy & Security › Developer Mode.":
+        "打开 设置 应用，然后进入 隐私与安全性 › 开发者模式。",
+    "Tap “Pair with SwiftInstaller”.": "轻点“与 SwiftInstaller 配对”。",
+    "Enter your iPhone’s passcode if it asks for it.": "如果系统要求，请输入你的 iPhone 密码。",
+    "Come back to SwiftInstaller, read the code it shows you, then type that same code into the prompt in Settings.":
+        "回到 SwiftInstaller，查看它显示给你的验证码，然后把相同的验证码输入到 设置 中的提示框内。",
+    "Type the code that appears at the top of the screen into the prompt in Settings. If none appears, come back to SwiftInstaller to read it.":
+        "将屏幕顶部显示的验证码输入到 设置 中的提示框内。如果没有显示，请回到 SwiftInstaller 查看。",
+    "Allow notifications when SwiftInstaller asks: that's how the pairing code reaches you in Settings.":
+        "当 SwiftInstaller 询问时，请允许通知：配对码会通过通知显示在 设置 中。",
+
+    // The pairing Live Activity
+    "Privacy & Security › Developer Mode › Pair with SwiftInstaller":
+        "隐私与安全性 › 开发者模式 › 与 SwiftInstaller 配对",
+    "Paired": "已配对",
+    "Tap to return to SwiftInstaller.": "轻点以返回 SwiftInstaller。",
+
+    "A signing certificate already exists": "已存在签名证书",
+    "Apple returned error 7460: this Apple ID already has an iOS development certificate, or a request for one is still pending.":
+        "Apple 返回错误 7460：此 Apple ID 已有一个 iOS 开发证书，或者有一个申请仍在处理中。",
+    "SwiftInstaller couldn't reuse it. That happens when the certificate was issued somewhere else — AltStore, SideStore, Sideloadly or Xcode on another device — so the private key it needs isn't on this iPhone.":
+        "SwiftInstaller 无法复用它。当证书是在别处签发时就会这样——另一台设备上的 AltStore、SwiftStore、Sideloadly 或 Xcode——所需的私钥并不在这台 iPhone 上。",
+    "Use “Revoke and retry” above, or open Certificates in the Tools tab, tap “Load certificates”, and revoke it there.":
+        "使用上方的“吊销并重试”，或在“工具”标签页中打开“证书”，点按“加载证书”，在那里吊销它。",
+    "Revoking is permanent: every app already signed with that certificate stops launching, on every device.":
+        "吊销不可撤回：所有已用该证书签名的 App 都将无法启动，在所有设备上都是如此。",
+    "Alternatively, sign in with a different (or spare) Apple ID above, then tap Install again.":
+        "或者，在上面用另一个（或备用的）Apple ID 登录，然后再次轻点“安装”。",
+
+    // MARK: - Guide cards
+
+    // Guide: reset a locked Apple Account
+
+    "Reset your Apple Account password": "重设你的 Apple 账户密码",
+    "Apple has locked this Apple Account for security reasons, often after too many sign-in attempts. Every sign-in fails until it's unlocked, so tapping Install again won't help yet.":
+        "出于安全原因，Apple 已锁定此 Apple 账户，通常是因为登录尝试次数过多。在解锁之前每次登录都会失败，所以现在再次轻点“安装”也没有用。",
+    "Open iForgot, enter this Apple Account's email, and follow Apple's steps to unlock it and reset its password.":
+        "打开 iForgot，输入此 Apple 账户的电子邮件，然后按照 Apple 的步骤解锁并重设密码。",
+    "Back in SwiftInstaller, open Settings › Account, swipe left on this Apple ID, tap Edit, and enter the new password.":
+        "回到 SwiftInstaller，打开“设置 › 账户”，在此 Apple ID 上向左轻扫，轻点“编辑”，然后输入新密码。",
+    "Then tap Install again.": "然后再次轻点“安装”。",
+    "Open iForgot": "打开 iForgot",
+    "Apple won't let this Apple Account use developer services because of its owner's age (error 1102). Sign in with an adult's Apple Account instead.":
+        "由于账户持有人的年龄，Apple 不允许此 Apple 账户使用开发者服务（错误 1102）。请改用成年人的 Apple 账户登录。",
+    "This Apple ID has no App IDs left (error 9120). A free Apple ID can register 10 a week, and each one counts for 7 days, so wait for some to expire or sign in with another Apple ID.":
+        "此 Apple ID 已没有可用的 App ID（错误 9120）。免费 Apple ID 每周可注册 10 个，每个会占用 7 天，所以请等一些过期，或用另一个 Apple ID 登录。",
+    "This iPhone already has three apps signed with a free Apple ID, the most iOS allows, counting expired ones. Delete one of them, then try again.":
+        "此 iPhone 上已有三个用免费 Apple ID 签名的 App，这是 iOS 允许的上限，已过期的也算在内。删除其中一个后再试一次。",
+    "This Apple Account can't sign apps": "此 Apple 账户无法签名 App",
+    "Apple only lets adults use the developer services SwiftInstaller signs apps with, and it reports that this Apple Account belongs to someone younger (error 1102).":
+        "Apple 只允许成年人使用 SwiftInstaller 用来签名 App 的开发者服务，而它显示此 Apple 账户属于未成年人（错误 1102）。",
+    "Sign in with an adult's Apple Account instead: open Settings › Account and add it there.":
+        "请改用成年人的 Apple 账户登录：打开“设置 › 账户”并在那里添加。",
+    "Apple won't let this Apple Account use developer services until its email address is verified (error 2160). Verify it at account.apple.com, then try again.":
+        "在电子邮件地址通过验证之前，Apple 不允许此 Apple 账户使用开发者服务（错误 2160）。请在 account.apple.com 验证后再试。",
+    "Verify your Apple Account's email":
+        "验证你的 Apple 账户电子邮件",
+    "Apple won't let this Apple Account sign apps until its email address is verified (error 2160). Signing in again or through another anisette server won't change that.":
+        "在电子邮件地址通过验证之前，Apple 不允许此 Apple 账户签名 App（错误 2160）。重新登录或换用其他 anisette 服务器都无法改变这一点。",
+    "Sign in at account.apple.com with this Apple Account and verify its email address when Apple asks. Apple sends the code or link to that address, so check its spam folder too.":
+        "用此 Apple 账户登录 account.apple.com，并在 Apple 提示时验证电子邮件地址。Apple 会把验证码或链接发送到该地址，也请检查垃圾邮件文件夹。",
+    "Open Apple Account":
+        "打开 Apple 账户",
+    "No App IDs left this week": "本周已没有可用的 App ID",
+    "Every app and app extension SwiftInstaller signs needs an App ID. A free Apple ID can register 10 a week, and each one counts for 7 days.":
+        "SwiftInstaller 签名的每个 App 和 App 扩展都需要一个 App ID。免费 Apple ID 每周可注册 10 个，每个会占用 7 天。",
+    "They can't be deleted sooner. Wait until some expire, then tap Install again.":
+        "它们无法提前删除。等一些过期后，再次轻点“安装”。",
+    "Or sign in with a different (or spare) Apple ID in Settings › Account, then tap Install again.":
+        "或者在“设置 › 账户”中用另一个（或备用的）Apple ID 登录，然后再次轻点“安装”。",
+    "Three sideloaded apps already": "已有三个侧载应用",
+    "iOS allows three apps signed with a free Apple ID on an iPhone at a time, and it refused a fourth.":
+        "iOS 只允许一台 iPhone 同时安装三个用免费 Apple ID 签名的 App，因此拒绝了第四个。",
+    "Expired apps count too. Delete one you no longer need from the Home Screen.":
+        "已过期的 App 也算在内。从主屏幕删除一个不再需要的 App。",
+
+    // Guide: import a pairing file
+
+    "Import a pairing file": "导入配对文件",
+    "iOS %@ is the first version an iPhone can pair with itself on. On this one the pairing file has to be made on a computer.":
+        "iOS %@ 是 iPhone 能与自身配对的第一个版本。在本机上，配对文件必须在电脑上生成。",
+    "On a Mac, Windows PC or Linux box, plug this iPhone in, trust the computer, and run jitterbugpair (or “pymobiledevice3 lockdown pair”).":
+        "在 Mac、Windows 电脑或 Linux 上插上本机，选择信任该电脑，然后运行 jitterbugpair（或“pymobiledevice3 lockdown pair”）。",
+    "Send the file it writes — a .mobiledevicepairing or .plist — to this iPhone, by AirDrop, iCloud Drive or a cable.":
+        "通过隔空投送、iCloud 云盘或数据线，把生成的文件（.mobiledevicepairing 或 .plist）传到本机。",
+    "Come back here, tap “Import pairing file”, and pick it. Everything after that works as it does on iOS %@.":
+        "回到这里，点按“导入配对文件”并选中它。之后的步骤与 iOS %@ 上完全一致。",
+    "Get jitterbugpair": "获取 jitterbugpair",
+
+    // MARK: - Revoke-and-retry (Apple error 7460)
+
+    "A certificate already exists": "已存在证书",
+    "Apple won't issue a second signing certificate for this Apple ID. Revoking the one it already has lets the install continue — but it can't be undone.":
+        "Apple 不会为此 Apple ID 签发第二个签名证书。吊销已有的那个可以让安装继续——但此操作无法撤回。",
+    "Loading certificates": "正在加载证书",
+    "Revoke and retry": "吊销并重试",
+    "Which certificate should be revoked?": "要吊销哪个证书？",
+    "Apple reports a certificate on this Apple ID, but none came back in the list. It may be a request that's still pending — wait a few minutes and tap Install again.":
+        "Apple 报告此 Apple ID 上有证书，但列表返回为空。可能是仍在处理中的申请——请等几分钟后再次点按“安装”。",
+    "Every app already signed with the certificate you pick will stop launching, on every device — including apps installed by AltStore, SideStore, or a computer. This can't be undone. The install retries straight afterwards.":
+        "所有已用你选择的证书签名的 App 都将无法启动，在所有设备上都是如此——包括通过 AltStore、SwiftStore 或电脑安装的 App。此操作无法撤回。安装会紧接着重试。",
+    " (expired)": "（已过期）",
+
+    "Couldn't register this device": "无法注册此设备",
+    "Your Apple ID has hit its limit of registered devices. Free accounts can only register a handful of devices per year and can't remove old ones until the year resets.":
+        "你的 Apple ID 已达到注册设备数量的上限。免费账户每年只能注册少量设备，并且在年度重置之前无法移除旧设备。",
+    "Easiest fix: put a different (or spare) Apple ID in the fields above, then tap Install again.":
+        "最简单的解决办法：在上面的输入框中填入另一个（或备用的）Apple ID，然后再次轻点“安装”。",
+    "SwiftInstaller couldn't add this iPhone to your Apple ID's developer team automatically. Tapping Install again often works — Apple's developer service is sometimes briefly unavailable.":
+        "SwiftInstaller 无法自动将此 iPhone 添加到你 Apple ID 的开发者团队。再次轻点“安装”通常就能成功 —— Apple 的开发者服务有时会短暂不可用。",
+    "If it keeps failing, add the device by hand. Its UDID is:":
+        "如果一直失败，请手动添加该设备。它的 UDID 是：",
+    "Paste that into the “Register a Device” form in the Apple Developer portal (this requires a paid Apple Developer account), then tap Install again.":
+        "把它粘贴到 Apple Developer 门户中的“Register a Device”表单里（这需要付费的 Apple Developer 账户），然后再次轻点“安装”。",
+    "Open device list": "打开设备列表",
+
+    "Last step: trust %@": "最后一步：信任 %@",
+    "Open Settings › General › VPN & Device Management.":
+        "打开 设置 › 通用 › VPN 与设备管理。",
+    "Tap your Apple ID under “Developer App”, then tap Trust.":
+        "在“开发者 App”下轻点你的 Apple ID，然后轻点“信任”。",
+    "Open %@ from your Home Screen — you're done.":
+        "从主屏幕打开 %@ —— 就大功告成了。",
+
+    "Import the certificate into SwiftContainer": "将证书导入 SwiftContainer",
+    "Open SwiftContainer from your Home Screen.": "从主屏幕打开 SwiftContainer。",
+    "Tap the Settings tab.": "轻点 Settings 标签页。",
+    "Tap “Import Certificate From SideStore”.":
+        "轻点“Import Certificate From SideStore”。",
+    "Wrong device IP": "设备 IP 有误",
+    "The address in Settings › Advanced › Device IP is one this iPhone already holds, so there's nothing at the other end to connect to.":
+        "“设置 › 高级 › 设备 IP”中填的地址是本机已有的地址，另一端没有可连接的对象。",
+    "Set it back to 10.7.0.1, the default. In LocalDevVPN that's the value under Settings › Device IP — not the address on its main screen, which is the tunnel's own end.":
+        "改回默认值 10.7.0.1。在 LocalDevVPN 中，它是“设置 › Device IP”里的值，而不是主界面上显示的地址——那是隧道自己的一端。",
+    "If you changed LocalDevVPN's addresses, copy its Device IP here — including the /32, if it shows one.":
+        "若你改过 LocalDevVPN 的地址，请把它的 Device IP 复制到这里——如果末尾带 /32，一并保留即可。",
+    "Pairing this iPhone needs it: SwiftInstaller advertises itself on the local network for Settings to find.":
+        "配对这台 iPhone 需要它：SwiftInstaller 会在本地网络上广播自己，供“设置”发现。",
+    "Connect to a Wi-Fi network. Pairing this iPhone needs it — SwiftInstaller has to be findable on the local network.":
+        "请连接到 Wi-Fi 网络。配对这台 iPhone 需要它——SwiftInstaller 必须能在本地网络上被找到。",
+
+    // MARK: - About
+
+    "About": "关于",
+    "Version %@ (%@)": "版本 %@ (%@)",
+    "SwiftInstaller installs SwiftStore and SwiftContainer straight onto your iPhone, with no PC involved.":
+        "SwiftInstaller 直接把 SwiftStore 和 SwiftContainer 装到你的 iPhone 上，全程不需要电脑。",
+
+    "Links": "链接",
+    "Source code": "源代码",
+    "Support the project": "支持这个项目",
+    "Crypto": "加密货币",
+    "Donation wallets for Bitcoin, Ethereum and Solana.": "比特币、以太坊和 Solana 的捐赠钱包。",
+    "Crypto donations": "加密货币捐赠",
+    "Donations are entirely optional. They don't buy anything, unlock any feature or get you anything in return; they're just a way to say thanks if SwiftInstaller has helped you.":
+        "捐赠完全自愿。捐赠不会购买任何东西，不会解锁任何功能，也不会带来任何回报；这只是在 SwiftInstaller 帮到你时表达感谢的一种方式。",
+    "Coin": "币种",
+    "Network: %@": "网络：%@",
+    "QR code for the %@ address": "%@ 地址的二维码",
+    "Copied": "已复制",
+    "Send each coin only on the network shown. Crypto sent on another network can't be recovered.":
+        "每种币请只通过所示网络发送。通过其他网络发送的加密货币将无法找回。",
+
+    "Special thanks": "特别感谢",
+    "For idevice, the library SwiftInstaller talks to your iPhone through. None of this exists without it.":
+        "感谢 idevice——SwiftInstaller 正是通过这个库与你的 iPhone 通信的。没有它，这一切都不会存在。",
+    "For the support, and for spotting the bugs that got fixed because of it.":
+        "感谢一路以来的支持，以及发现了那些因此得到修复的问题。",
+    "For the Japanese translation.": "感谢提供日语翻译。",
+
+    "Built with": "基于以下项目",
+    "The open source work this app is built on:": "这个应用所依赖的开源成果：",
+    "Pairing, the tunnel and the install itself. By jkcoxson, MIT.":
+        "配对、隧道以及安装本身，由 jkcoxson 开发，MIT 许可证。",
+    "Apple ID sign in, certificates and signing on the device. By nab138, MIT.":
+        "Apple ID 登录、证书与本机签名，由 nab138 开发，MIT 许可证。",
+    "The sideloading app this installs for you.":
+        "本应用为你安装的侧载应用。",
+    "Runs sideloaded apps without spending an app slot on each one.":
+        "运行侧载应用，而不必为每个应用占用一个名额。",
+    "The developer disk image location spoofing mounts. Mirrored by doronz88.":
+        "位置模拟所挂载的开发者磁盘映像，由 doronz88 镜像存放。",
+
+    "Where to get it": "从哪里获取",
+    "Only the builds on the official install page and repository are mine. Anyone can fork the source, add a credential stealer and ship it under the same name and icon — so don't trust your Apple ID to a copy from anywhere else.":
+        "只有官方安装页面和代码仓库上的构建版本才是我发布的。任何人都可以 fork 源代码，加入窃取凭据的代码，再用同样的名称和图标发布——所以不要把你的 Apple ID 交给来自其他地方的副本。",
+    "Install page": "安装页面",
+    "Terms": "条款",
+
+    // MARK: - Madeira
+
+    "%@ needs iOS %d or later. This iPhone runs iOS %@.": "%@ 需要 iOS %d 或更高版本。这台 iPhone 运行的是 iOS %@。",
+    "Open Madeira from your Home Screen.": "从主屏幕打开 Madeira。",
+    "In its setup, under “Set up JIT”, pick “In-app with pairing file”: SwiftInstaller already put the file there, so tap “Continue”.":
+        "在它的设置流程中，在“Set up JIT”下选择“In-app with pairing file”：SwiftInstaller 已经把文件放进去了，轻点“Continue”即可。",
+    "In its setup, under “Set up JIT”, pick how this iPhone gets JIT.":
+        "在它的设置流程中，在“Set up JIT”下选择这台 iPhone 获得 JIT 的方式。",
+    "Madeira renews its own signing from now on, when it's open and LocalDevVPN is connected. SwiftInstaller gave it a sign-in for that: a token for Apple's developer service, not your password. Madeira can forget it under Settings › Signing.":
+        "从现在起，只要 Madeira 处于打开状态且 LocalDevVPN 已连接，它就会自行续签。为此 SwiftInstaller 给了它一个登录凭据：用于 Apple 开发者服务的令牌，而不是你的密码。可以在 Madeira 的 Settings › Signing 中将其移除。",
+    "Its signing lasts 7 days. Before they run out, refresh it here under Tools › Sideloaded apps.":
+        "它的签名有效期为 7 天。到期前，请在这里的“工具 › 侧载应用”中续签。",
+    "This pairing file has no RPPairing record, the only kind %@ reads.":
+        "这个配对文件没有 RPPairing 记录，而 %@ 只读取这一种。",
+    "Runs Windows PC games on your iPhone. By Will Faust, GPL-3.0.":
+        "在你的 iPhone 上运行 Windows 电脑游戏，由 Will Faust 开发，GPL-3.0 许可证。",
+]
