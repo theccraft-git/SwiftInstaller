@@ -17,7 +17,7 @@ let spanishStrings: [String: String] = [
     "Cancelling": "Cancelando",
     "Installed": "Instalado",
     "Something went wrong": "Algo ha ido mal",
-    "an app by Frizzle": "una app de Frizzle",
+    "an app by theccraft-git": "una app de theccraft-git",
     "device": "dispositivo",
 
     // MARK: - Welcome
@@ -791,6 +791,8 @@ let spanishStrings: [String: String] = [
     "Send each coin only on the network shown. Crypto sent on another network can't be recovered.":
         "Envía cada moneda solo por la red indicada. Las criptomonedas enviadas por otra red no se pueden recuperar.",
 
+    "For building the core app, SideInstaller.":
+        "Por crear la aplicación base, SideInstaller.",
     "Special thanks": "Agradecimientos especiales",
     "For idevice, the library SwiftInstaller talks to your iPhone through. None of this exists without it.":
         "Por idevice, la biblioteca con la que SwiftInstaller se comunica con tu iPhone. Sin ella nada de esto existiría.",

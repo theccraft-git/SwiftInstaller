@@ -5,7 +5,7 @@
 	<key>ConsentText</key>
 	<dict>
 		<key>default</key>
-		<string>This is SideInstaller's official DNS. You can uninstall this as soon as you install Sidestore or SS + Livecontainer.</string>
+		<string>This is SwiftInstaller's official DNS. You can uninstall this as soon as you install SwiftStore or SwiftStore + SwiftContainer.</string>
 	</dict>
 	<key>PayloadContent</key>
 	<array>
@@ -46,11 +46,11 @@
 				</dict>
 			</array>
 			<key>PayloadDisplayName</key>
-			<string>SideInstaller</string>
+			<string>SwiftInstaller</string>
 			<key>PayloadIdentifier</key>
 			<string>io.nextdns.73f83a.profile.dnsSettings.managed</string>
 			<key>PayloadOrganization</key>
-			<string>SideInstaller</string>
+			<string>SwiftInstaller</string>
 			<key>PayloadType</key>
 			<string>com.apple.dnsSettings.managed</string>
 			<key>PayloadUUID</key>
@@ -60,9 +60,9 @@
 		</dict>
 	</array>
 	<key>PayloadDescription</key>
-	<string>This is SideInstaller's official DNS. You can uninstall this as soon as you install Sidestore or SS + Livecontainer.</string>
+	<string>This is SwiftInstaller's official DNS. You can uninstall this as soon as you install SwiftStore or SwiftStore + SwiftContainer.</string>
 	<key>PayloadDisplayName</key>
-	<string>SideInstaller</string>
+	<string>SwiftInstaller</string>
 	<key>PayloadIdentifier</key>
 	<string>io.nextdns.73f83a.profile</string>
 	<key>PayloadScope</key>

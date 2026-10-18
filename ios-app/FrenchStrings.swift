@@ -16,7 +16,7 @@ let frenchStrings: [String: String] = [
     "Cancelling": "Annulation en cours",
     "Installed": "Installé",
     "Something went wrong": "Une erreur s'est produite",
-    "an app by Frizzle": "une app de Frizzle",
+    "an app by theccraft-git": "une app de theccraft-git",
     "device": "appareil",
 
     // MARK: - Welcome
@@ -792,6 +792,8 @@ let frenchStrings: [String: String] = [
     "Send each coin only on the network shown. Crypto sent on another network can't be recovered.":
         "N'envoyez chaque monnaie que sur le réseau indiqué. Les cryptos envoyées sur un autre réseau sont irrécupérables.",
 
+    "For building the core app, SideInstaller.":
+        "Pour avoir créé l'application de base, SideInstaller.",
     "Special thanks": "Remerciements",
     "For idevice, the library SwiftInstaller talks to your iPhone through. None of this exists without it.":
         "Pour idevice, la bibliothèque avec laquelle SwiftInstaller communique avec votre iPhone. Rien de tout cela n’existerait sans elle.",

@@ -18,7 +18,7 @@ struct WelcomeView: View {
                         .font(.system(size: 40, weight: .bold))
                         .foregroundStyle(.white)
                         .welcomeItem(0)
-                    Text(L("an app by Frizzle"))
+                    Text(L("an app by theccraft-git"))
                         .font(.headline.weight(.medium))
                         .foregroundStyle(.secondary)
                         .welcomeItem(1)
@@ -106,7 +106,7 @@ struct WelcomeView: View {
                        isOn: $accepted.animation(.snappy(duration: 0.25)))
             }
 
-            Link(destination: URL(string: "https://frizzlem.github.io/SideInstaller/terms.html")!) {
+            Link(destination: URL(string: "https://theccraft-git.github.io/SwiftInstaller/terms.html")!) {
                 Text("TOS")
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(Theme.accent2)

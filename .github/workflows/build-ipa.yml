@@ -1,0 +1,137 @@
+name: build-ipa
+
+# Builds an unsigned SwiftInstaller.ipa on a GitHub-hosted Mac, where Xcode and
+# xcodegen exist. This checkout does not contain SideInstaller.xcodeproj (it is
+# gitignored); the job generates it from project.yml, then runs the same export
+# scripts/export-ipa.sh uses locally.
+#
+# The IPA is always kept as a workflow artifact. When "Publish a GitHub Release"
+# is left on, the job also attaches SwiftInstaller.ipa to a new release. That
+# publish is what starts sign-sideinstaller, which signs the release asset with
+# every certificate and refreshes the install page. A release trigger always
+# signs onto the stable page (index.html / output/).
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish_release:
+        description: "Publish a GitHub Release with SwiftInstaller.ipa (starts sign-sideinstaller)"
+        required: false
+        type: boolean
+        default: true
+
+permissions:
+  contents: write   # create the release and its tag
+
+concurrency:
+  group: build-ipa
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      # build-rust.sh defaults DEVELOPER_DIR to Xcode-beta, which this runner
+      # does not have. Point it at the newest Xcode that is actually installed.
+      # The app uses the iOS 26 SDK (#available(iOS 26.0)), so an older Xcode
+      # cannot compile it.
+      - name: Select Xcode
+        shell: bash
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          apps=(/Applications/Xcode*.app)
+          shopt -u nullglob
+          if [[ ${#apps[@]} -eq 0 ]]; then
+            echo "::error::This runner has no Xcode.app"
+            exit 1
+          fi
+          newest="$(printf '%s\n' "${apps[@]}" | sort -V | tail -1)"
+          sudo xcode-select -s "$newest/Contents/Developer"
+          echo "DEVELOPER_DIR=$newest/Contents/Developer" >> "$GITHUB_ENV"
+          xcodebuild -version
+          major="$(xcodebuild -version | awk 'NR==1 { split($2, v, "."); print v[1] }')"
+          if [[ -z "$major" || "$major" -lt 26 ]]; then
+            echo "::error::Need Xcode 26 or newer to compile this app (runner has $(xcodebuild -version | head -1))"
+            exit 1
+          fi
+
+      - name: Install Rust iOS targets
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! command -v rustup >/dev/null; then
+            curl --proto '=https' --tlsv1.2 -fsSL https://sh.rustup.rs | sh -s -- -y --profile minimal
+          fi
+          # shellcheck disable=SC1090
+          source "$HOME/.cargo/env"
+          echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+          rustup target add aarch64-apple-ios aarch64-apple-ios-sim
+          rustc --version
+
+      - name: Cache cargo registry and build
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            rust-core/target
+          key: ipa-${{ runner.os }}-${{ hashFiles('rust-core/Cargo.toml', 'rust-core/Cargo.lock', 'build-rust.sh') }}
+          restore-keys: ipa-${{ runner.os }}-
+
+      - name: Install xcodegen
+        run: brew install xcodegen
+
+      - name: Generate the Xcode project
+        run: xcodegen generate
+
+      - name: Build the unsigned IPA
+        shell: bash
+        env:
+          REVEAL: "0"
+          OUTPUT_DIR: ${{ runner.temp }}/unsigned
+        run: |
+          set -euo pipefail
+          chmod +x scripts/export-ipa.sh build-rust.sh
+          ./scripts/export-ipa.sh "$GITHUB_SHA"
+          shopt -s nullglob
+          built=("${OUTPUT_DIR}"/*.ipa)
+          shopt -u nullglob
+          if [[ ${#built[@]} -ne 1 ]]; then
+            echo "::error::Expected one IPA in ${OUTPUT_DIR}, found ${#built[@]}"
+            exit 1
+          fi
+          cp "${built[0]}" "$RUNNER_TEMP/SwiftInstaller.ipa"
+          echo "Built ${built[0]}"
+          ls -lh "$RUNNER_TEMP/SwiftInstaller.ipa"
+
+      - name: Upload unsigned IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: SwiftInstaller-unsigned
+          path: ${{ runner.temp }}/SwiftInstaller.ipa
+          if-no-files-found: error
+
+      - name: Publish GitHub Release
+        if: inputs.publish_release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="$(awk '/MARKETING_VERSION:/ { gsub(/"/, "", $2); print $2; exit }' project.yml)"
+          short="$(git rev-parse --short HEAD)"
+          tag="ipa-${version}-${short}"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            tag="${tag}-${GITHUB_RUN_NUMBER}"
+          fi
+          gh release create "$tag" "$RUNNER_TEMP/SwiftInstaller.ipa" \
+            --target "$GITHUB_SHA" \
+            --title "SwiftInstaller ${version} (${short})" \
+            --notes "Unsigned IPA from ${GITHUB_SHA}. Publishing this release starts sign-sideinstaller, which signs it with every certificate and updates the install page."
+          echo "Release: ${tag}" >> "$GITHUB_STEP_SUMMARY"

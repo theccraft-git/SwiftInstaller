@@ -49,10 +49,10 @@ final class SideBySideManager: ObservableObject {
 
     /// Unsigned IPA from SwiftInstaller's latest GitHub release.
     static let releaseIPA = URL(string:
-        "https://github.com/FrizzleM/SideInstaller/releases/latest/download/SideInstaller.ipa")!
+        "https://github.com/theccraft-git/SwiftInstaller/releases/latest/download/SwiftInstaller.ipa")!
 
     /// What the release asset is called, and what the download is saved as.
-    static let ipaFileName = "SideInstaller.ipa"
+    static let ipaFileName = "SwiftInstaller.ipa"
 
     // MARK: Inputs
 

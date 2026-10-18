@@ -190,7 +190,7 @@ struct ContentView: View {
 
     /// A quiet brand credit at the foot of the screen.
     private var footer: some View {
-        Text(L("an app by Frizzle"))
+        Text(L("an app by theccraft-git"))
             .font(.caption)
             .foregroundStyle(.secondary)
             .frame(maxWidth: .infinity)

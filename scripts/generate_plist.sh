@@ -12,8 +12,8 @@ if [[ -n "${GITHUB_REPOSITORY:-}" && "$GITHUB_REPOSITORY" == */* ]]; then
   GITHUB_USER="${GITHUB_USER:-${GITHUB_REPOSITORY%/*}}"
   GITHUB_REPO="${GITHUB_REPO:-${GITHUB_REPOSITORY#*/}}"
 else
-  GITHUB_USER="${GITHUB_USER:-SideInstaller}"
-  GITHUB_REPO="${GITHUB_REPO:-SideInstaller}"
+  GITHUB_USER="${GITHUB_USER:-theccraft-git}"
+  GITHUB_REPO="${GITHUB_REPO:-SwiftInstaller}"
 fi
 GITHUB_BRANCH="${GITHUB_BRANCH:-main}"
 OUTPUT_BASE_URL="${OUTPUT_BASE_URL:-https://raw.githubusercontent.com/$GITHUB_USER/$GITHUB_REPO/$GITHUB_BRANCH/output}"

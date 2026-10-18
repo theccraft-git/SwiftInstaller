@@ -396,7 +396,11 @@ if not rel:
 ipas = [a for a in rel.get("assets", []) if a.get("name", "").lower().endswith(".ipa")]
 if not ipas:
     raise SystemExit(1)
-print(ipas[0]["browser_download_url"])
+# browser_download_url 404s on a private repository: GitHub only serves that
+# link to a browser session. The API asset URL, fetched with GITHUB_TOKEN and
+# Accept: application/octet-stream, is the one curl can actually download.
+asset = ipas[0]
+print(asset.get("url") or asset.get("browser_download_url") or "")
 PY
 }
 
@@ -742,10 +746,66 @@ fi
 
 # A precheck stops before all of this: it needs the certificate pool and nothing
 # else, so it skips the IPA download, the WWDR intermediates and the keychains.
+# A public /releases/download/ link 404s for a private repo. Rewrite it to the
+# API asset URL, which accepts GITHUB_TOKEN. curl must not be told to trust
+# that token across the redirect: GitHub's CDN rejects the Authorization header.
+github_release_asset_api() {
+  local url="$1" rest owner repo tag file json
+  [[ "$url" == https://github.com/*/releases/download/* ]] || return 1
+  [[ -n "${GITHUB_TOKEN:-}" ]] || return 1
+  rest="${url#https://github.com/}"
+  owner="${rest%%/*}"
+  rest="${rest#*/}"
+  repo="${rest%%/*}"
+  rest="${rest#*/releases/download/}"
+  tag="${rest%/*}"
+  file="${rest##*/}"
+  [[ -n "$owner" && -n "$repo" && -n "$tag" && -n "$file" && "$tag" != "$rest" ]] || return 1
+  json="$TMP_DIR/tag-release.json"
+  curl -fsSL \
+    -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+    -H "Accept: application/vnd.github+json" \
+    "https://api.github.com/repos/${owner}/${repo}/releases/tags/${tag}" \
+    -o "$json" || return 1
+  python3 - "$json" "$file" <<'PY'
+import json, sys
+name = sys.argv[2]
+rel = json.load(open(sys.argv[1]))
+for asset in rel.get("assets", []):
+    if asset.get("name") == name and asset.get("url"):
+        print(asset["url"])
+        raise SystemExit(0)
+raise SystemExit(1)
+PY
+}
+
+download_release_asset() {
+  local url="$1" dest="$2" attempt api
+  if api="$(github_release_asset_api "$url")"; then
+    log "Release asset is private or the public link 404s; downloading via the API"
+    url="$api"
+  fi
+  for attempt in 1 2 3 4 5; do
+    local -a hdr=()
+    if [[ -n "${GITHUB_TOKEN:-}" ]]; then
+      hdr+=(-H "Authorization: Bearer ${GITHUB_TOKEN}")
+    fi
+    if [[ "$url" == https://api.github.com/* ]]; then
+      hdr+=(-H "Accept: application/octet-stream")
+    fi
+    if curl -fSL ${hdr[@]+"${hdr[@]}"} "$url" -o "$dest"; then
+      return 0
+    fi
+    warn "Download attempt ${attempt} failed for ${url}"
+    sleep $((attempt * 3))
+  done
+  return 1
+}
+
 if [[ "$PRECHECK_ONLY" == "1" ]]; then
   echo "[*] Precheck mode: inspecting the certificate pool only"
 else
-  if ! curl -fSL "$UNSIGNED_IPA_RESOLVED_URL" -o "$UNSIGNED_IPA"; then
+  if ! download_release_asset "$UNSIGNED_IPA_RESOLVED_URL" "$UNSIGNED_IPA"; then
     fail "Could not download the unsigned IPA from: $UNSIGNED_IPA_RESOLVED_URL"
     exit 1
   fi

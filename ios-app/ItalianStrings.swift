@@ -15,7 +15,7 @@ let italianStrings: [String: String] = [
     "Cancelling": "Annullamento in corso",
     "Installed": "Installato",
     "Something went wrong": "Qualcosa è andato storto",
-    "an app by Frizzle": "un'app di Frizzle",
+    "an app by theccraft-git": "un'app di theccraft-git",
     "device": "dispositivo",
 
     // MARK: - Welcome
@@ -788,6 +788,8 @@ let italianStrings: [String: String] = [
     "Send each coin only on the network shown. Crypto sent on another network can't be recovered.":
         "Invia ogni moneta solo sulla rete indicata. Le criptovalute inviate su un'altra rete non si possono recuperare.",
 
+    "For building the core app, SideInstaller.":
+        "Per aver creato l'app di base, SideInstaller.",
     "Special thanks": "Ringraziamenti speciali",
     "For idevice, the library SwiftInstaller talks to your iPhone through. None of this exists without it.":
         "Per idevice, la libreria con cui SwiftInstaller comunica con il tuo iPhone. Senza, niente di tutto questo esisterebbe.",

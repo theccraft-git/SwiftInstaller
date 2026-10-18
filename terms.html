@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>SideInstaller — Terms of Service</title>
+<title>SwiftInstaller — Terms of Service</title>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
 <link rel="apple-touch-icon" href="app-icon.png">
@@ -10,13 +10,13 @@
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#000000">
 <style>
-  /* Same brand palette as the install page (Theme.swift blues), but restrained:
+  /* Same brand palette as the install page (Theme.swift orange), but restrained:
      static backdrop, no motion — appropriate for a legal document. */
   :root{
-    --card:rgba(23,28,42,.62);
+    --card:rgba(48,22,12,.55);
     --stroke:rgba(255,255,255,.07); --stroke-strong:rgba(255,255,255,.14);
     --text:#f4f6fb; --muted:#9ba3b8; --faint:#6c7386;
-    --accent:#2170f5; --accent2:#4dadff; --glow:#011a5c;
+    --accent:#e95f3c; --accent2:#f0753f; --glow:#5c2010;
     --radius:22px; --radius-sm:14px;
   }
   *{box-sizing:border-box}
@@ -30,9 +30,9 @@
   .bg{
     position:fixed; inset:0; z-index:-1; pointer-events:none;
     background:
-      radial-gradient(70% 42% at 50% -6%, rgba(1,26,92,.5), transparent 74%),
-      radial-gradient(46% 30% at 32% 2%, rgba(33,112,245,.10), transparent 70%),
-      radial-gradient(40% 26% at 72% 0%, rgba(77,173,255,.07), transparent 72%),
+      radial-gradient(70% 42% at 50% -6%, rgba(92,32,16,.5), transparent 74%),
+      radial-gradient(46% 30% at 32% 2%, rgba(235,124,50,.10), transparent 70%),
+      radial-gradient(40% 26% at 72% 0%, rgba(240,117,63,.07), transparent 72%),
       #000;
   }
   .wrap{max-width:760px; margin:0 auto}
@@ -42,7 +42,7 @@
   .logo{
     width:72px; height:72px; margin:0 auto 16px; display:block;
     border-radius:18px; border:1px solid var(--stroke-strong);
-    box-shadow:0 10px 34px rgba(33,112,245,.28), 0 16px 50px rgba(1,26,92,.8);
+    box-shadow:0 10px 34px rgba(235,124,50,.28), 0 16px 50px rgba(92,32,16,.8);
   }
   .head .app{margin:0; font-size:15px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent2)}
   h1{margin:6px 0 0; color:#fff; font-size:clamp(26px,5.4vw,36px); font-weight:800; letter-spacing:-.02em}
@@ -83,7 +83,7 @@
   /* Emphasis block for the standalone risk statement. */
   .notice{
     margin:14px 0 12px; padding:13px 16px; border-radius:var(--radius-sm);
-    background:rgba(33,112,245,.08); border:1px solid rgba(33,112,245,.3);
+    background:rgba(235,124,50,.08); border:1px solid rgba(235,124,50,.3);
     color:var(--text); font-weight:600; font-size:15px;
   }
 
@@ -100,10 +100,10 @@
   @media print{
     body{background:#fff; color:#111}
     .bg,.toc{display:none}
-    .head .app, h2.sec .num{color:#1d4ed8}
+    .head .app, h2.sec .num{color:#c2410c}
     h1, h2.sec{color:#000}
     section p, section li, .intro{color:#222}
-    .notice{border-color:#1d4ed8; background:none; color:#000}
+    .notice{border-color:#c2410c; background:none; color:#000}
   }
 </style>
 </head>
@@ -112,11 +112,11 @@
 <div class="wrap">
 
   <header class="head">
-    <img class="logo" src="https://raw.githubusercontent.com/FrizzleM/SideInstaller/main/app-icon.png" alt="SideInstaller">
-    <p class="app">SideInstaller</p>
+    <img class="logo" src="https://raw.githubusercontent.com/theccraft-git/SwiftInstaller/favicon-192" alt="SwiftInstaller">
+    <p class="app">SwiftInstaller</p>
     <h1>Terms of Service</h1>
-    <span class="updated">Last updated: July 2026</span>
-    <p class="intro">By downloading, installing, or using SideInstaller (the "App"), or by using its source code, you agree to these Terms of Service ("Terms"). <b>If you do not agree, do not use the App.</b></p>
+    <span class="updated">Last updated: October 2026</span>
+    <p class="intro">By downloading, installing, or using SwiftInstaller (the "App"), or by using its source code, you agree to these Terms of Service ("Terms"). <b>If you do not agree, do not use the App.</b></p>
   </header>
 
   <nav class="toc" aria-label="Contents">
@@ -137,7 +137,7 @@
 
   <section id="nature">
     <h2 class="sec"><span class="num">1</span>Nature of the App</h2>
-    <p>SideInstaller is a free, community-driven tool that allows users to install and manage apps on their own iOS devices ("sideloading") using their own Apple ID and Apple's developer provisioning system. SideInstaller is an independent project. <b>It is not affiliated with, endorsed by, or sponsored by Apple Inc.</b> Apple, iOS, and Apple ID are trademarks of Apple Inc.</p>
+    <p>SwiftInstaller is a free, community-driven tool that allows users to install and manage apps on their own iOS devices ("sideloading") using their own Apple ID and Apple's developer provisioning system. SwiftInstaller is an independent project. <b>It is not affiliated with, endorsed by, or sponsored by Apple Inc.</b> Apple, iOS, and Apple ID are trademarks of Apple Inc.</p>
   </section>
 
   <section id="risk">
@@ -147,7 +147,7 @@
       <li><b>Apple account actions.</b> Apple may flag, lock, restrict, or terminate Apple IDs used with sideloading tools, and may revoke certificates or provisioning profiles at any time, causing installed apps to stop working.</li>
       <li><b>Device issues.</b> Installation failures, app crashes, data loss, pairing problems, or other malfunctions on your device.</li>
       <li><b>Service changes.</b> iOS updates or Apple server-side changes may break the App's functionality partially or entirely, without notice.</li>
-      <li><b>Third-party apps.</b> Any app you choose to install through SideInstaller is your sole responsibility. SideInstaller does not review, host, or endorse third-party apps or their content.</li>
+      <li><b>Third-party apps.</b> Any app you choose to install through SwiftInstaller is your sole responsibility. SwiftInstaller does not review, host, or endorse third-party apps or their content.</li>
     </ul>
     <p class="notice">You use the App entirely at your own risk and on your own devices and accounts.</p>
   </section>
@@ -190,7 +190,7 @@
 
   <section id="privacy">
     <h2 class="sec"><span class="num">7</span>Privacy</h2>
-    <p>SideInstaller processes your Apple ID credentials on-device solely to communicate with Apple's servers for provisioning. Credentials are not transmitted to, stored by, or accessible to the developer. See the project documentation for details.</p>
+    <p>SwiftInstaller processes your Apple ID credentials on-device solely to communicate with Apple's servers for provisioning. Credentials are not transmitted to, stored by, or accessible to the developer. See the project documentation for details.</p>
   </section>
 
   <section id="changes">
@@ -205,12 +205,12 @@
 
   <section id="contact">
     <h2 class="sec"><span class="num">10</span>Contact</h2>
-    <p>Questions about these Terms may be directed via the official repository: <a href="https://github.com/FrizzleM" target="_blank" rel="noopener">github.com/FrizzleM</a></p>
+    <p>Questions about these Terms may be directed via the official repository: <a href="https://github.com/theccraft-git/SwiftInstaller" target="_blank" rel="noopener">github.com/theccraft-git/SwiftInstaller</a></p>
   </section>
 
   <hr class="rule">
   <footer class="footer">
-    SideInstaller — Terms of Service
+    SwiftInstaller — Terms of Service
     <br><a href="index.html">← Back to the install page</a>
   </footer>
 

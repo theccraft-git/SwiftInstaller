@@ -8,7 +8,7 @@ ROOT_DIR="${GITHUB_WORKSPACE:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 OUTPUT_PREFIX="${OUTPUT_PREFIX:-sideinstaller}"
 OUTPUT_DIR="${OUTPUT_DIR:-$ROOT_DIR/output}"
-APP_NAME="${APP_NAME:-SideInstaller}"
+APP_NAME="${APP_NAME:-SwiftInstaller}"
 APP_TAGLINE="${APP_TAGLINE:-On-device sideloader. Follow the three steps below to get set up.}"
 PAGE_TITLE="${PAGE_TITLE:-$APP_NAME}"
 OUTPUT_HTML="${OUTPUT_HTML:-index.html}"
@@ -18,8 +18,8 @@ if [[ -n "${GITHUB_REPOSITORY:-}" && "$GITHUB_REPOSITORY" == */* ]]; then
   GITHUB_USER="${GITHUB_USER:-${GITHUB_REPOSITORY%/*}}"
   GITHUB_REPO="${GITHUB_REPO:-${GITHUB_REPOSITORY#*/}}"
 else
-  GITHUB_USER="${GITHUB_USER:-SideInstaller}"
-  GITHUB_REPO="${GITHUB_REPO:-SideInstaller}"
+  GITHUB_USER="${GITHUB_USER:-theccraft-git}"
+  GITHUB_REPO="${GITHUB_REPO:-SwiftInstaller}"
 fi
 GITHUB_BRANCH="${GITHUB_BRANCH:-main}"
 OUTPUT_BASE_URL="${OUTPUT_BASE_URL:-https://raw.githubusercontent.com/$GITHUB_USER/$GITHUB_REPO/$GITHUB_BRANCH/output}"
@@ -30,7 +30,7 @@ LOGO_URL="${LOGO_URL:-https://raw.githubusercontent.com/$GITHUB_USER/$GITHUB_REP
 # with a one-off IPA override (UNSIGNED_IPA_URL, the workflow's ipa_url input),
 # the button points at that build instead, so the page always hands out the same
 # IPA the install cards were signed from.
-IPA_ASSET_NAME="${IPA_ASSET_NAME:-SideInstaller.ipa}"
+IPA_ASSET_NAME="${IPA_ASSET_NAME:-SwiftInstaller.ipa}"
 DEFAULT_RELEASE_URL="https://github.com/$GITHUB_USER/$GITHUB_REPO/releases/latest/download/$IPA_ASSET_NAME"
 LATEST_RELEASE_URL="${LATEST_RELEASE_URL:-${UNSIGNED_IPA_URL:-$DEFAULT_RELEASE_URL}}"
 
@@ -56,7 +56,7 @@ fi
 if [[ -n "$LOGO_URL" ]]; then
   LOGO_HTML="<img src=\"$LOGO_URL\" alt=\"$APP_NAME\">"
 else
-  LOGO_HTML='<svg viewBox="0 0 24 24" fill="none" stroke="url(#g)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="g" x1="0" y1="0" x2="24" y2="24"><stop offset="0" stop-color="#2170f5"/><stop offset="1" stop-color="#4dadff"/></linearGradient></defs><rect x="4" y="2.5" width="16" height="19" rx="3.5"/><path d="M12 7v8"/><path d="M8.5 11.5L12 15l3.5-3.5"/></svg>'
+  LOGO_HTML='<svg viewBox="0 0 24 24" fill="none" stroke="url(#g)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="g" x1="0" y1="0" x2="24" y2="24"><stop offset="0" stop-color="#f0753f"/><stop offset="1" stop-color="#e95f3c"/></linearGradient></defs><rect x="4" y="2.5" width="16" height="19" rx="3.5"/><path d="M12 7v8"/><path d="M8.5 11.5L12 15l3.5-3.5"/></svg>'
 fi
 
 html_escape() { sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g; s/"/\&quot;/g'; }

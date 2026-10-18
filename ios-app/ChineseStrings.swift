@@ -17,7 +17,7 @@ let chineseStrings: [String: String] = [
     "Cancelling": "正在取消",
     "Installed": "已安装",
     "Something went wrong": "出了点问题",
-    "an app by Frizzle": "由 Frizzle 打造的应用",
+    "an app by theccraft-git": "由 theccraft-git 打造的应用",
     "device": "设备",
 
     // MARK: - Welcome
@@ -771,6 +771,8 @@ let chineseStrings: [String: String] = [
     "Send each coin only on the network shown. Crypto sent on another network can't be recovered.":
         "每种币请只通过所示网络发送。通过其他网络发送的加密货币将无法找回。",
 
+    "For building the core app, SideInstaller.":
+        "感谢构建核心应用 SideInstaller。",
     "Special thanks": "特别感谢",
     "For idevice, the library SwiftInstaller talks to your iPhone through. None of this exists without it.":
         "感谢 idevice——SwiftInstaller 正是通过这个库与你的 iPhone 通信的。没有它，这一切都不会存在。",

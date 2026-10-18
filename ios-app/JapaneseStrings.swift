@@ -17,7 +17,7 @@ let japaneseStrings: [String: String] = [
     "Cancelling": "キャンセル中",
     "Installed": "インストール済み",
     "Something went wrong": "問題が発生しました",
-    "an app by Frizzle": "Frizzle 制作のアプリ",
+    "an app by theccraft-git": "theccraft-git 制作のアプリ",
     "device": "デバイス",
 
     // MARK: - Welcome
@@ -771,6 +771,8 @@ let japaneseStrings: [String: String] = [
     "Send each coin only on the network shown. Crypto sent on another network can't be recovered.":
         "各通貨は表示されたネットワークでのみ送金してください。別のネットワークで送金した暗号資産は取り戻せません。",
 
+    "For building the core app, SideInstaller.":
+        "コアアプリ SideInstaller を作ってくれたことに。",
     "Special thanks": "特別な感謝",
     "For idevice, the library SwiftInstaller talks to your iPhone through. None of this exists without it.":
         "idevice に感謝します。SwiftInstaller はこのライブラリを通じて iPhone と通信しています。これがなければ何も成り立ちません。",

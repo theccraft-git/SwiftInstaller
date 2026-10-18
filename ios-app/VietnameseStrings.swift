@@ -17,7 +17,7 @@ let vietnameseStrings: [String: String] = [
     "Cancelling": "Đang hủy",
     "Installed": "Đã cài đặt",
     "Something went wrong": "Đã xảy ra lỗi",
-    "an app by Frizzle": "một ứng dụng của Frizzle",
+    "an app by theccraft-git": "một ứng dụng của theccraft-git",
     "device": "thiết bị",
 
     // MARK: - Welcome
@@ -785,6 +785,8 @@ let vietnameseStrings: [String: String] = [
     "Send each coin only on the network shown. Crypto sent on another network can't be recovered.":
         "Chỉ gửi mỗi đồng tiền qua đúng mạng được ghi. Tiền mã hóa gửi qua mạng khác sẽ không thể khôi phục.",
 
+    "For building the core app, SideInstaller.":
+        "Vì đã xây dựng ứng dụng gốc, SideInstaller.",
     "Special thanks": "Lời cảm ơn đặc biệt",
     "For idevice, the library SwiftInstaller talks to your iPhone through. None of this exists without it.":
         "Vì idevice, thư viện mà SwiftInstaller dùng để giao tiếp với iPhone của bạn. Không có nó thì mọi thứ này đều không tồn tại.",
