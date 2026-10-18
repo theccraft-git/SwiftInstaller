@@ -74,8 +74,8 @@ enum InstallSource: String, CaseIterable, Identifiable {
     /// GitHub "owner/repo" whose release holds the IPA.
     var repo: String? {
         switch self {
-        case .sideStore:     return "SideStore/SideStore"
-        case .liveContainer: return "LiveContainer/LiveContainer"
+        case .sideStore:     return "theccraft-git/SwiftStore"
+        case .liveContainer: return "theccraft-git/SwiftContainer"
         case .madeira:       return "willfaust/Madeira"
         case .custom:        return nil
         }
@@ -116,8 +116,8 @@ enum InstallSource: String, CaseIterable, Identifiable {
     /// `assetFileName(forTag:)`.
     var assetFileName: String? {
         switch self {
-        case .sideStore:        return "SideStore.ipa"
-        case .liveContainer:    return "LiveContainer+SideStore.ipa"
+        case .sideStore:        return "SwiftStore.ipa"
+        case .liveContainer:    return "SwiftContainer+SwiftStore.ipa"
         case .madeira, .custom: return nil
         }
     }
@@ -150,8 +150,8 @@ enum InstallSource: String, CaseIterable, Identifiable {
     /// Name an upstream release title uses. The picker shows `displayName`.
     private var upstreamReleaseName: String {
         switch self {
-        case .sideStore:     return "SideStore"
-        case .liveContainer: return "LiveContainer + SideStore"
+        case .sideStore:     return "SwiftStore"
+        case .liveContainer: return "SwiftContainer + SwiftStore"
         case .madeira:       return "Madeira"
         case .custom:        return ""
         }
@@ -184,28 +184,10 @@ enum InstallSource: String, CaseIterable, Identifiable {
         }
     }
 
-    /// A copy to install while `repo` is gone from GitHub, as LiveContainer's
-    /// has been since GitHub hid its organization in October 2026.
-    ///
-    /// The copy is its last nightly (18 September 2026, commit 4dbe0f9), put up
-    /// by someone who isn't a maintainer, so only that file is taken, by its
-    /// hash. The hash is the one Atticus2077/lc-sidestore-nightly-source's CI
-    /// recorded for the official asset on 25 September, before the takedown,
-    /// and the copy that CI kept matches this one file for file. Anything else
-    /// under the same link is refused, and no other build stands in for it.
-    var mirror: Mirror? {
-        switch self {
-        case .liveContainer:
-            return Mirror(
-                repo: "LiveContainerMirror/LiveContainer",
-                url: URL(string: "https://github.com/LiveContainerMirror/LiveContainer/releases/download/nightly/LiveContainer+SideStore.ipa")!,
-                assetName: "LiveContainer+SideStore.ipa",
-                channel: .nightly,
-                sha256: "bec41bc21d75a0f2e85a0aa589ce5772e24e410deb017486758a3bc0503c8de7")
-        case .sideStore, .madeira, .custom:
-            return nil
-        }
-    }
+    /// A copy to install while `repo` is gone from GitHub. None of the builds
+    /// has one now: the old LiveContainer copy was for LiveContainer's
+    /// repository, which this app no longer downloads from.
+    var mirror: Mirror? { nil }
 
     /// Local filename for the downloaded IPA, e.g. "SideStore-nightly.ipa", or
     /// "SideStore (0.6.3).ipa" for a version picked under Advanced.
@@ -230,8 +212,8 @@ enum InstallSource: String, CaseIterable, Identifiable {
     /// Start of every downloaded filename; nil for a custom IPA.
     private var fileStem: String? {
         switch self {
-        case .sideStore:     return "SideStore"
-        case .liveContainer: return "LiveContainer+SideStore"
+        case .sideStore:     return "SwiftStore"
+        case .liveContainer: return "SwiftContainer+SwiftStore"
         case .madeira:       return "Madeira"
         case .custom:        return nil
         }
@@ -301,8 +283,10 @@ enum InstallSource: String, CaseIterable, Identifiable {
             return assets.first { $0.name.hasSuffix(".ipa") }
         case .liveContainer:
             // Prefer the published name, in case the asset is renamed later.
-            return assets.first { $0.name == "LiveContainer+SideStore.ipa" }
-                ?? assets.first { $0.name.lowercased().contains("sidestore") && $0.name.hasSuffix(".ipa") }
+            return assets.first { $0.name == "SwiftContainer+SwiftStore.ipa" }
+                ?? assets.first { $0.name.lowercased().contains("swiftstore") && $0.name.hasSuffix(".ipa") }
+                ?? assets.first { $0.name.lowercased().contains("swiftcontainer") && $0.name.hasSuffix(".ipa") }
+                ?? assets.first { $0.name.hasSuffix(".ipa") }
         case .madeira:
             // "Madeira-<version>.ipa", beside its checksum file.
             return assets.first { $0.name.lowercased().hasPrefix("madeira") && $0.name.hasSuffix(".ipa") }
@@ -860,9 +844,8 @@ enum SideStoreDownloader {
     /// Scans the repo's recent releases for the newest one that has this build,
     /// used when the channel's own release doesn't.
     ///
-    /// Needed for LiveContainer: its rolling `nightly` release can carry only
-    /// `LiveContainer.ipa`, so the newest `LiveContainer+SideStore.ipa` is on a
-    /// tagged release.
+    /// Needed when a rolling `nightly` release doesn't carry this build's IPA,
+    /// so the newest one is on a tagged release.
     ///
     /// Stable requests never fall back to a pre-release. Nightly requests take
     /// the newest release of either kind.
