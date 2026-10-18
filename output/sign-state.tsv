@@ -2,10 +2,10 @@
 # Written by the last full run and compared before the next one; the run
 # is skipped when this file would come out identical. Delete to force.
 channel	stable
-ipa_url	https://github.com/FrizzleM/SideInstaller/releases/download/v1.5.3/SideInstaller.ipa
-ipa_size	9208665
-output_base_url	https://raw.githubusercontent.com/FrizzleM/SideInstaller/main/output
-inputs_sha256	ea1675f6f6457ddc49471635c14d619ec42b06ae7dab5eff77ea5c203339effd
+ipa_url	https://api.github.com/repos/theccraft-git/SwiftInstaller/releases/assets/653148067
+ipa_size	280
+output_base_url	https://raw.githubusercontent.com/theccraft-git/SwiftInstaller/add-swiftinstaller/output
+inputs_sha256	86a66d1a18e56f2f62d7a05bb563904d39a238b5c314efea8a03317bbc756ea4
 cert	BOC-International-China-Limited-qi-ye-weixin-app-id-huiyi-kuozhan	7E869FF0566ABD14D4D134191EE9D95DA21EC905	2026-11-06	revoked
 cert	BOC-International-China-Limited-qi-ye-weixin-app-id-kuozhan	7E869FF0566ABD14D4D134191EE9D95DA21EC905	2026-11-06	revoked
 cert	BOC-International-China-Limited-qi-ye-weixin-app-id-tuisong-kuozhan	7E869FF0566ABD14D4D134191EE9D95DA21EC905	2026-11-06	revoked
