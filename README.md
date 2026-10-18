@@ -33,24 +33,21 @@ After that, you use SwiftStore (and SwiftContainer, if you chose it) as the side
 
 ## What changed from SideInstaller
 
-SideInstaller installs **SideStore**, or **SideStore + LiveContainer**. This fork keeps that installer and presents those choices under new names, in a new colour.
+SideInstaller installs **SwiftStore**, or **SwiftStore + SwiftContainer**.
 
 | | SideInstaller | SwiftInstaller |
 | --- | --- | --- |
 | App name | SideInstaller | SwiftInstaller |
-| Colour | Blue | Orange. Coral `#E95F3C`, wing `#F0753F`, deep ember behind the icons. Light, Dark, and Tinted app icons, the in-app section icons, and the install page all use that palette. |
 | First choice | SideStore | SwiftStore |
 | Second choice | SideStore + LiveContainer | SwiftStore + SwiftContainer |
 | Author | Frizzle | theccraft-git, with thanks to Frizzle for the core app |
 
 The names on the picker are SwiftStore and SwiftContainer. The files that get downloaded are still the upstream releases, because those projects publish under their original names:
 
-- **SwiftStore** downloads `SideStore.ipa` from [SideStore/SideStore](https://github.com/SideStore/SideStore).
-- **SwiftStore + SwiftContainer** downloads `LiveContainer+SideStore.ipa` from [LiveContainer/LiveContainer](https://github.com/LiveContainer/LiveContainer).
+- **SwiftStore** downloads `SwiftStore.ipa` from [theccraft-git/SwiftStore](https://github.com/theccraft-git/SwiftStore).
+- **SwiftStore + SwiftContainer** downloads `SwiftContainer+SwiftStore.ipa` from [theccraft-git/SwiftContainer](https://github.com/theccraft-git/SwiftContainer).
 
-The installed apps still show SideStore and LiveContainer on the Home Screen. Pairing looks for those names, which is what the IPAs are actually called. Madeira is unchanged.
-
-Discord, Ko-fi, and crypto donations from the original project are not in this fork.
+Madeira is unchanged.
 
 ## How to use it
 
